@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Impression des fiches
+Comment=Imprime les fiches dans un pdf et met à jour Tellico
+Exec=/bin/bash -c 'cd "$(dirname "$0")";python3 CodeSource/impression.py --exclude Documentaire fiches' %k
+Icon=
+Terminal=false
+Type=Application

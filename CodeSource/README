@@ -1,0 +1,13 @@
+# biblioteca
+Un automate pour imprimer des fiches et des cotes à partir d'une base de donnée tellico
+
+./impression.py -h
+usage: impression.py [-h] [--log LOG] [--exclude EXCLUDE] item_type
+
+positional arguments:
+  item_type          peut prendre la valeur "fiches" ou "cotes"
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --log LOG          info or debug
+  --exclude EXCLUDE  la liste des genres à exclure, séparés par des ';'
