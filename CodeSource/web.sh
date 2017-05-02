@@ -1,8 +1,8 @@
 #/bin/bash
 
 # Compile le fichier xml de tellico pour en faire une page web
-# Envoie ensuite cette page web sur le serveur calandreta.
-# Note: ce script ne marche que si il existe dans la racine
+# Envoie ensuite par ftp cette page web sur le serveur calandreta.
+# Note: l'envoi ftp ne marche que si il existe dans la racine
 # du home utilisateur un fichier nommé .netrc qui contient les
 # lignes suivantes:
 ### machine ftp.de.la.calandreta.com
@@ -19,3 +19,4 @@ xsltproc --param "column-names" "'id title author editor language genre cote nb-
 
 # Envoie le fichier sur le serveur calandreta
 echo put /tmp/index.html /bibli/index.html | ftp ftp.cluster010.hosting.ovh.net
+
