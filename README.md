@@ -1,5 +1,7 @@
 # Biblioteca Calandreta Paulina
-
+Ce document traite de la gestion de la bibliothèque de l'école. La documentation des 
+scripts, qui participent à cette gestion, se trouve dans le répertoire 
+[CodeSource][] du projet
 ___
 
 ## Fonctionnement de la bibliothèque d'école Calandreta Pau
@@ -34,8 +36,8 @@ quelqu'un allume l'ordinateur
 
 
 ### Gestion des emprunts
-La gestion des emprunts de livre ne se fait pas informatiquement, mais __grâce
-à des fiches__. La fonction de gestion des emprunts de Tellico n'est pas utilisée. 
+La gestion des emprunts de livre ne se fait pas informatiquement, mais **grâce
+à des fiches**. La fonction de gestion des emprunts de Tellico n'est pas utilisée. 
 
 Nous considérons qu'un livre est prêté à une classe (ex: la classe de CP), pas à 
 un élève en particulier. Dans la bibliothèque il y a donc une boite pour
@@ -58,9 +60,9 @@ sur ce sujet [plus bas dans ce document](#pourquoi-une-gestion-des-prêts-par-fi
 Les nouveaux livres qui sont acquis par la bibliothèque suivent le processus
 suivant
 
-1. Nettoyage
-2. Réparation si nécessaire
-3. Couverture
+1. Nettoyage.
+2. Réparation si nécessaire.
+3. Couverture.
 4. Ajout d'un bandeau horizontal de couleur en haut du dos si le livre n'est pas 
   en français  
     * occitan: rouge.
@@ -68,25 +70,30 @@ suivant
     * bilingue français/occitan ou français/étranger :  le bandeau est rouge ou 
       jaune selon la langue, mais il est barré d'un trait blanc sur toute sa
       longueur.
-5. Ajout d'une pochette en fin de livre, qui permet de glisser la fiche
-6. Catalogage sur Tellico
-7. Impression et mise en place de la fiche
-8. Impression et mise en place de la cote
-9. Rangement dans le rayon
+5. Ajout d'une pochette en fin de livre, qui permet de glisser la fiche.
+6. Catalogage en utilisant le programme Tellico
+7. Impression et mise en place de la fiche. L'impression se fait grâce au 
+   raccourci `Impression des fiches` à la racine du projet. Un double-clic
+   sur ce raccourci lance le script [impression.py][] avec le
+   paramétrage nécessaire.
+8. Impression et mise en place de la cote. L'impression se fait grâce au
+   raccourci `Impression des cotes` à la racine du projet. Un double-clic
+   sur ce raccourci lance le script [impression.py][] avec le
+   paramétrage nécessaire.
+9. Rangement dans le rayon adéquat.
 
 
 
 
 
-[Tellico]:http://tellico-project.org/
 [CodeSource]:CodeSource
+[Tellico]:http://tellico-project.org/
 [impression.py]:CodeSource/impression.py
 [web.sh]:CodeSource/web.sh
 [github_backup.sh]:CodeSource/github_backup.sh
 [fichier de catalogage]:inventaire.tc
 [rename_authors.py]:CodeSource/rename_authors.py
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
-[wkhtmltopdf]:https://wkhtmltopdf.org/
 [page internet générée à partir du catalogue]:http://calandreta-pau.org/bibli/
 
 
