@@ -25,7 +25,7 @@ optional arguments:
 
 ### web.sh
 Génére une page internet qui présente les livres du catalogue et met cette page 
-en ligne. Cette page inclus un champs de recherche. On peut cliquer sur une 
+en ligne. Cette page inclut un champs de recherche. On peut cliquer sur une 
 colonne pour trier suivant cette colonne.
 
 
@@ -76,7 +76,7 @@ Les personnes qui s'occupent de la bibliothèque ne sont pas toutes des fanas
 de la ligne de commande. Ces personnes gèrent l'impression des fiches et des
 cotes simplement en double-cliquant sur les raccourcis `impression_fiches` et
 `impression_cotes` à la racine du projet. Ces raccourcis lancent le script 
-`impression.py` avec les paramètres qui vont bien
+`impression.py` avec les paramètres qui vont bien.
 
 Pour des besoins plus particuliers, un utilisateur aguerri peut utiliser 
 `impressions.py` directement en ligne de commande.
@@ -106,7 +106,7 @@ installés sur l'ordinateur:
   distrib donne une mauvaise sortie pdf car elle ignore l'option 
   `--disable-smart-shrinking` fournie par le script. Si cela vous arrive, 
   téléchargez la version fournie sur le site en ligne(1). Placez ensuite 
-  l'executable dans /usr/bin. Par ex:_  
+  l'executable dans /usr/bin :_  
   ```bash  
     sudo cp ~/Téléchargement/dossier_wkhtml_dezipé/bin/wkhtmltopdf /usr/bin
   ```  
@@ -122,3 +122,4 @@ patchée de Qt, et souvent la version disponible dans le dépot de votre distro
 linux favorite n'est pas compilée avec cette version patchée_
 
 [inventaire.tc]:../inventaire.tc
+[wkhtmltopdf]:https://wkhtmltopdf.org/
