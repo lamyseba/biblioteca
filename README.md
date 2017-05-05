@@ -1,9 +1,4 @@
-# biblioteca
-
-Des scripts pour faciliter la gestion d'une petite bibliothèque d'école qui 
-utilise le programme [Tellico][] pour le catalogage des livres. Les scripts
-se trouvent dans le répertoire [CodeSource][], et sont documenté dans le
-[README de ce répertoire](CodeSource/README.md)
+# Biblioteca Calandreta Paulina
 
 ___
 
