@@ -29,7 +29,7 @@ en ligne. Cette page inclus un champs de recherche. On peut cliquer sur une
 colonne pour trier suivant cette colonne.
 
 
-### gitbackup.sh 
+### github_backup.sh 
 Sauvegarder le catalogue sur github (eh oui ici même!)
 
 
@@ -66,7 +66,7 @@ Plus d'éléments sur le choix du formatage des noms d'auteurs dans le fichier
 "Documentation/format_noms_d_auteur"
 ```
 
-[une réflexion]:../Documentation/format_noms_d_auteur
+[une réflexion]:../Documentation/format_noms_d_auteur.md
 
 
 ___
@@ -81,8 +81,8 @@ cotes simplement en double-cliquant sur les raccourcis `impression_fiches` et
 Pour des besoins plus particuliers, un utilisateur aguerri peut utiliser 
 `impressions.py` directement en ligne de commande.
 
-Chez nous, [anacron][] lance automatiquement les scripts `web.sh` et `gitbackup.sh` 
-chaque jour où l'ordinateur de la bibliothèque est allumé.
+Chez nous, [anacron][] lance automatiquement les scripts `web.sh` et 
+`github_backup.sh` chaque jour où l'ordinateur de la bibliothèque est allumé.
 
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 

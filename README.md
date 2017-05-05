@@ -32,7 +32,7 @@ page. [Anacron][] lance ce script tous les jours ou quelqu'un allume l'ordinateu
 
 
 ### Sauvegarde du catalogue
-Le script [gitbackup.sh][] permet de sauvegarder sur github le 
+Le script [github_backup.sh][] permet de sauvegarder sur github le 
 [fichier de catalogage][]. [Anacron][] lance ce script tous les jours ou 
 quelqu'un allume l'ordinateur
 
@@ -87,7 +87,7 @@ suivant
 [CodeSource]:CodeSource
 [impression.py]:CodeSource/impression.py
 [web.sh]:CodeSource/web.sh
-[gitbackup.sh]:CodeSource/gitbackup.sh
+[github_backup.sh]:CodeSource/github_backup.sh
 [fichier de catalogage]:inventaire.tc
 [rename_authors.py]:CodeSource/rename_authors.py
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
