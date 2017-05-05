@@ -1,117 +1,64 @@
 # biblioteca
 
 Des scripts pour faciliter la gestion d'une petite bibliothèque d'école qui 
-utilise le programme [Tellico][] pour le catalogage des livres.
+utilise le programme [Tellico][] pour le catalogage des livres. Les scripts
+se trouvent dans le répertoire [CodeSource][], et sont documenté dans le
+[README de ce répertoire](CodeSource/README.md)
+
+___
+
+## Fonctionnement de la bibliothèque d'école Calandreta Pau
+
+La bibliothèque fonctionne avec très peu de moyen humain. Des bénévoles assurent
+le traitement des acquisitions des livres, ainsi qu'un peu de rangement. Les 
+utilisateurs de la bibliothèque (élèves et enseignant) doivent pouvoir la faire
+vivre quasiment en autonomie (donc gérer les emprunts et le rangement).
 
 
 
-### Fonctionnement de la bibliothèque d'école Calandreta Pau:
-Les livres sont catalogués sur Tellico. Une [page internet générée à partir
-du catalogue][] est disponible en ligne.
+### Catalogage
+Les livres sont catalogués manuellement sur [Tellico][]. La fonction de récupération 
+en ligne de données bibliographique n'est pas utilisée pour le moment. Nous
+ne disposons pas de lecteur de code barre. Voir les Questions/Réponses sur ce 
+sujet [plus bas dans ce document](#les-données-bibliographiques-sont-elles-récupérées-en-ligne)
 
-La gestion des emprunts de livre ne se fait pas informatiquement, mais grâce
-à des fiches. Un livre est prêté à une classe (ex: la classe de CP), pas à 
+
+
+### Consultation du catalogue
+Une [page internet générée à partir du catalogue][] est disponible en ligne sur
+le site de l'école. C'est le script [web.sh][] qui génère et met en ligne cette 
+page. [Anacron][] lance ce script tous les jours ou quelqu'un allume l'ordinateur
+
+
+
+### Sauvegarde du catalogue
+Le script [gitbackup.sh][] permet de sauvegarder sur github le 
+[fichier de catalogage][]. [Anacron][] lance ce script tous les jours ou 
+quelqu'un allume l'ordinateur
+
+
+
+### Gestion des emprunts
+La gestion des emprunts de livre ne se fait pas informatiquement, mais __grâce
+à des fiches__. La fonction de gestion des emprunts de Tellico n'est pas utilisée. 
+
+Nous considérons qu'un livre est prêté à une classe (ex: la classe de CP), pas à 
 un élève en particulier. Dans la bibliothèque il y a donc une boite pour
-chacune des cinq classes de l'école. Dans la boite d'une classe se trouvent 
-les fiches de tous les livres empruntés par les élèves de cette classe.
+chacune des cinq classes de l'école. 
+
+![cinq boites](Documentation/images/boites.png)
+
+Dans la boite d'une classe se trouvent les fiches de tous les livres empruntés 
+par les élèves de cette classe.
 
 Cette organisation n'a pas été choisie faute de moyen informatiques pour
 gérer les emprunts, mais pour permettre un fonctionnement courant de la 
-bibliothèque avec très peu de moyen humain. Voir les [questions/réponses]
-sur ce sujet.
+bibliothèque avec très peu de moyen humain. Voir les Questions / Réponses
+sur ce sujet [plus bas dans ce document](#pourquoi-une-gestion-des-prêts-par-fiches).
 
 
 
-### A quoi servent ces scripts?
-Les scripts de ce projet sont dans le répertoire [CodeSource][]
-et répondent aux besoins suivant:
-
-* [impression.py][]
-    * Imprimer des fiches pour les livres qui en ont besoin
-    * Imprimer des cotes pour les livres qui en ont besoin
-* [web.sh][]: Générer une page internet qui présente les livres du catalogue et 
-  mettre cette page en ligne. Cette page inclus un champs de recherche. On peut 
-  cliquer sur une colonne pour trier suivant cette colonne.
-* [gitbackup.sh][]: Sauvegarder le catalogue sur github (eh oui ici même!)
-* [rename_authors.py]: Changer le format des noms d'auteurs. On est parti sur
-  un format "Dupont, Jean", mais on se réserve la possibilité d'adopter
-  "Jean Dupont" à l'avenir.
-
-
-
-### Qui utilise ces scripts?
-Les personnes qui s'occupent de la bibliothèque ne sont pas toutes des fanas
-de la ligne de commande. Ces personnes gèrent l'impression des fiches et des
-cotes simplement en double-cliquant sur les raccourcis `impression_fiches` et
-`impression_cotes` à la racine du projet. Ces raccourcis lancent le script 
-`impression.py` avec les paramètres qui vont bien
-
-Pour des besoins plus particuliers, un utilisateur aguerri peut utiliser 
-`impressions.py` directement en ligne de commande.
-
-Chez nous, les scripts `web.sh` et `gitbackup.sh` sont lancés automatiquement au 
-chaque jour au démarrage de l'ordinateur de la bibliothèque (grâce à [anacron][])
-
-
-
-### Il y a des dépendances à installer?
-C'est mieux de partir avec Tellico, bien sur! Ces scripts s'appuient sur un 
-catalogue Tellico customisé avec des champs supplémentaires, notamment pour 
-gérer le nombre d'impression de fiche ou de cote pour chaque livre. 
-Le catalogue `inventaire.tc` (à la racine du projet) fonctionne bien avec
-les scripts: c'est le catalogue à jour de notre école! Vous pouvez l'ouvrir avec
-Tellico, puis le vider pour le re-remplir avec vos propres références.
-
-Les scripts utilisent des programmes en ligne de commande, qui doivent être 
-installés sur l'ordinateur:
- 
-* [xsltproc] : utilisé pour générer une page html à partir des données du 
-  catalogue
-* [wkhtmltopdf] : utilisé pour transformer la page html en pdf à imprimer  
-  _**Note:** La version disponible par défaut dans les dépôts de la plupart des 
-  distrib donne une mauvaise sortie pdf car elle ignore l'option 
-  `--disable-smart-shrinking` fournie par le script. Si cela vous arrive, 
-  téléchargez la version fournie sur le site en ligne(1). Placez ensuite 
-  l'executable dans /usr/bin. Par ex:_
-  
-        sudo cp ~/Téléchargement/dossier_wkhtml_dezipé/bin/wkhtmltopdf /usr/bin
-    
-* la commande ftp doit être disponible (c'est le cas la plupart du temps)
-* Un interpréteur python, et la librairie DBUS pour python (python-dbus)
-
-
-Pour plus de renseignement sur le fonctionnement de la bibliothèque de l'école,
-vous pouvez consulter le wiki.
-
-_(1) Pour la petite histoire, cette version est compilée avec une version 
-patchée de Qt, et souvent la version disponible dans le dépot de votre distro
-linux favorite n'est pas compilée avec cette version patchée_
-
-
-[Tellico]:http://tellico-project.org/
-[CodeSource]:tree/master/CodeSource
-[impression.py]:blob/master/CodeSource/web.sh
-[web.sh]:blob/master/CodeSource/web.sh
-[gitbackup.sh]:blob/master/CodeSource/gitbackup.sh
-[rename_authors.py]:blob/master/CodeSource/rename_authors.py
-  
-___
-
-## Questions/Réponses
-### Pourquoi Tellico pour le catalogage?
-
-
-### Les données bibliographiques sont-elles récupérées en ligne?
-Les fonctions de récupération des
-données bibliographiques sur des serveurs ne sont pas utilisées pour le moment,
-même si Tellico permet notamment de récupérer ce type de données sur les 
-serveur de la BNF.
-
-### Pourquoi une gestion des prêts par fiches?
-
-___
-
-## Traitement des acquisitions de la bibliothèque
+### Traitement des acquisitions de la bibliothèque
 
 Les nouveaux livres qui sont acquis par la bibliothèque suivent le processus
 suivant
@@ -121,11 +68,104 @@ suivant
 3. Couverture
 4. Ajout d'un bandeau horizontal de couleur en haut du dos si le livre n'est pas 
   en français  
-    * rouge: occitan
-    * jaune: langue étrangère
-  Si le livre est bilingue français/occitan ou français/étranger, on barre
-  le bandeau de couleur d'un trait blanc horizontal/
-  _NDLR: eh oui nous sommes une école occitane, donc beaucoup de livres avec un 
-  bandeau rouge_
-5. Ajout d'un support en carton en fin de livre, qui permet de fixer la fiche
+    * occitan: rouge.
+    * langue étrangère : jaune.
+    * bilingue français/occitan ou français/étranger :  le bandeau est rouge ou 
+      jaune selon la langue, mais il est barré d'un trait blanc sur toute sa
+      longueur.
+5. Ajout d'une pochette en fin de livre, qui permet de glisser la fiche
+6. Catalogage sur Tellico
+7. Impression et mise en place de la fiche
+8. Impression et mise en place de la cote
+9. Rangement dans le rayon
+
+
+
+
+
+[Tellico]:http://tellico-project.org/
+[CodeSource]:CodeSource
+[impression.py]:CodeSource/impression.py
+[web.sh]:CodeSource/web.sh
+[gitbackup.sh]:CodeSource/gitbackup.sh
+[fichier de catalogage]:inventaire.tc
+[rename_authors.py]:CodeSource/rename_authors.py
+[anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
+[wkhtmltopdf]:https://wkhtmltopdf.org/
+[page internet générée à partir du catalogue]:http://calandreta-pau.org/bibli/
+
+
+
+
+___
+
+## Questions / Réponses
+
+
+
+### Pourquoi Tellico pour le catalogage?
+Le logiciel utilisé pour le catalogage devait répondre au cahier des charges
+suivant:
+
+* __Disponible hors-ligne__ :
+  * L'ordinateur de la bibliothèque n'était pas connecté à internet ni 
+  * au réseau local au début du projet
+  * Nous ne souhaitons pas dépendre d'une connexion réseau disponible pour le
+    catalogage.
+  * Nous sommes frileux pour confier l'hébergement de nos données à un tiers.
+    Il faut en tout cas pouvoir les exporter facilement vers un nouveau
+    logiciel si besoin. Tellico permet l'export dans de nombreux formats,
+    dont le csv, qui est très répandu.
+* __Prise en main facile__ pour les enseignants, les bénévoles, et les élèves
+* __Gestion des doublons__ : Lors du catalogage, nous voulions détecter
+  le nombre d'exemplaire de chaque livre. Le logiciel choisi devait nous aider
+  dans cette tâche. L'auto-complétion avec liste de suggestion, disponible dans 
+  Tellico nous assiste efficacement dans cette tâche
+
+Dans un premier temps, nous avons commencé à utiliser une simple feuille
+`libreoffice calc`. Puis nous avons migré vers Tellico pour la simplicité
+et la convivialité de son interface.
+
+
+
+### Les données bibliographiques sont-elles récupérées en ligne?
+
+Tellico permet la récupération des données bibliographiques sur des serveurs, 
+comme par exemple le serveur de la BNF. Nous n'utilisons pas cette 
+fonctionnalité pour le moment.
+
+Dans notre cas en effet, le nombre de données à saisir pour chaque livre est
+relativement peu important (Titre, Auteur, Éditeur, Langue). Nos données de 
+catalogage comprennent aussi des informations qui ne sont pas disponibles sur
+le serveur BNF: code de rangement interne, statut de l'impression des fiches,
+nombre d'exemplaires dans notre stock.
+Enfin, le serveur BNF ne met pas l'illustrateur des livres dans les
+auteurs, mais dans les commentaires, ce qui ne correspond pas à notre logique.
+(nous voulons pouvoir regrouper les livres par illustrateur aussi).
+
+Au total, il aurait fallu systématiquement remodifier les données importées du
+serveur, le gain de temps nous semble incertain. Il est cependant possible que
+nous utilisions à l'avenir cette fonctionnalité de Tellico pour compléter nos
+données bibliographique.
+
+
+
+
+### Pourquoi une gestion des prêts par fiches?
+21è siècle, l'ère du code-barre. Et pourtant!
+
+Loin du modèle de bibliothèque classique avec un ou plusieurs employés pour
+gérer le stock, les prêts et le rangement des livres, notre bibliothèque repose
+sur le bénévolat quand il est disponible, les enseignants et les élèves le reste
+du temps. La ou les personnes qui viennent emprunter des livres ont de grandes
+chances de se trouver seule(s) dans la bibliothèque.
+
+Dans ce contexte, demander aux élèves ou aux enseignants d'allumer l'ordinateur,
+de lancer le programme, d'identifier la classe et de scanner les codes barres
+nécessaires relève presque de l'utopie.
+La logique "Mets la fiche dans la boite de ta classe avant d'emporter le livre"
+nous a semblé plus accessible pour les enseignants et surtout les élèves.
+Bien sur il y aura des ratés, des fiches pas rangées, mais l'objectif au 
+sein de l'école est d'avoir un système de prêt qui permet le plus de souplesse
+possible dans la pratique, plutôt qu'un système _théoriquement_ très rigoureux.
 
