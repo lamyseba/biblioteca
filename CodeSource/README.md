@@ -1,6 +1,6 @@
 Ce répertoire contient des scripts pour faciliter la gestion d'une petite 
 bibliothèque d'école qui utilise le programme [Tellico][] pour le catalogage 
-des livres. Vous trouverez plus d'information sur le fonctionnement de cette 
+des livres. Vous trouverez plus d'information sur la gestion de cette 
 bibliothèque d'école dans le [README principal du projet](../README.md)
 
 
