@@ -99,8 +99,8 @@
  </xsl:choose>
 </xsl:variable>
 
-<xsl:variable name="lowercase" select="'aáàâbcçdeéèêfghiíîjklmnoóòôpqrstuúùûvwxyzÁÂÉÈÊÍÎÓÒÔÚÛ'"/>
-<xsl:variable name="uppercase" select="'AAAABCCDEEEEFGHIIIJKLMNOOOOPQRSTUUUUVWXYZAAEEEIIOOOUU'"/>
+<xsl:variable name="lowercase" select="'aáàâbcçdeéèêfghiíîjklmnoóòôpqrstuúùûvwxyzÁÂÇÉÈÊÍÎÓÒÔÚÛ'"/>
+<xsl:variable name="uppercase" select="'AAAABCCDEEEEFGHIIIJKLMNOOOOPQRSTUUUUVWXYZAACEEEIIOOOUU'"/>
 
 <xsl:template match="/">
  <xsl:apply-templates select="tc:tellico"/>
