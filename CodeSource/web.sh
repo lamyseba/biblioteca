@@ -13,7 +13,7 @@
 unzip -p ~/Bibli/inventaire.tc tellico.xml | \
 \
 # Compile le xml pour faire une page web enregistrée dans /tmp/index.html
-xsltproc --param "column-names" "'id title author editor language genre cote nb-ex'" \
+xsltproc --novalid --param "column-names" "'id title author editor language genre cote nb-ex'" \
         ~/Bibli/CodeSource/templates/web.xsl \
         - > /tmp/index.html
 
