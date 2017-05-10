@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Compile le fichier xml de tellico pour en faire une page web
 # Envoie ensuite par ftp cette page web sur le serveur calandreta.
