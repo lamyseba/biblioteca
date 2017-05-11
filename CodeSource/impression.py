@@ -337,6 +337,7 @@ class PrintManager:
         # au fichier xml de la liste des livres.
         f=open('/tmp/calandreta_'+self.item_type+'.html','w')
         args=[  'xsltproc',
+                '--novalid',
                 '--param','entry_predicate','"'+self.entry_predicate+'"',
                 '--param','sort-name1',"'%s'"%sort[self.item_type],
                 input_dir+'/'+self.item_type+'.xsl',
