@@ -1,8 +1,12 @@
-Ce répertoire contient des scripts pour faciliter la gestion d'une petite 
-bibliothèque d'école qui utilise le programme [Tellico][] pour le catalogage 
-des livres. Vous trouverez plus d'information sur la gestion de cette 
+# Utilisation des scripts
+
+
+Le répertoire `CodeSource` contient des scripts pour faciliter la gestion d'une 
+petite bibliothèque d'école qui utilise le programme [Tellico][] pour le 
+catalogage des livres. Vous trouverez plus d'information sur la gestion de cette 
 bibliothèque d'école dans le [README principal du projet](../README.md)
 
+[Tellico]:http://tellico-project.org/
 
 ### impression.py
 
@@ -24,19 +28,20 @@ optional arguments:
 ```
 
 ### web.sh
-Génére une page internet qui présente les livres du catalogue et met cette page 
-en ligne. Cette page inclut un champs de recherche. On peut cliquer sur une 
-colonne pour trier suivant cette colonne.
+Ce script génére une page internet montrant les livres du catalogue, puis la met 
+en ligne sur le site de l'école. Cette page inclut un champs de recherche. On 
+peut cliquer sur une colonne pour trier suivant cette colonne.
 
 
 ### github_backup.sh 
-Sauvegarder le catalogue sur github (eh oui ici même!)
+Ce script sauvegarder le catalogue `inventaire.tc` sur github
 
 
 ### rename_authors.py
-Change le format des noms d'auteurs. On est parti sur un format "Dupont, Jean" 
-pour le catalogage, mais on se réserve la possibilité d'adopter  "Jean Dupont" 
-à l'avenir, même si [une réflexion][] nous indique c'est peu probable.
+Ce programme permet de changer le format des noms d'auteurs. On est parti sur un 
+format "Dupont, Jean" pour le catalogage, mais on se réserve la possibilité 
+d'adopter  "Jean Dupont" à l'avenir, même si [une réflexion][] nous indique 
+c'est peu probable.
 
 ```bash
 # > ./rename_authors.py -h

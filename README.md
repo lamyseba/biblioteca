@@ -1,7 +1,6 @@
-# Biblioteca Calandreta Paulina
 Ce document traite de la gestion de la bibliothèque de l'école. La documentation des 
-scripts, qui participent à cette gestion, se trouve dans le répertoire 
-[CodeSource][] du projet
+scripts, qui participent à cette gestion, se trouve dans le [README][] du répertoire 
+`CodeSource` du projet
 ___
 
 ## Fonctionnement de la bibliothèque d'école Calandreta Pau
@@ -30,8 +29,8 @@ page. [Anacron][] lance ce script tous les jours ou quelqu'un allume l'ordinateu
 
 ### Sauvegarde du catalogue
 Le script [github_backup.sh][] permet de sauvegarder sur github le 
-[fichier de catalogage][]. [Anacron][] lance ce script tous les jours ou 
-quelqu'un allume l'ordinateur
+fichier de catalogage `inventaire.tc`. [Anacron][] lance ce script tous les 
+jours ou quelqu'un allume l'ordinateur
 
 
 
@@ -71,7 +70,11 @@ suivant
       jaune selon la langue, mais il est barré d'un trait blanc sur toute sa
       longueur.
 5. Ajout d'une pochette en fin de livre, qui permet de glisser la fiche.
-6. Catalogage en utilisant le programme Tellico
+6. Catalogage en utilisant le programme Tellico. Pour les noms d'auteur, nous
+   adoptons une saisie sous la forme `Nom, Prénom` séparés par des `;`. Par exemple  
+   ```
+   Dupont, Jean; D'Agobert, Roger
+   ```
 7. Impression et mise en place de la fiche. L'impression se fait grâce au 
    raccourci `Impression des fiches` à la racine du projet. Un double-clic
    sur ce raccourci lance le script [impression.py][] avec le
@@ -86,13 +89,12 @@ suivant
 
 
 
-[CodeSource]:CodeSource
+[README]:CodeSource/README.md
 [Tellico]:http://tellico-project.org/
-[impression.py]:CodeSource/impression.py
-[web.sh]:CodeSource/web.sh
-[github_backup.sh]:CodeSource/github_backup.sh
-[fichier de catalogage]:inventaire.tc
-[rename_authors.py]:CodeSource/rename_authors.py
+[impression.py]:CodeSource/README.md#impressionpy
+[web.sh]:CodeSource/README.md#websh
+[github_backup.sh]:CodeSource/README.md#github_backupsh
+[rename_authors.py]:CodeSource/README.md#rename_authorspy
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 [page internet générée à partir du catalogue]:http://calandreta-pau.org/bibli/
 
