@@ -11,8 +11,6 @@ vivre quasiment en autonomie (donc gérer les emprunts et le rangement).
 L'inventaire est stocké dans le fichier `inventaire.tc` à la racine du projet.
 Les données y sont stockées au format XML, puis compressées avec ZIP.
 C'est un fichier exploitable par le programme Tellico.
-Sur ce sujet vous pouvez lire [Pourquoi Tellico pour le catalogage?][] dans les
-[Questions/Réponses][]
 
 
 ### Consultation de l'inventaire
@@ -122,12 +120,11 @@ suivant
 
 
 
-[README]:CodeSource/README.md
 [Tellico]:http://tellico-project.org/
-[impression.py]:CodeSource/README.md#impressionpy
-[web.sh]:CodeSource/README.md#websh
-[github_backup.sh]:CodeSource/README.md#github_backupsh
-[rename_authors.py]:CodeSource/README.md#rename_authorspy
+[impression.py]:../CodeSource/README.md#impressionpy
+[web.sh]:../CodeSource/README.md#websh
+[github_backup.sh]:../CodeSource/README.md#github_backupsh
+[rename_authors.py]:../CodeSource/README.md#rename_authorspy
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 [page internet générée à partir du catalogue]:http://calandreta-pau.org/bibli/
 

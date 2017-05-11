@@ -11,10 +11,10 @@ immersion occitan.
 Description et aide
 
 ## Annexes
-### [Réflexion sur le format de saisie des Noms d'auteur]
+#### [Réflexion sur le format de saisie des Noms d'auteur][4]
 
 
 [1]:Documentation/fonctionnement-bibliotheque.md
 [2]:Documentation/questions-reponses.md
-[3]:CodeSource
+[3]:CodeSource/README.md
 [4]:Documentation/format-noms-d-auteur.md
