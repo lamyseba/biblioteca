@@ -3,15 +3,14 @@
 
 Le répertoire `CodeSource` contient des scripts pour faciliter la gestion d'une 
 petite bibliothèque d'école qui utilise le programme [Tellico][] pour le 
-catalogage des livres. Vous trouverez plus d'information sur la gestion de cette 
-bibliothèque d'école dans le [README principal du projet](../README.md)
+catalogage des livres.
 
 [Tellico]:http://tellico-project.org/
 
 ### impression.py
 
 Un automate pour imprimer les fiches et les cotes pour les livres qui en ont
-besoin. Ce programme génère un pdf et met à jour le fichier catalogue: il
+besoin. Ce programme génère un pdf et met à jour le fichier d'inventaire: il
 remet à zéro le nombre de fiche ou de cote à imprimer pour les livres concernés.
 
 ```bash
@@ -39,7 +38,7 @@ Ce script sauvegarder le catalogue `inventaire.tc` sur github
 
 ### rename_authors.py
 Ce programme permet de changer le format des noms d'auteurs. On est parti sur un 
-format "Dupont, Jean" pour le catalogage, mais on se réserve la possibilité 
+format "Dupont, Jean" pour l'inventaire, mais on se réserve la possibilité 
 d'adopter  "Jean Dupont" à l'avenir, même si [une réflexion][] nous indique 
 c'est peu probable.
 
@@ -97,8 +96,9 @@ C'est mieux de partir avec Tellico, bien sur! Ces scripts s'appuient sur un
 catalogue Tellico customisé avec des champs supplémentaires, notamment pour 
 gérer le nombre d'impression de fiche ou de cote pour chaque livre. 
 Le catalogue [inventaire.tc][] (à la racine du projet) fonctionne bien avec
-les scripts: c'est le catalogue à jour de notre école! Vous pouvez l'ouvrir avec
-Tellico, puis le vider pour le re-remplir avec vos propres références.
+les scripts: c'est l'inventaire à jour des livres de notre école! Vous pouvez 
+l'ouvrir avec Tellico, puis le vider pour le re-remplir avec vos propres
+références.
 
 Les scripts utilisent des programmes en ligne de commande, qui doivent être 
 installés sur l'ordinateur:
