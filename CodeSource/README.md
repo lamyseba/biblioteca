@@ -71,7 +71,7 @@ Plus d'éléments sur le choix du formatage des noms d'auteurs dans le fichier
 "Documentation/format_noms_d_auteur"
 ```
 
-[une réflexion]:../Documentation/format_noms_d_auteur.md
+[une réflexion]:../Documentation/format-noms-d_auteur.md
 
 
 ___

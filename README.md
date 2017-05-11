@@ -1,105 +1,6 @@
 Ce document traite de la gestion de la bibliothèque de l'école. La documentation des 
 scripts, qui participent à cette gestion, se trouve dans le [README][] du répertoire 
 `CodeSource` du projet
-___
-
-## Fonctionnement de la bibliothèque d'école Calandreta Pau
-
-La bibliothèque fonctionne avec très peu de moyen humain. Des bénévoles assurent
-le traitement des acquisitions des livres, ainsi qu'un peu de rangement. Les 
-utilisateurs de la bibliothèque (élèves et enseignant) doivent pouvoir la faire
-vivre quasiment en autonomie (donc gérer les emprunts et le rangement).
-
-
-
-### Catalogage
-Les livres sont catalogués manuellement sur [Tellico][]. La fonction de récupération 
-en ligne de données bibliographique n'est pas utilisée pour le moment. Nous
-ne disposons pas de lecteur de code barre. Voir les Questions/Réponses sur ce 
-sujet [plus bas dans ce document](#les-données-bibliographiques-sont-elles-récupérées-en-ligne)
-
-
-
-### Consultation du catalogue
-Une [page internet générée à partir du catalogue][] est disponible en ligne sur
-le site de l'école. C'est le script [web.sh][] qui génère et met en ligne cette 
-page. [Anacron][] lance ce script tous les jours ou quelqu'un allume l'ordinateur
-
-
-
-### Sauvegarde du catalogue
-Le script [github_backup.sh][] permet de sauvegarder sur github le 
-fichier de catalogage `inventaire.tc`. [Anacron][] lance ce script tous les 
-jours ou quelqu'un allume l'ordinateur
-
-
-
-### Gestion des emprunts
-La gestion des emprunts de livre ne se fait pas informatiquement, mais **grâce
-à des fiches**. La fonction de gestion des emprunts de Tellico n'est pas utilisée. 
-
-Nous considérons qu'un livre est prêté à une classe (ex: la classe de CP), pas à 
-un élève en particulier. Dans la bibliothèque il y a donc une boite pour
-chacune des cinq classes de l'école. 
-
-![cinq boites](Documentation/images/boites.png)
-
-Dans la boite d'une classe se trouvent les fiches de tous les livres empruntés 
-par les élèves de cette classe.
-
-Cette organisation n'a pas été choisie faute de moyen informatiques pour
-gérer les emprunts, mais pour permettre un fonctionnement courant de la 
-bibliothèque avec très peu de moyen humain. Voir les Questions / Réponses
-sur ce sujet [plus bas dans ce document](#pourquoi-une-gestion-des-prêts-par-fiches).
-
-
-
-### Traitement des acquisitions de la bibliothèque
-
-Les nouveaux livres qui sont acquis par la bibliothèque suivent le processus
-suivant
-
-1. Nettoyage.
-2. Réparation si nécessaire.
-3. Couverture.
-4. Ajout d'un bandeau horizontal de couleur en haut du dos si le livre n'est pas 
-  en français  
-    * occitan: rouge.
-    * langue étrangère : jaune.
-    * bilingue français/occitan ou français/étranger :  le bandeau est rouge ou 
-      jaune selon la langue, mais il est barré d'un trait blanc sur toute sa
-      longueur.
-5. Ajout d'une pochette en fin de livre, qui permet de glisser la fiche.
-6. Catalogage en utilisant le programme Tellico. Pour les noms d'auteur, nous
-   adoptons une saisie sous la forme `Nom, Prénom` séparés par des `;`. Par exemple  
-   ```
-   Dupont, Jean; D'Agobert, Roger
-   ```
-7. Impression et mise en place de la fiche. L'impression se fait grâce au 
-   raccourci `Impression des fiches` à la racine du projet. Un double-clic
-   sur ce raccourci lance le script [impression.py][] avec le
-   paramétrage nécessaire.
-8. Impression et mise en place de la cote. L'impression se fait grâce au
-   raccourci `Impression des cotes` à la racine du projet. Un double-clic
-   sur ce raccourci lance le script [impression.py][] avec le
-   paramétrage nécessaire.
-9. Rangement dans le rayon adéquat.
-
-
-
-
-
-[README]:CodeSource/README.md
-[Tellico]:http://tellico-project.org/
-[impression.py]:CodeSource/README.md#impressionpy
-[web.sh]:CodeSource/README.md#websh
-[github_backup.sh]:CodeSource/README.md#github_backupsh
-[rename_authors.py]:CodeSource/README.md#rename_authorspy
-[anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
-[page internet générée à partir du catalogue]:http://calandreta-pau.org/bibli/
-
-
-
 
 ___
 
@@ -125,6 +26,8 @@ suivant:
   le nombre d'exemplaire de chaque livre. Le logiciel choisi devait nous aider
   dans cette tâche. L'auto-complétion avec liste de suggestion, disponible dans 
   Tellico nous assiste efficacement dans cette tâche
+* __OpenSource__ : Le partage des connaissances, la liberté et la curiosité 
+  font partie de nos valeur.
 
 Dans un premier temps, nous avons commencé à utiliser une simple feuille
 `libreoffice calc`. Puis nous avons migré vers Tellico pour la simplicité
@@ -143,9 +46,13 @@ relativement peu important (Titre, Auteur, Éditeur, Langue). Nos données de
 catalogage comprennent aussi des informations qui ne sont pas disponibles sur
 le serveur BNF: code de rangement interne, statut de l'impression des fiches,
 nombre d'exemplaires dans notre stock.
-Enfin, le serveur BNF ne met pas l'illustrateur des livres dans les
-auteurs, mais dans les commentaires, ce qui ne correspond pas à notre logique.
-(nous voulons pouvoir regrouper les livres par illustrateur aussi).
+Enfin, nous n'utilisons pas tout à fait les mêmes conventions de saisie que
+le serveur BNF:
+* Le serveur de la BNF ne met pas l'illustrateur dans la liste des auteurs, mais 
+  dans les commentaires, ce qui ne correspond pas à notre logique (nous voulons 
+  pouvoir regrouper les livres par illustrateur aussi).
+* Le serveur BNF ne sépare pas le nom et le prénom de l'auteur par une virgule,
+  mais par un espace, ce qui ne permet pas de les distinguer.
 
 Au total, il aurait fallu systématiquement remodifier les données importées du
 serveur, le gain de temps nous semble incertain. Il est cependant possible que
