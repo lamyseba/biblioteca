@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="La documentation pour la bibliotèca calandreta paulina" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="CodeSource/templates/doc/stylesheets/stylesheet.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Bibli-doc</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">Documentation</h1>
+          <h2 id="project_tagline">Bibliotèca Calandreta Paulina</h2>
+        </header>
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+      
+<p>Ce document traite de la gestion de la bibliothèque de l'école. La documentation des 
+scripts, qui participent à cette gestion, se trouve dans le <a href="CodeSource/README.html">README</a> du répertoire 
+<code>CodeSource</code> du projet</p>
+<hr />
+<h2 id="fonctionnement-de-la-bibliotheque-decole-calandreta-pau">Fonctionnement de la bibliothèque d'école Calandreta Pau</h2>
+<p>La bibliothèque fonctionne avec très peu de moyen humain. Des bénévoles assurent
+le traitement des acquisitions des livres, ainsi qu'un peu de rangement. Les 
+utilisateurs de la bibliothèque (élèves et enseignant) doivent pouvoir la faire
+vivre quasiment en autonomie (donc gérer les emprunts et le rangement).</p>
+<h3 id="catalogage">Catalogage</h3>
+<p>Les livres sont catalogués manuellement sur <a href="http://tellico-project.org/">Tellico</a>. La fonction de récupération 
+en ligne de données bibliographique n'est pas utilisée pour le moment. Nous
+ne disposons pas de lecteur de code barre. Voir les Questions/Réponses sur ce 
+sujet <a href="#les-données-bibliographiques-sont-elles-récupérées-en-ligne">plus bas dans ce document</a></p>
+<h3 id="consultation-du-catalogue">Consultation du catalogue</h3>
+<p>Une <a href="http://calandreta-pau.org/bibli/">page internet générée à partir du catalogue</a> est disponible en ligne sur
+le site de l'école. C'est le script <a href="CodeSource/README.html#websh">web.sh</a> qui génère et met en ligne cette 
+page. <a href="http://www.delafond.org/traducmanfr/man/man8/anacron.8.html">Anacron</a> lance ce script tous les jours ou quelqu'un allume l'ordinateur</p>
+<h3 id="sauvegarde-du-catalogue">Sauvegarde du catalogue</h3>
+<p>Le script <a href="CodeSource/README.html#github_backupsh">github_backup.sh</a> permet de sauvegarder sur github le 
+fichier de catalogage <code>inventaire.tc</code>. <a href="http://www.delafond.org/traducmanfr/man/man8/anacron.8.html">Anacron</a> lance ce script tous les 
+jours ou quelqu'un allume l'ordinateur</p>
+<h3 id="gestion-des-emprunts">Gestion des emprunts</h3>
+<p>La gestion des emprunts de livre ne se fait pas informatiquement, mais <strong>grâce
+à des fiches</strong>. La fonction de gestion des emprunts de Tellico n'est pas utilisée. </p>
+<p>Nous considérons qu'un livre est prêté à une classe (ex: la classe de CP), pas à 
+un élève en particulier. Dans la bibliothèque il y a donc une boite pour
+chacune des cinq classes de l'école. </p>
+<p><img alt="cinq boites" src="Documentation/images/boites.png" /></p>
+<p>Dans la boite d'une classe se trouvent les fiches de tous les livres empruntés 
+par les élèves de cette classe.</p>
+<p>Cette organisation n'a pas été choisie faute de moyen informatiques pour
+gérer les emprunts, mais pour permettre un fonctionnement courant de la 
+bibliothèque avec très peu de moyen humain. Voir les Questions / Réponses
+sur ce sujet <a href="#pourquoi-une-gestion-des-prêts-par-fiches">plus bas dans ce document</a>.</p>
+<h3 id="traitement-des-acquisitions-de-la-bibliotheque">Traitement des acquisitions de la bibliothèque</h3>
+<p>Les nouveaux livres qui sont acquis par la bibliothèque suivent le processus
+suivant</p>
+<ol>
+<li>Nettoyage.</li>
+<li>Réparation si nécessaire.</li>
+<li>Couverture.</li>
+<li>Ajout d'un bandeau horizontal de couleur en haut du dos si le livre n'est pas 
+  en français  <ul>
+<li>occitan: rouge.</li>
+<li>langue étrangère : jaune.</li>
+<li>bilingue français/occitan ou français/étranger :  le bandeau est rouge ou 
+  jaune selon la langue, mais il est barré d'un trait blanc sur toute sa
+  longueur.</li>
+</ul>
+</li>
+<li>Ajout d'une pochette en fin de livre, qui permet de glisser la fiche.</li>
+<li>Catalogage en utilisant le programme Tellico. Pour les noms d'auteur, nous
+   adoptons une saisie sous la forme <code>Nom, Prénom</code> séparés par des <code>;</code>. Par exemple<br />
+<code>Dupont, Jean; D'Agobert, Roger</code></li>
+<li>Impression et mise en place de la fiche. L'impression se fait grâce au 
+   raccourci <code>Impression des fiches</code> à la racine du projet. Un double-clic
+   sur ce raccourci lance le script <a href="CodeSource/README.html#impressionpy">impression.py</a> avec le
+   paramétrage nécessaire.</li>
+<li>Impression et mise en place de la cote. L'impression se fait grâce au
+   raccourci <code>Impression des cotes</code> à la racine du projet. Un double-clic
+   sur ce raccourci lance le script <a href="CodeSource/README.html#impressionpy">impression.py</a> avec le
+   paramétrage nécessaire.</li>
+<li>Rangement dans le rayon adéquat.</li>
+</ol>
+<hr />
+<h2 id="questions-reponses">Questions / Réponses</h2>
+<h3 id="pourquoi-tellico-pour-le-catalogage">Pourquoi Tellico pour le catalogage?</h3>
+<p>Le logiciel utilisé pour le catalogage devait répondre au cahier des charges
+suivant:</p>
+<ul>
+<li><strong>Disponible hors-ligne</strong> :</li>
+<li>L'ordinateur de la bibliothèque n'était pas connecté à internet ni </li>
+<li>au réseau local au début du projet</li>
+<li>Nous ne souhaitons pas dépendre d'une connexion réseau disponible pour le
+    catalogage.</li>
+<li>Nous sommes frileux pour confier l'hébergement de nos données à un tiers.
+    Il faut en tout cas pouvoir les exporter facilement vers un nouveau
+    logiciel si besoin. Tellico permet l'export dans de nombreux formats,
+    dont le csv, qui est très répandu.</li>
+<li><strong>Prise en main facile</strong> pour les enseignants, les bénévoles, et les élèves</li>
+<li><strong>Gestion des doublons</strong> : Lors du catalogage, nous voulions détecter
+  le nombre d'exemplaire de chaque livre. Le logiciel choisi devait nous aider
+  dans cette tâche. L'auto-complétion avec liste de suggestion, disponible dans 
+  Tellico nous assiste efficacement dans cette tâche</li>
+</ul>
+<p>Dans un premier temps, nous avons commencé à utiliser une simple feuille
+<code>libreoffice calc</code>. Puis nous avons migré vers Tellico pour la simplicité
+et la convivialité de son interface.</p>
+<h3 id="les-donnees-bibliographiques-sont-elles-recuperees-en-ligne">Les données bibliographiques sont-elles récupérées en ligne?</h3>
+<p>Tellico permet la récupération des données bibliographiques sur des serveurs, 
+comme par exemple le serveur de la BNF. Nous n'utilisons pas cette 
+fonctionnalité pour le moment.</p>
+<p>Dans notre cas en effet, le nombre de données à saisir pour chaque livre est
+relativement peu important (Titre, Auteur, Éditeur, Langue). Nos données de 
+catalogage comprennent aussi des informations qui ne sont pas disponibles sur
+le serveur BNF: code de rangement interne, statut de l'impression des fiches,
+nombre d'exemplaires dans notre stock.
+Enfin, le serveur BNF ne met pas l'illustrateur des livres dans les
+auteurs, mais dans les commentaires, ce qui ne correspond pas à notre logique.
+(nous voulons pouvoir regrouper les livres par illustrateur aussi).</p>
+<p>Au total, il aurait fallu systématiquement remodifier les données importées du
+serveur, le gain de temps nous semble incertain. Il est cependant possible que
+nous utilisions à l'avenir cette fonctionnalité de Tellico pour compléter nos
+données bibliographique.</p>
+<h3 id="pourquoi-une-gestion-des-prets-par-fiches">Pourquoi une gestion des prêts par fiches?</h3>
+<p>21è siècle, l'ère du code-barre. Et pourtant!</p>
+<p>Loin du modèle de bibliothèque classique avec un ou plusieurs employés pour
+gérer le stock, les prêts et le rangement des livres, notre bibliothèque repose
+sur le bénévolat quand il est disponible, les enseignants et les élèves le reste
+du temps. La ou les personnes qui viennent emprunter des livres ont de grandes
+chances de se trouver seule(s) dans la bibliothèque.</p>
+<p>Dans ce contexte, demander aux élèves ou aux enseignants d'allumer l'ordinateur,
+de lancer le programme, d'identifier la classe et de scanner les codes barres
+nécessaires relève presque de l'utopie.
+La logique "Mets la fiche dans la boite de ta classe avant d'emporter le livre"
+nous a semblé plus accessible pour les enseignants et surtout les élèves.
+Bien sur il y aura des ratés, des fiches pas rangées, mais l'objectif au 
+sein de l'école est d'avoir un système de prêt qui permet le plus de souplesse
+possible dans la pratique, plutôt qu'un système <em>théoriquement</em> très rigoureux.</p>        
+        
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Slate theme maintained by <a href="https://github.com/jasoncostello">Jason Costello</a></p>
+      </footer>
+    </div>
+
+  </body>
+</html>

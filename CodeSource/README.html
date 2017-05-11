@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="La documentation pour la bibliotèca calandreta paulina" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="../CodeSource/templates/doc/stylesheets/stylesheet.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <title>Bibli-doc</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">Documentation</h1>
+          <h2 id="project_tagline">Bibliotèca Calandreta Paulina</h2>
+        </header>
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+      
+<p>Le répertoire <code>CodeSource</code> contient des scripts pour faciliter la gestion d'une 
+petite bibliothèque d'école qui utilise le programme <a href="http://tellico-project.org/">Tellico</a> pour le 
+catalogage des livres. Vous trouverez plus d'information sur la gestion de cette 
+bibliothèque d'école dans le <a href="../README.html">README principal du projet</a></p>
+<h3 id="impressionpy">impression.py</h3>
+<p>Un automate pour imprimer les fiches et les cotes pour les livres qui en ont
+besoin. Ce programme génère un pdf et met à jour le fichier catalogue: il
+remet à zéro le nombre de fiche ou de cote à imprimer pour les livres concernés.</p>
+<div class="highlight"><pre><span></span><span class="c1"># &gt; ./impression.py -h</span>
+usage: impression.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--log LOG<span class="o">]</span> <span class="o">[</span>--exclude EXCLUDE<span class="o">]</span> item_type
+
+positional arguments:
+  item_type          peut prendre la valeur <span class="s2">&quot;fiches&quot;</span> ou <span class="s2">&quot;cotes&quot;</span>
+
+optional arguments:
+  -h, --help         show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  --log LOG          info or debug
+  --exclude EXCLUDE  la liste des genres à exclure, séparés par des <span class="s1">&#39;;&#39;</span>
+</pre></div>
+
+
+<h3 id="websh">web.sh</h3>
+<p>Ce script génére une page internet montrant les livres du catalogue, puis la met 
+en ligne sur le site de l'école. Cette page inclut un champs de recherche. On 
+peut cliquer sur une colonne pour trier suivant cette colonne.</p>
+<h3 id="github_backupsh">github_backup.sh</h3>
+<p>Ce script sauvegarder le catalogue <code>inventaire.tc</code> sur github (eh oui ici même!)</p>
+<h3 id="rename_authorspy">rename_authors.py</h3>
+<p>Ce programme permet de changer le format des noms d'auteurs. On est parti sur un 
+format "Dupont, Jean" pour le catalogage, mais on se réserve la possibilité 
+d'adopter  "Jean Dupont" à l'avenir, même si <a href="../Documentation/format_noms_d_auteur.html">une réflexion</a> nous indique 
+c'est peu probable.</p>
+<div class="highlight"><pre><span></span><span class="c1"># &gt; ./rename_authors.py -h</span>
+usage: rename_authors.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-v<span class="o">]</span> input_file output_file
+
+Ce script permet de renommer tous les auteurs de la base Tellico: Tous les
+auteurs saisis sous la forme <span class="s2">&quot;Dupont, Jean&quot;</span> deviendront: <span class="s2">&quot;Jean Dupont&quot;</span>.
+
+positional arguments:
+  input_file     le fichier de base de donnée tellico à transformer
+  output_file    le nom du fichier de sortie
+
+optional arguments:
+  -h, --help     show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  -v, --verbose  affiche les transformations de nom sur la sortie standard
+
+---
+Avantages : cette nouvelle mise en forme des auteurs simplifie la saisie: on 
+copie tel quel ce qui est indiqué sur le livre
+---
+Inconvénient: Dans certains cas, l<span class="s1">&#39;auto-complétion de l&#39;</span>auteur disfonctionne:
+    * Pour les auteurs dont le prénom n<span class="s1">&#39;est pas fourni sur certains livres    </span>
+<span class="s1">    * Pour les auteurs dont seule l&#39;</span>initiale du prénom est fournie sur le livre    
+    * Pour les couples <span class="o">(</span>deux prénoms et un seul nom<span class="o">)</span>
+---
+Plus d<span class="s1">&#39;éléments sur le choix du formatage des noms d&#39;</span>auteurs dans le fichier 
+<span class="s2">&quot;Documentation/format_noms_d_auteur&quot;</span>
+</pre></div>
+
+
+<hr />
+<h2 id="qui-utilise-ces-scripts">Qui utilise ces scripts?</h2>
+<p>Les personnes qui s'occupent de la bibliothèque ne sont pas toutes des fanas
+de la ligne de commande. Ces personnes gèrent l'impression des fiches et des
+cotes simplement en double-cliquant sur les raccourcis <code>impression_fiches</code> et
+<code>impression_cotes</code> à la racine du projet. Ces raccourcis lancent le script 
+<code>impression.py</code> avec les paramètres qui vont bien.</p>
+<p>Pour des besoins plus particuliers, un utilisateur aguerri peut utiliser 
+<code>impressions.py</code> directement en ligne de commande.</p>
+<p>Chez nous, <a href="http://www.delafond.org/traducmanfr/man/man8/anacron.8.html">anacron</a> lance automatiquement les scripts <code>web.sh</code> et 
+<code>github_backup.sh</code> chaque jour où l'ordinateur de la bibliothèque est allumé.</p>
+<h2 id="il-y-a-des-dependances-a-installer">Il y a des dépendances à installer?</h2>
+<p>C'est mieux de partir avec Tellico, bien sur! Ces scripts s'appuient sur un 
+catalogue Tellico customisé avec des champs supplémentaires, notamment pour 
+gérer le nombre d'impression de fiche ou de cote pour chaque livre. 
+Le catalogue <a href="../inventaire.tc">inventaire.tc</a> (à la racine du projet) fonctionne bien avec
+les scripts: c'est le catalogue à jour de notre école! Vous pouvez l'ouvrir avec
+Tellico, puis le vider pour le re-remplir avec vos propres références.</p>
+<p>Les scripts utilisent des programmes en ligne de commande, qui doivent être 
+installés sur l'ordinateur:</p>
+<ul>
+<li><code>xsltproc</code> est utilisé pour générer une page html à partir des données du 
+  catalogue. Ce programme fait partie du paquet <code>libxslt</code> installé dans 
+  la plupart des distribution linux.</li>
+<li><a href="https://wkhtmltopdf.org/">wkhtmltopdf</a> : utilisé pour transformer la page html en pdf à imprimer<br />
+<em><strong>Note:</strong> La version disponible par défaut dans les dépôts de la plupart des 
+  distrib donne une mauvaise sortie pdf car elle ignore l'option 
+  <code>--disable-smart-shrinking</code> fournie par le script. Si cela vous arrive, 
+  téléchargez la version fournie sur le site en ligne(1). Placez ensuite 
+  l'executable dans /usr/bin :</em><br />
+<code>bash  
+    sudo cp ~/Téléchargement/dossier_wkhtml_dezipé/bin/wkhtmltopdf /usr/bin</code>  </li>
+<li>la commande <code>ftp</code> doit être disponible (c'est le cas la plupart du temps)</li>
+<li>Un interpréteur python, et la librairie <code>python-dbus</code></li>
+</ul>
+<p>Pour plus de renseignement sur le fonctionnement de la bibliothèque de l'école,
+vous pouvez consulter le wiki.</p>
+<p><em>(1) Pour la petite histoire, cette version est compilée avec une version 
+patchée de Qt, et souvent la version disponible dans le dépot de votre distro
+linux favorite n'est pas compilée avec cette version patchée</em></p>        
+        
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Slate theme maintained by <a href="https://github.com/jasoncostello">Jason Costello</a></p>
+      </footer>
+    </div>
+
+  </body>
+</html>
