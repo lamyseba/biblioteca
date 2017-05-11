@@ -60,7 +60,7 @@ utilisée pour le moment. Voir les [Questions/Réponses sur ce sujet](questions-
 
 ### Sauvegarde de l'inventaire
 Le script [github_backup.sh][] permet de sauvegarder le fichier `inventaire.tc`
-sur github. [Anacron][] lance ce script tous les jours ou quelqu'un allume 
+sur github. [Anacron][] lance ce script tous les jours où quelqu'un allume 
 l'ordinateur
 
 

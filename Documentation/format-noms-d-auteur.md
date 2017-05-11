@@ -1,5 +1,5 @@
 
-Réflexion sur le format de saisie des Noms d'auteur
+Réflexion sur le format de saisie des noms d'auteur
 =====================================
 
 
