@@ -9,6 +9,10 @@
 ### login user
 ### password secret
 
+# Si la commande de génération de la page se passe mal, il faut sortir du
+# script avant l'upload.
+
+set -e
 # Dezippe le fichier XML de tellico
 unzip -p ~/Bibli/inventaire.tc tellico.xml | \
 \
