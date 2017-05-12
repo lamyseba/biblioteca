@@ -20,7 +20,7 @@ le lancer depuis le bureau de l'ordinateur, ou bien par un double clic sur le
 fichier `inventaire.tc`.
 
 Le catalogue peut aussi être consulté en ligne sur le site internet de l'école,
-à l'adresse http://calandreta-pau.org/bibli/. C'est le script [web.sh][] qui 
+à l'adresse <http://calandreta-pau.org/bibli/>. C'est le script [web.sh][] qui 
 génère la page internet à partir du fichier `inventaire.tc`
 
 
