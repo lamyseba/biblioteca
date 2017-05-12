@@ -88,7 +88,7 @@ bibliothèque avec très peu de moyen humain. Voir les
 ## Traitement des acquisitions de la bibliothèque
 
 Les nouveaux livres qui sont acquis par la bibliothèque suivent le processus
-suivant
+suivant.
 
 1. Nettoyage.
 2. Réparation si nécessaire.
@@ -101,22 +101,30 @@ suivant
       jaune selon la langue, mais il est barré d'un trait blanc sur toute sa
       longueur.
 5. Ajout d'une pochette en fin de livre, qui permet de glisser la fiche.
-6. Catalogage en utilisant le programme Tellico. Pour les noms d'auteur, nous
-   adoptons une saisie sous la forme `Nom, Prénom` séparés par des `;`. Par exemple  
-   ```
-   Dupont, Jean; D'Agobert, Roger
-   ```
+6. Inventorier le livre utilisant le programme Tellico. Pour les noms d'auteur, 
+   nous adoptons une saisie sous la forme `Nom, Prénom` séparés par des `;`.  
+   Par exemple `Dupont, Jean; D'Agobert, Roger`     
+   Une fois que le livre est enregistré dans l'inventaire, il faut **recopier le
+   N° d'inventaire sur la page de titre du livre**.
 7. Impression et mise en place de la fiche. L'impression se fait grâce au 
    raccourci `Impression des fiches` à la racine du projet. Un double-clic
-   sur ce raccourci lance le script [impression.py][] avec le
-   paramétrage nécessaire.
+   sur ce raccourci lance le script [impression.py][] avec le paramétrage 
+   nécessaire. 
 8. Impression et mise en place de la cote. L'impression se fait grâce au
    raccourci `Impression des cotes` à la racine du projet. Un double-clic
    sur ce raccourci lance le script [impression.py][] avec le
    paramétrage nécessaire.
 9. Rangement dans le rayon adéquat.
 
-
+Pour chaque étape, un emplacement est réservé dans le rayonnage. On y trouve
+tous les livres qui n'ont pas encore passé cette étape. Après avoir traité
+le livre, on le range dans le rayon de l'étape suivante à effectuer pour
+ce livre.
+ 
+* [ ] TODO: rédiger un document spécifique à l'impression des fiches : où se
+  trouve le pdf, comment paramétrer l'imprimante, que faire si des fiches sont
+  mal imprimées, etc...
+* [ ] TODO: intégrer une vidéo de démonstration: "Comment couvrir".
 
 
 
