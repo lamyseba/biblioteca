@@ -83,6 +83,10 @@ footer p {
   color: #f2f2f2;
 }
 
+footer .metadata{
+    font-size:15px;
+}
+
 a {
   display: inline-block;
   text-decoration: none;

@@ -1,6 +1,15 @@
 #!/usr/bin/python
-import sys, os, glob, markdown, re, codecs
+import sys, os, glob, markdown, re, codecs, argparse, datetime, locale
 from string import Template
+
+# récupère et vérifie les arguments de la ligne de commande
+parser = argparse.ArgumentParser(description="""
+Génère la documentation de la bibliothèque au format html (consultable dans un 
+navigateur), à partir de l'ensemble des fichiers d'extension '.md' qui se 
+trouvent dans le projet. Les fichiers .md sont des fichiers au format Markdown,
+modifiables avec un simple éditeur de texte. Pour plus d'information sur la 
+consultation et la modification de la documentation, consultez le fichier 
+Documentation/utiliser-la-documentation.html""")
 
 
 # définit le répertoire de travail: celui juste au dessus de là où
@@ -11,7 +20,8 @@ style_sheet_path = os.path.join(layout_dir,"stylesheets","stylesheet.css")
 md=markdown.Markdown(
     extensions=['markdown.extensions.codehilite',
                 'markdown.extensions.fenced_code',
-                'markdown.extensions.toc'
+                'markdown.extensions.toc',
+                'markdown.extensions.meta'
                ],
     extension_configs = {
         'markdown.extensions.codehilite': {
@@ -20,7 +30,26 @@ md=markdown.Markdown(
     })
 
 
+html_escape_table = {
+    "&": "&amp;",
+    '"': "&quot;",
+    "'": "&apos;",
+    ">": "&gt;",
+    "<": "&lt;",
+    }
+
+def html_escape(text):
+    """Produce entities within text."""
+    return "".join(html_escape_table.get(c,c) for c in text)
+
+
 def ext_and_slug(match):
+    """ transforme un lien vers un fichier d'extension `.md` en un lien vers
+        le fichier de même nom mais d'extension `.html`. Transforme
+        l'ancre du lien pour la rendre compatible avec python-markdown
+        (utilisation de la méthode slugify)
+        match -- un RegExpMatch contenant le lien.
+    """
     modified_link = match.group(1)+".html"
     if match.group(2):
         modified_link += '#'+markdown.extensions.toc.slugify(match.group(2),'-')
@@ -28,7 +57,7 @@ def ext_and_slug(match):
     print("              ->",modified_link)
     return modified_link
 
-    
+ 
 # Les ancres générées par github peuvent contenir des accents, pas celles
 # générées par python_markdown. Donc pour la version locale de la documentation
 # (générée avec python_markdown), il faut supprimer les ancres. Aussi, il
@@ -42,8 +71,10 @@ alp = re.compile('(\]\s*\(.*)\.md#?([^\)]*)')
 # Une autre expression, cette fois pour trouver des liens en note.
 # Ex: [impression.py]:CodeSource/Readme.md#impression.py
 # Il faut supprimer les accents des ancres dans la version html
-alp2 =re.compile('(\]\s*:.*)\.md#?(.*)')
+alp2 = re.compile('(\]\s*:.*)\.md#?(.*)')
 
+# header pattern
+h1p = re.compile('#\s*([^#\n]+)|(.+)\n={5,}')
 
 
 # file_paths: la liste de tous les chemin des fichiers .md, relatif au
@@ -53,15 +84,22 @@ for file_path in file_paths :
     print("---")
     # on calcule l'emplacement du fichier de mise en forme en fonction
     # du chemin du fichier .md
-    css_link= ("../"*file_path.count(os.path.sep))+style_sheet_path
+    home_path_rel = ("../"*file_path.count(os.path.sep))
+    css_link= os.path.normpath(home_path_rel+style_sheet_path)
     html_file_name = os.path.splitext(file_path)[0]+".html"
     print("rendering "+file_path)
     
-    # ouvre le fichier markdown
     md_in=""
-    with open(os.path.join(os.getcwd(),file_path),'r') as f:
+    # file_path_abs : chemin absolu vers le fichier markdown
+    file_path_abs= os.path.join(os.getcwd(),file_path)
+    # ouvre le fichier markdown
+    with open(file_path_abs,'r') as f:
         md_in = f.read()    
-    # transforme les ancres dans le fichier markdown  
+    # trouve le titre 
+    matches=h1p.search(md_in).groups()
+    title = matches[0] or matches[1]
+    print("#",title)
+    # transforme les ancres dans le fichier markdown 
     md_out=alp.sub(ext_and_slug,md_in)
     md_out=alp2.sub(ext_and_slug, md_out) 
     # transforme le texte markdown en html
@@ -73,9 +111,29 @@ for file_path in file_paths :
         template_in = f.read()
     template = Template(template_in)
     # substitue les champs à substituer
-    template_out = template.substitute(
+    
+    # La chaine de caractère qui précise l'auteur de la page.
+    # Ex: Auteur: Sébastien Lamy
+    authors = ""
+    
+    # Pour afficher la date de modification, il faut mattre à jour la localisation
+    # de python
+    update_time = datetime.datetime.fromtimestamp(os.path.getmtime(file_path_abs))
+    locale.setlocale(locale.LC_ALL,"fr_FR.UTF-8")
+    
+    for key in md.Meta :
+        if key.lower().startswith("auteur") : 
+            authors = "; ".join(md.Meta[key])            
+            authors = key.title()+"&nbsp;: "+html_escape(authors)
+    template_out = template.safe_substitute(
         markdown_output=html_out,
-        css_link=css_link
+        css_link=css_link,
+        summary_link=os.path.normpath(home_path_rel+"README.html"),
+        authors= authors,
+        source_file_path = file_path_abs,
+        update_date = update_time.strftime("%d %b %Y"),
+        edit_man_url= os.path.normpath(home_path_rel+"Documentation/utiliser-la-documentation.html"),
+        title=title
     )       
     # crée le fichier html avec le contenu final
     with codecs.open(html_file_name,'w',encoding="utf-8", errors="xmlcharrefreplace") as f:
