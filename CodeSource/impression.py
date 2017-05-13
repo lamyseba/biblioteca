@@ -12,10 +12,6 @@ import logging
 
 
 
-# Enlever le commentaire si les emplacement de fichiers sont situés 
-# par rapport au script, pas par un chemin absolu.
-# os.chdir(os.path.dirname(sys.argv[0]))
-
 # Le répertoire de base de l'application est le répertoire parent de l'emplacement
 # du script 
 app_home_dir = os.path.normpath(os.path.dirname(sys.argv[0])+"/..")
