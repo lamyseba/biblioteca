@@ -1,8 +1,13 @@
-# Questions / Réponses
+---
+auteur: Sébastien Lamy (lamyseba arobase free.fr)
+---
+
+Questions / Réponses
+===========================================================
 
 
-
-## Pourquoi Tellico pour le catalogage?
+Pourquoi Tellico pour le catalogage?
+-------------------------------------
 Le logiciel utilisé pour le catalogage devait répondre au cahier des charges
 suivant:
 
@@ -29,8 +34,9 @@ et la convivialité de son interface.
 
 
 
-## Les données bibliographiques sont-elles récupérées en ligne?
 
+Les données bibliographiques sont-elles récupérées en ligne?
+-------------------------------------
 Tellico permet la récupération des données bibliographiques sur des serveurs, 
 comme par exemple le serveur de la BNF. Nous n'utilisons pas cette 
 fonctionnalité pour le moment.
@@ -56,7 +62,8 @@ données bibliographique.
 
 
 
-## Pourquoi une gestion des prêts par fiches?
+Pourquoi une gestion des prêts par fiches?
+-------------------------------------
 21è siècle, l'ère du code-barre. Et pourtant!
 
 Loin du modèle de bibliothèque classique avec un ou plusieurs employés pour

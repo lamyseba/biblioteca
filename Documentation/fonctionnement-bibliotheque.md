@@ -1,4 +1,9 @@
-# Fonctionnement de la bibliothèque d'école Calandreta Pau
+---
+auteur: Sébastien Lamy (lamyseba arobase free.fr)
+---
+
+Fonctionnement de la bibliothèque d'école Calandreta Pau
+===========================================================
 
 La bibliothèque fonctionne avec très peu de moyen humain. Des bénévoles assurent
 le traitement des acquisitions des livres, ainsi qu'un peu de rangement. Les 
@@ -7,7 +12,8 @@ vivre quasiment en autonomie (donc gérer les emprunts et le rangement).
 
 
 
-## Inventaire des livres
+Inventaire des livres
+-------------------------------------
 L'inventaire est stocké dans le fichier `inventaire.tc` à la racine du projet.
 Les données y sont stockées au format XML, puis compressées avec ZIP.
 C'est un fichier exploitable par le programme Tellico.
@@ -54,8 +60,12 @@ automatiquement rajoutées pour le livre:
 * **N°** : Le numéro d'inventaire du livre
 * **Créé le** : La date à laquelle le livre a été ajouté à l'inventaire.
 
+* [ ] TODO: préciser avec un warning qu'il faut écrire le numéro d'inventaire
+  sur le livre après enregistrement.
+
 La fonction de récupération en ligne de données bibliographique n'est pas 
 utilisée pour le moment. Voir les [Questions/Réponses sur ce sujet](questions-reponses.md#les-données-bibliographiques-sont-elles-récupérées-en-ligne)
+
 
 
 ### Sauvegarde de l'inventaire
@@ -65,7 +75,9 @@ l'ordinateur
 
 
 
-## Gestion des emprunts
+
+Gestion des emprunts
+-------------------------------------
 La gestion des emprunts de livre ne se fait pas informatiquement, mais **grâce
 à des fiches**. La fonction de gestion des emprunts de Tellico n'est pas utilisée. 
 
@@ -85,8 +97,10 @@ bibliothèque avec très peu de moyen humain. Voir les
 
 
 
-## Traitement des acquisitions de la bibliothèque
 
+
+Traitement des acquisitions de la bibliothèque
+-------------------------------------
 Les nouveaux livres qui sont acquis par la bibliothèque suivent le processus
 suivant.
 
@@ -105,7 +119,9 @@ suivant.
    nous adoptons une saisie sous la forme `Nom, Prénom` séparés par des `;`.  
    Par exemple `Dupont, Jean; D'Agobert, Roger`     
    Une fois que le livre est enregistré dans l'inventaire, il faut **recopier le
-   N° d'inventaire sur la page de titre du livre**.
+   N° d'inventaire sur la page de titre du livre**.  
+     * [ ] TODO: mettre un symbole de warning et un lien vers `Ajout d'un livre à l'inventaire`
+       de ce document qui 
 7. Impression et mise en place de la fiche. L'impression se fait grâce au 
    raccourci `Impression des fiches` à la racine du projet. Un double-clic
    sur ce raccourci lance le script [impression.py][] avec le paramétrage 

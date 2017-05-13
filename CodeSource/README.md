@@ -1,5 +1,9 @@
-# Utilisation des scripts
+---
+auteur: Sébastien Lamy (lamyseba arobase free.fr)
+---
 
+Utilisation des scripts
+===========================================================
 
 Le répertoire `CodeSource` contient des scripts pour faciliter la gestion d'une 
 petite bibliothèque d'école qui utilise le programme [Tellico][] pour le 
@@ -75,7 +79,8 @@ Plus d'éléments sur le choix du formatage des noms d'auteurs dans le fichier
 
 ___
 
-## Qui utilise ces scripts?
+Qui utilise ces scripts?
+-------------------------------------
 Les personnes qui s'occupent de la bibliothèque ne sont pas toutes des fanas
 de la ligne de commande. Ces personnes gèrent l'impression des fiches et des
 cotes simplement en double-cliquant sur les raccourcis `impression_fiches` et
@@ -91,11 +96,14 @@ Chez nous, [anacron][] lance automatiquement les scripts `web.sh` et
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 
 
-## Il y a des dépendances à installer?
+
+
+Il y a des dépendances à installer?
+-------------------------------------
 C'est mieux de partir avec Tellico, bien sur! Ces scripts s'appuient sur un 
 catalogue Tellico customisé avec des champs supplémentaires, notamment pour 
 gérer le nombre d'impression de fiche ou de cote pour chaque livre. 
-Le catalogue [inventaire.tc][] (à la racine du projet) fonctionne bien avec
+Le catalogue `inventaire.tc` (à la racine du projet) fonctionne bien avec
 les scripts: c'est l'inventaire à jour des livres de notre école! Vous pouvez 
 l'ouvrir avec Tellico, puis le vider pour le re-remplir avec vos propres
 références.
@@ -119,12 +127,10 @@ installés sur l'ordinateur:
 * Un interpréteur python, et la librairie `python-dbus`
 
 
-Pour plus de renseignement sur le fonctionnement de la bibliothèque de l'école,
-vous pouvez consulter le wiki.
 
 _(1) Pour la petite histoire, cette version est compilée avec une version 
 patchée de Qt, et souvent la version disponible dans le dépot de votre distro
 linux favorite n'est pas compilée avec cette version patchée_
 
-[inventaire.tc]:../inventaire.tc
+
 [wkhtmltopdf]:https://wkhtmltopdf.org/

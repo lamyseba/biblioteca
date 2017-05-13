@@ -1,6 +1,9 @@
+---
+auteur: Sébastien Lamy (lamyseba arobase free.fr)
+---
 
 Réflexion sur le format de saisie des noms d'auteur
-=====================================
+===========================================================
 
 
 
