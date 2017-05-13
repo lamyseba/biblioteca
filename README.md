@@ -1,4 +1,9 @@
-# Sommaire
+---
+auteur: Sébastien Lamy (lamyseba arobase free.fr)
+---
+
+Sommaire
+===========================================================
 
 #### [Fonctionnement de la bibliothèque d'école Calandreta Pau][1]
 Vue générale.
@@ -10,7 +15,10 @@ immersion occitan.
 #### [Utilisation des scripts][3]
 Description et aide
 
-## Annexes
+
+
+Annexes
+-------------------------------------
 #### [Réflexion sur le format de saisie des noms d'auteur][4]
 
 
