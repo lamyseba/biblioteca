@@ -78,7 +78,7 @@ Plus d'éléments sur le choix du formatage des noms d'auteurs dans le fichier
 "Documentation/format_noms_d_auteur"
 ```
 
-[une réflexion]:../docs/format-noms-d-auteur.md
+[une réflexion]:https://lamyseba.github.io/biblioteca/format-noms-d-auteur.html
 
 
 

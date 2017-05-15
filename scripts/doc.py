@@ -93,7 +93,7 @@ def convert_internal_links(text):
         docs et il est quand même inclut dans la génération de la documentation.
         text -- le texte dans lequel il faut convertir les liens
     """
-    return re.compile('(][:\(]).*docs/(.*)\.md').sub(r'\1\2.html',text)
+    return text.replace("https://lamyseba.github.io/biblioteca/","")
 
 
 # DEPRECATED: cette fonction ne sert plus à rien dans la nouvelle structure
@@ -127,12 +127,10 @@ if not os.path.exists('images'):
 os.chdir(app_dir)
 
 # file_paths: la liste de tous les fichiers .md à convertir en html.
+# Ce sont les fichiers ".md" qui se trouvent dans le répertoire "docs"
 # Le chemin donné pour chaque fichier est relatif au répertoire de travail.
 # ex: "./docs/index.md"
-# ajoute le fichier "scripts/README.md" en début de liste
-file_paths = ["scripts/README.md"]
-# ajoute tous les fichiers ".md" du répertoire docs.
-file_paths.extend(glob.glob("docs/*.md"))
+file_paths=glob.glob("docs/*.md")
 for file_path in file_paths :
     print("---")
     # md_file_path_abs : chemin absolu vers le fichier markdown
@@ -151,9 +149,12 @@ for file_path in file_paths :
     md_in=""
     with open(md_file_path_abs,'r') as f:
         md_in = f.read()
-    if file_path=='scripts/README.md':
+    # le fichier "utilisations-des-scripts" est un cas spécial, c'est un lien
+    # symbolique vers le README du répertoire "scripts". Il faut mettre à jour
+    # les liens internes contenus dans ce fichier: ce sont des liens vers
+    # la doc en ligne sur github.
+    if file_path=='docs/utilisation-des-scripts.md':
         md_in = convert_internal_links(md_in)
-        html_file_path = os.path.join(html_dir,"utilisation-des-scripts.html")
     # trouve le titre 
     matches=h1p.search(md_in).groups()
     title = matches[0] or matches[1]
