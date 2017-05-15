@@ -20,7 +20,7 @@ app_dir = os.getcwd()
 # template_dir : là ou se trouve le modèle de page pour la documentation
 template_dir = os.path.join(app_dir,"scripts","templates")
 # html_dir: là ou seront généré les fichiers html de la documenatation
-html_dir = os.path.join(app_dir,"docs","html")
+html_dir = os.path.join(app_dir,"docs")
 
  
 # DEPRECATED: on paramètre désormais l'extension toc pour qu'elle
@@ -86,14 +86,15 @@ def html_escape(text):
 
 # pour le
 def convert_internal_links(text):
-    """ Convertit les lien interne qui pointent vers le répertoire docs dans le 
-        texte fournit. Par exemple un lien vers "../docs/index.html" sera 
+    """ Convertit les lien interne qui pointent vers la documentation en ligne 
+        dans le texte fournit. Par exemple un lien vers 
+        ".https://lamyseba.github.io/biblioteca/index.html" sera 
         transformé en lien vers "index.html". Cette fonction ne sert que pour
         le fichier scripts/README.md, car il ne se trouve pas dans le répertoire
         docs et il est quand même inclut dans la génération de la documentation.
         text -- le texte dans lequel il faut convertir les liens
     """
-    return text.replace("https://lamyseba.github.io/biblioteca/","")
+    return re.compile('https://.+\.github\.io/biblioteca/').sub('',text)
 
 
 # DEPRECATED: cette fonction ne sert plus à rien dans la nouvelle structure
@@ -114,9 +115,7 @@ def ext_and_slug(match):
     return modified_link
 
 
-
-# créé le répertoire html s'il n'existe pas
-if not os.path.exists(html_dir) : os.makedirs(html_dir)
+"""
 os.chdir(html_dir)
 # créé le lien symbolique vers le répertoire des css s'il n'existe pas
 if not os.path.exists('doc-stylesheets'):
@@ -125,12 +124,16 @@ if not os.path.exists('doc-stylesheets'):
 if not os.path.exists('images'):
     os.symlink("../images","images")
 os.chdir(app_dir)
+"""
 
 # file_paths: la liste de tous les fichiers .md à convertir en html.
-# Ce sont les fichiers ".md" qui se trouvent dans le répertoire "docs"
 # Le chemin donné pour chaque fichier est relatif au répertoire de travail.
 # ex: "./docs/index.md"
-file_paths=glob.glob("docs/*.md")
+# Les fichiers ".md" qui se trouvent dans le répertoire "docs/sources"
+file_paths=glob.glob("docs/sources/*.md")
+# Le fichier "scripts/README.md"
+file_paths.append("scripts/README.md")
+
 for file_path in file_paths :
     print("---")
     # md_file_path_abs : chemin absolu vers le fichier markdown
@@ -153,8 +156,9 @@ for file_path in file_paths :
     # symbolique vers le README du répertoire "scripts". Il faut mettre à jour
     # les liens internes contenus dans ce fichier: ce sont des liens vers
     # la doc en ligne sur github.
-    if file_path=='docs/utilisation-des-scripts.md':
+    if file_path=='scripts/README.md':
         md_in = convert_internal_links(md_in)
+        html_file_path = os.path.join(html_dir,'utilisation-des-scripts.html')
     # trouve le titre 
     matches=h1p.search(md_in).groups()
     title = matches[0] or matches[1]
@@ -182,11 +186,18 @@ for file_path in file_paths :
             authors = "; ".join(md.Meta[key])            
             authors = key.title()+"&nbsp;: "+html_escape(authors)
     
+    # source_file_link: le lien relatif vers le fichiers source, sachant que la 
+    # page qui affiche ce lien se trouve dans le répertoire "docs"
+    if file_path.startswith('docs'):
+        source_file_link=file_path.replace('docs/','')
+    else:
+        source_file_link=os.path.join('..',file_path)
     # substitue les champs à substituer
     template_out = template.safe_substitute(
         markdown_output=html_out,
         authors= authors,
-        source_file_path = md_file_path_abs,
+        source_file_link = source_file_link,
+        source_file_link_text = file_path,
         update_date = update_time.strftime("%d %b %Y"),
         title=title
     )       

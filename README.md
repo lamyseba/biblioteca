@@ -11,9 +11,9 @@ d'école:
 * Imprimer des fiches et des cotes pour les livres;
 * Faire une copie de sauvegarde de l'inventaire sur github
 
-Avant de forker ce projet, assurez vous que vous avez des besoins similaires...
-Vous pouvez consulter le fonctionnement détaillé de notre bibliothèque dans la 
-documentation. Vous y trouverez aussi les raisons qui nous ont fait choisir
+Avant d'utiliser ce projet, assurez vous que vous avez des besoins similaires...
+Vous pouvez consulter le fonctionnement détaillé de notre bibliothèque dans 
+[la documentation[1]. Vous y trouverez aussi [les raisons] qui nous ont fait choisir
 une gestion des prêts par fiche.
 
 
@@ -23,9 +23,7 @@ Installation
 -------------------------------------
 Clonez ce projet dans le répertoire de votre choix. Pour que les scripts 
 fonctionnent, il faudra peut être installer des dépendances (voir 
-[la documentation sur des scripts][1])
-
-[1]:scripts/README.md##il-y-a-des-dépendances-à-installer
+[le README du dossier des scripts][2])
 
 
 
@@ -39,12 +37,17 @@ Par contre, gardez bien les champs définis dans ce catalogue. Certains champs
 spéciaux sont utilisés pour décompter les impressions de fiches et de cotes
 qu'il reste à faire.
 
-Logiquement, la réponse à vos autres question devrait se trouver dans la documentation.
+Logiquement, la réponse à vos autres question devrait se trouver dans 
+[la documentation][1].
 
 
 
 Documentation
 -------------------------------------
-La documentation est en ligne sur les github-pages, vous pouvez aussi la
-retrouver directement dans le répertoire `docs/html` du projet.
+La documentation[1] est en ligne sur github-pages, vous pouvez aussi la
+retrouver directement dans le répertoire `docs` du projet.
 Commencer par le fichier `index.html` peut être une bonne idée.
+
+
+[1]:https://lamyseba.github.io/
+[2]:scripts/README.md#il-y-a-des-dépendances-à-installer

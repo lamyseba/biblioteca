@@ -39,7 +39,7 @@ peut cliquer sur une colonne pour trier suivant cette colonne.
 
 
 
-### github_backup.sh 
+### github_push.sh 
 Ce script sauvegarder le catalogue `inventaire.tc` sur github
 
 
