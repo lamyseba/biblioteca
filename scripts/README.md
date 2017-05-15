@@ -96,7 +96,7 @@ Pour des besoins plus particuliers, un utilisateur aguerri peut utiliser
 `impressions.py` directement en ligne de commande.
 
 Chez nous, [anacron][] lance automatiquement les scripts `web.sh` et 
-`github_backup.sh` chaque jour où l'ordinateur de la bibliothèque est allumé.
+`github_push.sh` chaque jour où l'ordinateur de la bibliothèque est allumé.
 
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 

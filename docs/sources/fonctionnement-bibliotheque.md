@@ -69,7 +69,7 @@ utilisée pour le moment. Voir les [Questions/Réponses sur ce sujet](questions-
 
 
 ### Sauvegarde de l'inventaire
-Le script [github_backup.sh][] permet de sauvegarder le fichier `inventaire.tc`
+Le script [github_push.sh][] permet de sauvegarder le fichier `inventaire.tc`
 sur github. [Anacron][] lance ce script tous les jours où quelqu'un allume 
 l'ordinateur
 
@@ -147,7 +147,7 @@ ce livre.
 [Tellico]:http://tellico-project.org/
 [impression.py]:utilisation-des-scripts.html#impressionpy
 [web.sh]:utilisation-des-scripts.html#websh
-[github_backup.sh]:utilisation-des-scripts.html#github_backupsh
+[github_push.sh]:utilisation-des-scripts.html#github_pushsh
 [rename_authors.py]:utilisation-des-scripts.html#rename_authorspy
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 [page internet générée à partir du catalogue]:http://calandreta-pau.org/bibli/
