@@ -113,13 +113,35 @@
    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-1.10.13/b-html5-1.2.4/b-print-1.2.4/fh-3.1.2/datatables.min.js"></script>
 
    <style type="text/css">
-   body {font-family: sans-serif;<xsl:if test="count($columns) &gt; 3">font-size: 80%;</xsl:if>background-color: #fff;}
-   h1.colltitle {
-        margin: 0px;
-        padding-bottom: 5px;
+   body {font-family: sans-serif;<xsl:if test="count($columns) &gt; 3">font-size: 80%;</xsl:if>background-color: #fff;margin:0}
+   #header-left {
+        margin-top: 0;
+        float: left;
+        padding:8px;
+   }
+   #header-right {
+        margin: 0 0 0 30px;
+        float: right;
+        display: block;
+        padding: 12px 20px 12px 50px;
+        color: #fff;
+        background: url('blacktobook.svg') #444 no-repeat 8% 50%;
+        background-size: 35px;
+        font-weight: 700;
+        border: none;
+        text-decoration: none;
+        font-size:15px;
+   }
+   #header-right:hover{background-color:#1883ed}
+   h1.colltitle {        
+        margin: 0 0 5px 0;
+        padding: 6px;
         font-size: 2em;
         text-align: center;
+        background-color: #212121;
    }
+   #header-left, #header-right, h1.colltitle{color:#fff;}
+   
    table {
         margin-left: auto;
         margin-right: auto;
@@ -146,18 +168,20 @@
         border: 1px solid #eee;
         text-align: left;
    }
-   #myTable_length, #myTable_paginate{
+   #myTable_length, #myTable_filter{
     float:none;
     display:inline-block;
    }
-   #myTable_paginate{margin-right:30px;text-align:left;}
+   #myTable_filter{margin-right:30px;text-align:left;}
+   #myTable_filter,#myTable_info{margin-left:10px;}
+   #myTable_paginate{padding-top:0}
    </style>
    
    
    <script type="text/javascript" class="init"><xsl:text disable-output-escaping="yes" ><![CDATA[
     $(document).ready(function() {
       $('#myTable').DataTable( {
-        "dom":'fplrtip',
+        "dom":'pflrtip',
         "language": {
           processing:     "Traitement en cours...",
           search:         "Rechercher&nbsp;:",
@@ -199,8 +223,8 @@
 </xsl:template>
 
 <xsl:template match="tc:collection">
- <p id="header-left"><xsl:value-of select="$filename"/></p>
- <p id="header-right"><xsl:value-of select="$cdate"/></p>
+ <p id="header-left"><xsl:value-of select="$cdate"/></p>
+ <a id="header-right" href="http://lamyseba.github.io/biblioteca">Documentation</a>
  <h1 class="colltitle">
   <xsl:value-of select="@title"/>
  </h1>
