@@ -21,13 +21,13 @@ app_home_dir = os.path.normpath(os.path.dirname(sys.argv[0])+"/..")
 tellico_file_path = os.path.join(app_home_dir,"inventaire.tc")
 
 # Le répertoire dans lequel seront enregistré les pdf à imprimer
-output_dir=os.path.join(app_home_dir,'Impressions')
+output_dir=os.path.join(app_home_dir,'impressions')
 
 # L'emplacement du fichier de log
 logfile_path=os.path.join(output_dir,"impression.log")
 
 # Le répertoire dans lequel se trouvent les templates xsl 
-input_dir=os.path.join(app_home_dir,'CodeSource','templates')
+input_dir=os.path.join(app_home_dir,'scripts','templates')
 
 # L'emplacement de la copie temporaire de la base de donnée Tellico
 tmp_xml_path = "/tmp/tellico.xml"
@@ -271,8 +271,8 @@ class PrintManager:
             # ids = dbus_tellico.filteredEntries()
             # joined_ids = " or ".join("@id="+str(id) for id in ids)
             # entry_predicate+= "["+joined_ids+"]"
-                # print_dir -- Le sous répertoire de "Impressions" où seront stockées les impressions
-                # des fiches (Impressions/fiches) ou les cotes (Impressions/cotes)
+                # print_dir -- Le sous répertoire de "impressions" où seront stockées les impressions
+                # des fiches (impressions/fiches) ou les cotes (impressions/cotes)
         self.print_dir = os.path.expanduser(output_dir+'/'+item_type)
         logging.info("--------------------")
         logging.info("Total:%i %s à imprimer",self.print_count,item_type)
@@ -320,7 +320,7 @@ class PrintManager:
             
             # affiche un message d'info
             message_text=("Il n'y a pas de "+self.item_type[:-1]+" à imprimer pour le moment.\n"
-                         "Retrouvez les impressions déjà faites dans le répertoire 'Impressions'")
+                         "Retrouvez les impressions déjà faites dans le répertoire 'impressions'")
             shell_command(['zenity','--info','--text=%s'%message_text])                        
             
             # ouvre le répertoire ou se trouvent archivées les impressions  

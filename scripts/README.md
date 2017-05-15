@@ -5,14 +5,15 @@ auteur: Sébastien Lamy (lamyseba arobase free.fr)
 Utilisation des scripts
 ===========================================================
 
-Le répertoire `CodeSource` contient des scripts pour faciliter la gestion d'une 
+Le répertoire `scripts` contient des scripts pour faciliter la gestion d'une 
 petite bibliothèque d'école qui utilise le programme [Tellico][] pour le 
 catalogage des livres.
 
 [Tellico]:http://tellico-project.org/
 
-### impression.py
 
+
+### impression.py
 Un automate pour imprimer les fiches et les cotes pour les livres qui en ont
 besoin. Ce programme génère un pdf et met à jour le fichier d'inventaire: il
 remet à zéro le nombre de fiche ou de cote à imprimer pour les livres concernés.
@@ -30,14 +31,17 @@ optional arguments:
   --exclude EXCLUDE  la liste des genres à exclure, séparés par des ';'
 ```
 
+
 ### web.sh
 Ce script génére une page internet montrant les livres du catalogue, puis la met 
 en ligne sur le site de l'école. Cette page inclut un champs de recherche. On 
 peut cliquer sur une colonne pour trier suivant cette colonne.
 
 
+
 ### github_backup.sh 
 Ce script sauvegarder le catalogue `inventaire.tc` sur github
+
 
 
 ### rename_authors.py
@@ -74,7 +78,8 @@ Plus d'éléments sur le choix du formatage des noms d'auteurs dans le fichier
 "Documentation/format_noms_d_auteur"
 ```
 
-[une réflexion]:../Documentation/format-noms-d_auteur.md
+[une réflexion]:../docs/format-noms-d-auteur.md
+
 
 
 ___

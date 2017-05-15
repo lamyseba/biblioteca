@@ -64,7 +64,7 @@ automatiquement rajoutées pour le livre:
   sur le livre après enregistrement.
 
 La fonction de récupération en ligne de données bibliographique n'est pas 
-utilisée pour le moment. Voir les [Questions/Réponses sur ce sujet](questions-reponses.md#les-données-bibliographiques-sont-elles-récupérées-en-ligne)
+utilisée pour le moment. Voir les [Questions/Réponses sur ce sujet](questions-reponses.html#les-données-bibliographiques-sont-elles-récupérées-en-ligne)
 
 
 
@@ -93,7 +93,7 @@ par les élèves de cette classe.
 Cette organisation n'a pas été choisie faute de moyen informatiques pour
 gérer les emprunts, mais pour permettre un fonctionnement courant de la 
 bibliothèque avec très peu de moyen humain. Voir les 
-[Questions/Réponses sur ce sujet](questions-reponses.md#pourquoi-une-gestion-des-prêts-par-fiches).
+[Questions/Réponses sur ce sujet](questions-reponses.html#pourquoi-une-gestion-des-prêts-par-fiches).
 
 
 
@@ -145,10 +145,10 @@ ce livre.
 
 
 [Tellico]:http://tellico-project.org/
-[impression.py]:../CodeSource/README.md#impressionpy
-[web.sh]:../CodeSource/README.md#websh
-[github_backup.sh]:../CodeSource/README.md#github_backupsh
-[rename_authors.py]:../CodeSource/README.md#rename_authorspy
+[impression.py]:utilisation-des-scripts.html#impressionpy
+[web.sh]:utilisation-des-scripts.html#websh
+[github_backup.sh]:utilisation-des-scripts.html#github_backupsh
+[rename_authors.py]:utilisation-des-scripts.html#rename_authorspy
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 [page internet générée à partir du catalogue]:http://calandreta-pau.org/bibli/
 

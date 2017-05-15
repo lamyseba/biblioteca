@@ -21,7 +21,7 @@
 
 <!-- import common templates -->
 <!-- location depends on being installed correctly -->
-<xsl:import href="ressources/tellico-common.xsl"/>
+<xsl:import href="tellico-common.xsl"/>
 
 <xsl:output method="html"
             indent="yes"
