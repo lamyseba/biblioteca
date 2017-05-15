@@ -13,7 +13,7 @@ d'école:
 
 Avant d'utiliser ce projet, assurez vous que vous avez des besoins similaires...
 Vous pouvez consulter le fonctionnement détaillé de notre bibliothèque dans 
-[la documentation[1]. Vous y trouverez aussi [les raisons] qui nous ont fait choisir
+[la documentation][1]. Vous y trouverez aussi [les raisons] qui nous ont fait choisir
 une gestion des prêts par fiche.
 
 
@@ -44,10 +44,11 @@ Logiquement, la réponse à vos autres question devrait se trouver dans
 
 Documentation
 -------------------------------------
-La documentation[1] est en ligne sur github-pages, vous pouvez aussi la
+[La documentation][1] est en ligne sur github-pages, vous pouvez aussi la
 retrouver directement dans le répertoire `docs` du projet.
 Commencer par le fichier `index.html` peut être une bonne idée.
 
 
 [1]:https://lamyseba.github.io/
 [2]:scripts/README.md#il-y-a-des-dépendances-à-installer
+[Tellico]:http://tellico-project.org/
