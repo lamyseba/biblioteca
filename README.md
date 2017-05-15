@@ -1,6 +1,3 @@
----
-auteur: Sébastien Lamy (lamyseba arobase free.fr)
----
 
 biblioteca
 ===========================================================
@@ -49,6 +46,6 @@ retrouver directement dans le répertoire `docs` du projet.
 Commencer par le fichier `index.html` peut être une bonne idée.
 
 
-[1]:https://lamyseba.github.io/
+[1]:https://lamyseba.github.io/biblioteca/
 [2]:scripts/README.md#il-y-a-des-dépendances-à-installer
 [Tellico]:http://tellico-project.org/
