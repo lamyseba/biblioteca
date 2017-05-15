@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Générer html
+Comment=Génère les fichiers .html dans le répertoire "docs", à partir des fichiers .md du répertoire "docs/sources".
+Exec=/bin/bash -c 'cd "$(dirname "$0")";python3 ../../scripts/doc.py;sleep 2' %k
+Terminal=true
+Type=Application
