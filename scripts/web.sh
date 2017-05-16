@@ -11,13 +11,17 @@
 
 # Si la commande de génération de la page se passe mal, il faut sortir du
 # script avant l'upload.
-
 set -e
+
+# On enregistre la date de mise à jour
+DATE=$(date +"%d %b %Y")
+
 # Dezippe le fichier XML de tellico
 unzip -p ~/Bibli/inventaire.tc tellico.xml | \
 \
 # Compile le xml pour faire une page web enregistrée dans /tmp/index.html
 xsltproc --novalid --param "column-names" "'id title author editor language genre cote nb-ex'" \
+        --param "cdate" "'$DATE'" \
         ~/Bibli/scripts/templates/web.xsl \
         - > /tmp/index.html
 

@@ -3,13 +3,23 @@ import sys, os, glob, markdown, re, codecs, argparse, datetime, locale
 from string import Template
 
 # récupère et vérifie les arguments de la ligne de commande
-parser = argparse.ArgumentParser(description="""
-Génère la documentation de la bibliothèque au format html (consultable dans un 
-navigateur), à partir de l'ensemble des fichiers d'extension '.md' qui se 
-trouvent dans le projet. Les fichiers .md sont des fichiers au format Markdown,
-modifiables avec un simple éditeur de texte. Pour plus d'information sur la 
-consultation et la modification de la documentation, consultez le fichier 
-Documentation/utiliser-la-documentation.html""")
+parser = argparse.ArgumentParser(
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    description="""Génère la documentation:
+Utilise les fichiers ".md" du répertoire "docs/sources" pour générer les 
+fichiers ".html" correspondant dans le répertoire "docs". 
+* Les fichiers ".md" sont des fichiers au format Markdown, consultable et
+  modifiables avec un simple éditeur de texte.
+* Les fichiers ".html" sont des fichiers lus par les navigateurs web (firefox,
+  chrome...). La documentation du projet se trouve au format html dans le
+  répertoire "docs"
+Pour plus d'information sur la consultation et la modification de la 
+documentation, consultez le fichier docs/utiliser-la-documentation.html""")
+
+parser.add_argument(
+    "-i","--icon",action='store_true',
+    help="Mets à jour l'icone du lanceur (au lieu de générer la documentation)")
+args = parser.parse_args()
 
 
 # définit le répertoire de travail: celui juste au dessus de là où
@@ -46,7 +56,19 @@ alp2 = re.compile('(\]\s*:.*)\.md#?(.*)')
 # header pattern
 h1p = re.compile('#\s*([^#\n]+)|(.+)\n={5,}')
 
+if args.icon:
+    # f_text: le text contenu dans le fichier du lanceur de la documentation
+    f_text=""
+    launcher_path = os.path.join(app_dir,'documentation.desktop')
+    icon_path = os.path.join(app_dir,'docs/images/ico-documentation.png')
+    p=re.compile('Icon=.*')
+    with open(launcher_path,'r') as f:
+        f_text=f.read()
+    with open(launcher_path,'w') as f:
+        f.write(p.sub('Icon='+icon_path,f_text))
+    exit(0)
 
+    
 
 def slugify(value,separator):
     """ définit une façon de générer les ancres compatible avec github 
