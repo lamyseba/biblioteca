@@ -70,6 +70,8 @@ if args.item_type!="fiches" and args.item_type!="cotes":
 if args.exclude is not None: excluded_genres=args.exclude.split(";")
 
 #Initialise le logger
+# il faut un répertoire "impressions" pour pouvoir logger
+if not os.path.exists(output_dir): os.makedirs(output_dir)
 log_level = getattr(logging, args.log.upper(), None)
 if not isinstance(log_level, int):
     raise ValueError('Invalid log level: %s' % args.log)
