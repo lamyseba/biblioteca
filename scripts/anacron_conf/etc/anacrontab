@@ -1,0 +1,12 @@
+# etc/anacrontab: user configuration file for anacron
+
+# See anacron(8) and anacrontab(5) for details.
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+HOME=/home/calandreta
+LOGNAME=calandreta
+
+1	5	bibli_web	/home/calandreta/Bibli/scripts/web.sh
+1	10	bibli_github_backup /home/calandreta/Bibli/scripts/github_push.sh
+
