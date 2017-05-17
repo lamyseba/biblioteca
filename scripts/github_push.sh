@@ -8,5 +8,7 @@
 cd /home/calandreta/Bibli
 git add inventaire.tc
 git commit -m "Mise à jour de la base de donnée tellico"
+git add docs/*
+git commit -m "Mise à jour de la documentation"
 git push origin master
 
