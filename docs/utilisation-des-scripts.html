@@ -33,12 +33,25 @@
 <p>Le répertoire <code>scripts</code> contient des scripts pour faciliter la gestion d'une 
 petite bibliothèque d'école qui utilise le programme <a href="http://tellico-project.org/">Tellico</a> pour le 
 catalogage des livres.</p>
-<h3 id="impressionpy">impression.py</h3>
-<p>Un automate pour imprimer les fiches et les cotes pour les livres qui en ont
-besoin. Ce programme génère un pdf et met à jour le fichier d'inventaire: il
-remet à zéro le nombre de fiche ou de cote à imprimer pour les livres concernés.</p>
-<div class="highlight"><pre><span></span><span class="c1"># &gt; ./impression.py -h</span>
-usage: impression.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--log LOG<span class="o">]</span> <span class="o">[</span>--exclude EXCLUDE<span class="o">]</span> item_type
+<h2 id="impressionpy">impression.py</h2>
+<p>Un automate pour imprimer les fiches et les cotes des livres qui en ont besoin. 
+Ce programme génère un pdf et met à jour le fichier d'inventaire: il remet à 
+zéro le nombre de fiche ou de cote à imprimer pour les livres concernés.</p>
+<p>Ce script peut être lancé en ligne de commande depuis un terminal. On peut
+aussi cliquer sur les lanceurs <code>Impression des fiches</code> et <code>Impression des cotes</code> 
+à la racine du projet pour exécuter ce script sans option.</p>
+<p>Le fichier pdf est stocké dans le répertoire <code>impressions/fiches</code> ou
+<code>impressions/cotes</code> à la racine du projet. La liste des livres traités lors
+de chaque exécution du script est écrite à la fin du fichier 
+<code>impressions/impression.log</code>.</p>
+<p>La mise à jour des données est déléguée à Tellico si Tellico est 
+ouvert, sinon ce script met à jour directement le fichier <code>inventaire.tc</code> où 
+sont sauvegardées les données.</p>
+<h3 id="syntaxe">Syntaxe</h3>
+<div class="highlight"><pre><span></span>impression.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--log LOG<span class="o">]</span> <span class="o">[</span>--exclude EXCLUDE<span class="o">]</span> item_type
+
+Le premier argument indique s<span class="sb">`</span>il faut imprimer les fiches ou les cotes : Ce 
+script ne fait pas les deux à la fois.
 
 positional arguments:
   item_type          peut prendre la valeur <span class="s2">&quot;fiches&quot;</span> ou <span class="s2">&quot;cotes&quot;</span>
@@ -50,22 +63,55 @@ optional arguments:
 </pre></div>
 
 
-<h3 id="websh">web.sh</h3>
-<p>Ce script génére une page internet montrant les livres du catalogue, puis la met 
-en ligne sur le site de l'école. Cette page inclut un champs de recherche. On 
+<h3 id="exemples-dutilisation">Exemples d'utilisation</h3>
+<p>En supposant que vous soyez placé dans le répertoire racine du projet.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Imprime toutes les fiches manquantes</span>
+./scripts/impression.py fiches 
+
+<span class="c1"># Imprime les cotes manquantes de tous les livres qui ne sont pas du genre &quot;Documentaire&quot;</span>
+./scripts/impression.py cotes --exclude Documentaire 
+
+<span class="c1"># Imprime toutes les fiches manquantes et détaille le déroulé sur la sortie </span>
+<span class="c1"># standard (au lieu de l&#39;écrire dans le fichier de log)</span>
+./scripts/impression.py fiches --log debug
+</pre></div>
+
+
+<hr />
+<h2 id="websh">web.sh</h2>
+<p>Génère une page internet montrant les livres du catalogue, puis la met 
+en ligne sur le site de l'école. La page inclut un champs de recherche. On 
 peut cliquer sur une colonne pour trier suivant cette colonne.</p>
-<h3 id="github_pushsh">github_push.sh</h3>
-<p>Ce script sauvegarder le catalogue <code>inventaire.tc</code> sur github</p>
-<h3 id="rename_authorspy">rename_authors.py</h3>
+<p>Ce script ne prend pas d'option, il peut être lancé depuis la ligne de commande.
+On peut aussi utiliser <a href="http://www.delafond.org/traducmanfr/man/man8/anacron.8.html">anacron</a> pour le lancer automatiquement tous les jours.</p>
+<h3 id="exemple-dutilisation">Exemple d'utilisation:</h3>
+<p>En supposant que vous soyez placé dans le répertoire racine du projet.</p>
+<div class="highlight"><pre><span></span>./scripts/web.sh
+</pre></div>
+
+
+<hr />
+<h2 id="github_pushsh">github_push.sh</h2>
+<p>Sauvegarde le catalogue <code>inventaire.tc</code>, ainsi que le répertoire <code>docs</code> 
+(cette documentation). Cette sauvegarde est effectué par un commit
+suivi d'un push sur le site <a href="https://github.com/lamyseba/biblioteca/">github</a></p>
+<p>Ce script ne prend pas d'option, il peut être lancé depuis la ligne de commande.
+On peut aussi utiliser <a href="http://www.delafond.org/traducmanfr/man/man8/anacron.8.html">anacron</a> pour le lancer automatiquemetn tous les jours.</p>
+<h3 id="exemple-dutilisation_1">Exemple d'utilisation:</h3>
+<p>En supposant que vous soyez placé dans le répertoire racine du projet.</p>
+<div class="highlight"><pre><span></span>./scripts/github_push.sh
+</pre></div>
+
+
+<hr />
+<h2 id="rename_authorspy">rename_authors.py</h2>
 <p>Ce programme permet de changer le format des noms d'auteurs. On est parti sur un 
 format "Dupont, Jean" pour l'inventaire, mais on se réserve la possibilité 
 d'adopter  "Jean Dupont" à l'avenir, même si <a href="format-noms-d-auteur.html">une réflexion</a> nous indique 
-c'est peu probable.</p>
-<div class="highlight"><pre><span></span><span class="c1"># &gt; ./rename_authors.py -h</span>
-usage: rename_authors.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-v<span class="o">]</span> input_file output_file
-
-Ce script permet de renommer tous les auteurs de la base Tellico: Tous les
-auteurs saisis sous la forme <span class="s2">&quot;Dupont, Jean&quot;</span> deviendront: <span class="s2">&quot;Jean Dupont&quot;</span>.
+c'est peu probable. Ce script peut être lancé en ligne de commande depuis un 
+terminal.</p>
+<h3 id="syntaxe_1">Syntaxe</h3>
+<div class="highlight"><pre><span></span>rename_authors.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-v<span class="o">]</span> input_file output_file
 
 positional arguments:
   input_file     le fichier de base de donnée tellico à transformer
@@ -74,32 +120,61 @@ positional arguments:
 optional arguments:
   -h, --help     show this <span class="nb">help</span> message and <span class="nb">exit</span>
   -v, --verbose  affiche les transformations de nom sur la sortie standard
+</pre></div>
 
----
-Avantages : cette nouvelle mise en forme des auteurs simplifie la saisie: on 
-copie tel quel ce qui est indiqué sur le livre
----
-Inconvénient: Dans certains cas, l<span class="s1">&#39;auto-complétion de l&#39;</span>auteur disfonctionne:
-    * Pour les auteurs dont le prénom n<span class="s1">&#39;est pas fourni sur certains livres    </span>
-<span class="s1">    * Pour les auteurs dont seule l&#39;</span>initiale du prénom est fournie sur le livre    
-    * Pour les couples <span class="o">(</span>deux prénoms et un seul nom<span class="o">)</span>
----
-Plus d<span class="s1">&#39;éléments sur le choix du formatage des noms d&#39;</span>auteurs dans le fichier 
-<span class="s2">&quot;Documentation/format_noms_d_auteur&quot;</span>
+
+<h3 id="exemple-dutilisation_2">Exemple d'utilisation:</h3>
+<p>En supposant que vous soyez placé dans le répertoire racine du projet.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Renomme les auteurs du fichier inventaire.tc au format &#39;Prénom&#39; &#39;Nom&#39; et </span>
+<span class="c1"># enregistre le résultat dans le fichier inventaire.tc.bak</span>
+./scripts/rename_authors.py inventaire.tc inventaire.tc.bak
+
+<span class="c1"># Même chose; mais en affichant les transformations de nom sur la sortie standard:</span>
+./scripts/rename_authors.py -v inventaire.tc inventaire.tc.bak
 </pre></div>
 
 
 <hr />
-<h2 id="qui-utilise-ces-scripts">Qui utilise ces scripts?</h2>
-<p>Les personnes qui s'occupent de la bibliothèque ne sont pas toutes des fanas
-de la ligne de commande. Ces personnes gèrent l'impression des fiches et des
-cotes simplement en double-cliquant sur les raccourcis <code>impression_fiches</code> et
-<code>impression_cotes</code> à la racine du projet. Ces raccourcis lancent le script 
-<code>impression.py</code> avec les paramètres qui vont bien.</p>
-<p>Pour des besoins plus particuliers, un utilisateur aguerri peut utiliser 
-<code>impressions.py</code> directement en ligne de commande.</p>
-<p>Chez nous, <a href="http://www.delafond.org/traducmanfr/man/man8/anacron.8.html">anacron</a> lance automatiquement les scripts <code>web.sh</code> et 
-<code>github_push.sh</code> chaque jour où l'ordinateur de la bibliothèque est allumé.</p>
+<h2 id="docpy">doc.py</h2>
+<p>Génère la documentation du projet (celle que vous consultez maintenant): 
+utilise les fichiers <code>.md</code> du répertoire <code>docs/sources</code> pour générer les 
+fichiers <code>.html</code> dans le répertoire <code>docs</code>.</p>
+<ul>
+<li>Les fichiers <code>.md</code> sont des fichiers au format Markdown, consultable et
+  modifiables avec un simple éditeur de texte.</li>
+<li>Les fichiers <code>.html</code> sont des fichiers lus par les navigateurs web (firefox,
+  chrome...). La documentation du projet se trouve au format html dans le
+  répertoire <code>docs</code> à la racine du projet.</li>
+</ul>
+<p>Ce script peut être lancé en ligne de commande depuis un terminal, mais on 
+peut aussi cliquer sur le lanceur <code>Générer html</code> dans le dossier <code>docs/sources</code>
+pour exécuter ce script sans option.</p>
+<p>Avec l'option -i, ce script ne génère pas la documentation mais met à jour
+l'icone du lanceur <code>Documentation</code> à la racine du projet.  </p>
+<p>Pour plus d'information sur la consultation et la modification de la 
+documentation, consultez <a href="utiliser-la-documentation.html">la page dédiée</a></p>
+<h3 id="syntaxe_2">Syntaxe</h3>
+<div class="highlight"><pre><span></span>doc.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>-i<span class="o">]</span>
+
+optional arguments:
+  -h, --help  show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  -i, --icon  Mets à jour l<span class="sb">`</span>icone du lanceur <span class="o">(</span>au lieu de générer la
+              documentation<span class="o">)</span>
+</pre></div>
+
+
+<h3 id="exemple-dutilisation_3">Exemple d'utilisation:</h3>
+<p>En supposant que vous soyez placé dans le répertoire racine du projet.</p>
+<div class="highlight"><pre><span></span><span class="c1"># Génère la documentation à partir de tous les fichier .md du répertoire</span>
+<span class="c1"># docs/src</span>
+./scripts/doc.py
+
+<span class="c1"># Met à jour l&#39;icone du lanceur `Documentation`, à la racine du projet</span>
+./scripts/doc.py -i
+</pre></div>
+
+
+<hr />
 <h2 id="il-y-a-des-dépendances-à-installer">Il y a des dépendances à installer?</h2>
 <p>C'est mieux de partir avec Tellico, bien sur! Ces scripts s'appuient sur un 
 catalogue Tellico customisé avec des champs supplémentaires, notamment pour 
@@ -138,7 +213,7 @@ linux favorite n'est pas compilée avec cette version patchée</em></p>
       <footer class="inner">
         <p class="metadata">Auteur&nbsp;: Sébastien Lamy (lamyseba arobase free.fr)<br />
            Fichier source&nbsp;: <a href="../scripts/README.md" >scripts/README.md</a><br />
-           Dernière mise à jour&nbsp;: 15 mai 2017 -- 
+           Dernière mise à jour&nbsp;: 18 mai 2017 -- 
            <a href="utiliser-la-documentation.html">Comment faire pour modifier ce document&nbsp;?</a>
         </p>
         <p></p>

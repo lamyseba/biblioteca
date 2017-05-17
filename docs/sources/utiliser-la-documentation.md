@@ -71,7 +71,7 @@ rafraichir la page du sommaire, par un appui sur la touche `F5`)
 
 Générer la documentation à partir des sources
 -------------------------------------
-C'est le script `doc.py` qui se charge de ce travail. Ceux qui aiment parler à 
+C'est le script [doc.py] qui se charge de ce travail. Ceux qui aiment parler à 
 leur ordinateur en lui écrivant poliment des mots peuvent ouvrir une console 
 (`CTRL+ALT+T` sous Ubuntu), puis lui demander de se déplacer dans le dossier
 `scripts` du projet. Par exemple:
@@ -89,3 +89,5 @@ du projet. Là, ils trouveront entre autre le lanceur `Générer html`. Un doubl
 clic sur ce lanceur signifiera pour votre ordinateur: 
 "Eh! Toi, là! Réveille-toi et génère-moi la documentation! Tu vois bien que
 j'attends!".
+
+[doc.py]:utilisation-des-scripts.html#docpy

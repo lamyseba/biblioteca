@@ -13,14 +13,31 @@ catalogage des livres.
 
 
 
-### impression.py
-Un automate pour imprimer les fiches et les cotes pour les livres qui en ont
-besoin. Ce programme génère un pdf et met à jour le fichier d'inventaire: il
-remet à zéro le nombre de fiche ou de cote à imprimer pour les livres concernés.
+impression.py
+-------------------------------------
+Un automate pour imprimer les fiches et les cotes des livres qui en ont besoin. 
+Ce programme génère un pdf et met à jour le fichier d'inventaire: il remet à 
+zéro le nombre de fiche ou de cote à imprimer pour les livres concernés.
 
+Ce script peut être lancé en ligne de commande depuis un terminal. On peut
+aussi cliquer sur les lanceurs `Impression des fiches` et `Impression des cotes` 
+à la racine du projet pour exécuter ce script sans option.
+
+Le fichier pdf est stocké dans le répertoire `impressions/fiches` ou
+`impressions/cotes` à la racine du projet. La liste des livres traités lors
+de chaque exécution du script est écrite à la fin du fichier 
+`impressions/impression.log`.
+
+La mise à jour des données est déléguée à Tellico si Tellico est 
+ouvert, sinon ce script met à jour directement le fichier `inventaire.tc` où 
+sont sauvegardées les données.
+
+### Syntaxe
 ```bash
-# > ./impression.py -h
-usage: impression.py [-h] [--log LOG] [--exclude EXCLUDE] item_type
+impression.py [-h] [--log LOG] [--exclude EXCLUDE] item_type
+
+Le premier argument indique s`il faut imprimer les fiches ou les cotes : Ce 
+script ne fait pas les deux à la fois.
 
 positional arguments:
   item_type          peut prendre la valeur "fiches" ou "cotes"
@@ -31,31 +48,73 @@ optional arguments:
   --exclude EXCLUDE  la liste des genres à exclure, séparés par des ';'
 ```
 
+### Exemples d'utilisation
+En supposant que vous soyez placé dans le répertoire racine du projet.
+```bash
+# Imprime toutes les fiches manquantes
+./scripts/impression.py fiches 
 
-### web.sh
-Ce script génére une page internet montrant les livres du catalogue, puis la met 
-en ligne sur le site de l'école. Cette page inclut un champs de recherche. On 
+# Imprime les cotes manquantes de tous les livres qui ne sont pas du genre "Documentaire"
+./scripts/impression.py cotes --exclude Documentaire 
+
+# Imprime toutes les fiches manquantes et détaille le déroulé sur la sortie 
+# standard (au lieu de l'écrire dans le fichier de log)
+./scripts/impression.py fiches --log debug
+```
+
+
+
+---
+web.sh
+-------------------------------------
+Génère une page internet montrant les livres du catalogue, puis la met 
+en ligne sur le site de l'école. La page inclut un champs de recherche. On 
 peut cliquer sur une colonne pour trier suivant cette colonne.
 
+Ce script ne prend pas d'option, il peut être lancé depuis la ligne de commande.
+On peut aussi utiliser [anacron] pour le lancer automatiquement tous les jours.
+
+### Exemple d'utilisation:
+En supposant que vous soyez placé dans le répertoire racine du projet.
+```
+./scripts/web.sh
+```
 
 
-### github_push.sh 
-Ce script sauvegarder le catalogue `inventaire.tc` sur github
+
+---
+github_push.sh
+-------------------------------------
+Sauvegarde le catalogue `inventaire.tc`, ainsi que le répertoire `docs` 
+(cette documentation). Cette sauvegarde est effectué par un commit
+suivi d'un push sur le site [github](https://github.com/lamyseba/biblioteca/)
+
+Ce script ne prend pas d'option, il peut être lancé depuis la ligne de commande.
+On peut aussi utiliser [anacron] pour le lancer automatiquemetn tous les jours.
+
+### Exemple d'utilisation:
+En supposant que vous soyez placé dans le répertoire racine du projet.
+```
+./scripts/github_push.sh
+```
+
+[anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 
 
 
-### rename_authors.py
+---
+rename_authors.py
+-------------------------------------
 Ce programme permet de changer le format des noms d'auteurs. On est parti sur un 
 format "Dupont, Jean" pour l'inventaire, mais on se réserve la possibilité 
 d'adopter  "Jean Dupont" à l'avenir, même si [une réflexion][] nous indique 
-c'est peu probable.
+c'est peu probable. Ce script peut être lancé en ligne de commande depuis un 
+terminal.
+
+### Syntaxe
 
 ```bash
-# > ./rename_authors.py -h
-usage: rename_authors.py [-h] [-v] input_file output_file
-
-Ce script permet de renommer tous les auteurs de la base Tellico: Tous les
-auteurs saisis sous la forme "Dupont, Jean" deviendront: "Jean Dupont".
+rename_authors.py [-h] [-v] input_file output_file
 
 positional arguments:
   input_file     le fichier de base de donnée tellico à transformer
@@ -64,44 +123,70 @@ positional arguments:
 optional arguments:
   -h, --help     show this help message and exit
   -v, --verbose  affiche les transformations de nom sur la sortie standard
+```
 
----
-Avantages : cette nouvelle mise en forme des auteurs simplifie la saisie: on 
-copie tel quel ce qui est indiqué sur le livre
----
-Inconvénient: Dans certains cas, l'auto-complétion de l'auteur disfonctionne:
-    * Pour les auteurs dont le prénom n'est pas fourni sur certains livres    
-    * Pour les auteurs dont seule l'initiale du prénom est fournie sur le livre    
-    * Pour les couples (deux prénoms et un seul nom)
----
-Plus d'éléments sur le choix du formatage des noms d'auteurs dans le fichier 
-"Documentation/format_noms_d_auteur"
+### Exemple d'utilisation:
+En supposant que vous soyez placé dans le répertoire racine du projet.
+```bash
+# Renomme les auteurs du fichier inventaire.tc au format 'Prénom' 'Nom' et 
+# enregistre le résultat dans le fichier inventaire.tc.bak
+./scripts/rename_authors.py inventaire.tc inventaire.tc.bak
+
+# Même chose; mais en affichant les transformations de nom sur la sortie standard:
+./scripts/rename_authors.py -v inventaire.tc inventaire.tc.bak
 ```
 
 [une réflexion]:https://lamyseba.github.io/biblioteca/format-noms-d-auteur.html
 
 
 
-___
-
-Qui utilise ces scripts?
+---
+doc.py
 -------------------------------------
-Les personnes qui s'occupent de la bibliothèque ne sont pas toutes des fanas
-de la ligne de commande. Ces personnes gèrent l'impression des fiches et des
-cotes simplement en double-cliquant sur les raccourcis `impression_fiches` et
-`impression_cotes` à la racine du projet. Ces raccourcis lancent le script 
-`impression.py` avec les paramètres qui vont bien.
+Génère la documentation du projet (celle que vous consultez maintenant): 
+utilise les fichiers `.md` du répertoire `docs/sources` pour générer les 
+fichiers `.html` dans le répertoire `docs`.
 
-Pour des besoins plus particuliers, un utilisateur aguerri peut utiliser 
-`impressions.py` directement en ligne de commande.
+* Les fichiers `.md` sont des fichiers au format Markdown, consultable et
+  modifiables avec un simple éditeur de texte.
+* Les fichiers `.html` sont des fichiers lus par les navigateurs web (firefox,
+  chrome...). La documentation du projet se trouve au format html dans le
+  répertoire `docs` à la racine du projet.
 
-Chez nous, [anacron][] lance automatiquement les scripts `web.sh` et 
-`github_push.sh` chaque jour où l'ordinateur de la bibliothèque est allumé.
+Ce script peut être lancé en ligne de commande depuis un terminal, mais on 
+peut aussi cliquer sur le lanceur `Générer html` dans le dossier `docs/sources`
+pour exécuter ce script sans option.
 
-[anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
+Avec l'option -i, ce script ne génère pas la documentation mais met à jour
+l'icone du lanceur `Documentation` à la racine du projet.  
+
+Pour plus d'information sur la consultation et la modification de la 
+documentation, consultez [la page dédiée](utiliser-la-documentation.html)
 
 
+### Syntaxe
+```bash
+doc.py [-h] [-i]
 
+optional arguments:
+  -h, --help  show this help message and exit
+  -i, --icon  Mets à jour l`icone du lanceur (au lieu de générer la
+              documentation)
+```
+
+### Exemple d'utilisation:
+En supposant que vous soyez placé dans le répertoire racine du projet.
+```bash
+# Génère la documentation à partir de tous les fichier .md du répertoire
+# docs/src
+./scripts/doc.py
+
+# Met à jour l'icone du lanceur `Documentation`, à la racine du projet
+./scripts/doc.py -i
+```
+
+
+___
 
 Il y a des dépendances à installer?
 -------------------------------------

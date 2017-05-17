@@ -7,7 +7,7 @@ parser = argparse.ArgumentParser(
     formatter_class=argparse.RawDescriptionHelpFormatter,
     description="""Génère la documentation:
 Utilise les fichiers ".md" du répertoire "docs/sources" pour générer les 
-fichiers ".html" correspondant dans le répertoire "docs". 
+fichiers ".html" dans le répertoire "docs". 
 * Les fichiers ".md" sont des fichiers au format Markdown, consultable et
   modifiables avec un simple éditeur de texte.
 * Les fichiers ".html" sont des fichiers lus par les navigateurs web (firefox,

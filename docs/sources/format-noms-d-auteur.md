@@ -2,35 +2,31 @@
 auteur: Sébastien Lamy (lamyseba arobase free.fr)
 ---
 
-Réflexion sur le format de saisie des noms d'auteur
+Réflexion sur le format de saisie _Prénom Nom_ pour les auteurs
 ===========================================================
+ex: Jean Dupont
 
+### Avantage
+* Cette mise en forme simplifie la saisie: on copie tel quel ce qui est indiqué 
+  sur le livre. 
+* On peut penser que la saisie sous cette forme n'impacte pas l'affichage de 
+  l'auteur, car Tellico propose la mise en forme automatique des noms : 
+  "Jean Dupont" peut s'afficher "Dupont, Jean" si on coche l'option. Cette mise 
+  en forme automatique ne touche pas aux données réelles.
 
+### Inconvénients
+* Dans certains cas, l'auto-complétion de l'auteur disfonctionne:
+     * Pour les auteurs ou le prénom n'est pas fourni sur certains livres, mais
+       est disponible sur d'autres
+     * Pour les auteurs dont seul l'initiale du prénom est fournie sur le livre
+     * Pour les couples (deux prénoms et un seul nom)
+* La mise en forme automatique du nom d'auteur peut mal fonctionner (voir 
+  la liste d'exemples ci-dessous)
+* La mise en forme automatique du nom peut provoquer un comportement erroné de 
+  saisie, aussi bien en recherche qu'en ajout de donnée. En effet, on a tendance 
+  a chercher les noms comme il sont affichés, mais ce n'est pas ainsi qu'il sont 
+  stockés et accessibles en réalité.
 
-Complétion automatique du nom d'auteur lors de la saisie d'un nouveau livre
--------------------------------------
-Problèmes:
-
- * Pour les auteurs ou le prénom n'est pas fourni sur certains livres, mais
-   est disponible sur d'autres
- * Pour les auteurs dont seul l'initiale du prénom est fournie sur le livre
- * Pour les couples (deux prénoms et un seul nom)
-
-
-
-Mise en forme automatique
--------------------------------------
-Tellico propose la mise en forme automatique des noms : "Jean Dupont" peut
-s'afficher "Dupont, Jean" si on coche l'option. Cette mise en forme 
-automatique ne touche pas aux données réelles.).
-
-Problèmes:
-
- * Affichage du nom de certains auteurs (voir cette liste)
- * Peut provoquer un comportement erroné de saisie, aussi bien en recherche
-   qu'en ajout de donnée (on a tendance a chercher les noms comme il sont mis
-   en forme, mais ce n'est pas ainsi qu'il sont stockés et accessibles en 
-   réalité)
 
 
 

@@ -10,7 +10,42 @@ from datetime import datetime
 import time
 import logging
 
+description="""
+Un automate pour imprimer les fiches et les cotes des livres qui en ont besoin. 
+Ce programme génère un pdf et met à jour le fichier d'inventaire: il remet à 
+zéro le nombre de fiche ou de cote à imprimer pour les livres concernés.
 
+Ce script peut être lancé en ligne de commande depuis un terminal. On peut
+aussi cliquer sur les lanceurs `Impression des fiches` et `Impression des cotes` 
+à la racine du projet pour exécuter ce script sans option.
+
+Le fichier pdf est stocké dans le répertoire `impressions/fiches` ou
+`impressions/cotes` à la racine du projet. La liste des livres traités lors
+de chaque exécution du script est écrite à la fin du fichier 
+`impressions/impression.log`.
+
+La mise à jour des données est déléguée à Tellico si Tellico est 
+ouvert, sinon ce script met à jour directement le fichier `inventaire.tc` où 
+sont sauvegardées les données.
+
+Le premier argument indique s`il faut imprimer les fiches ou les cotes : Ce 
+script ne fait pas les deux à la fois.
+"""
+
+epilog="""
+Exemples d'utilisation:
+# Imprime toutes les fiches manquantes
+impression.py fiches 
+
+# Imprime les cotes manquantes de tous les livres qui ne sont pas du 
+# genre "Documentaire"
+impression.py cotes --exclude Documentaire 
+
+# Imprime toutes les fiches manquantes et détaille le déroulé sur la sortie 
+# standard (au lieu de l'écrire dans le fichier de log)
+impression.py fiches --log debug
+
+"""
 
 # Le répertoire de base de l'application est le répertoire parent de l'emplacement
 # du script 
@@ -56,8 +91,11 @@ excluded_genres=[]
 
 
 # récupère et vérifie les arguments de la ligne de commande
-parser = argparse.ArgumentParser()
-parser.add_argument("item_type",type=str,help='peut prendre la valeur "fiches" ou "cotes"')
+parser = argparse.ArgumentParser(
+    description=description,
+    epilog=epilog,
+    formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument("item_type",type=str,help="peut prendre la valeur 'fiches' ou 'cotes'")
 parser.add_argument("--log",type=str,help="info or debug", default="info")
 parser.add_argument("--exclude",type=str,help="la liste des genres à exclure, séparés par des ';'")
 args = parser.parse_args()

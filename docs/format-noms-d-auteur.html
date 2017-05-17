@@ -10,7 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,700,700italic' rel='stylesheet' type='text/css'>
 
-    <title>BiblioDoc - Réflexion sur le format de saisie des noms d'auteur</title>
+    <title>BiblioDoc - Réflexion sur le format de saisie _Prénom Nom_ pour les auteurs</title>
   </head>
 
   <body>
@@ -29,26 +29,32 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
       
-        <h1 id="réflexion-sur-le-format-de-saisie-des-noms-dauteur">Réflexion sur le format de saisie des noms d'auteur</h1>
-<h2 id="complétion-automatique-du-nom-dauteur-lors-de-la-saisie-dun-nouveau-livre">Complétion automatique du nom d'auteur lors de la saisie d'un nouveau livre</h2>
-<p>Problèmes:</p>
+        <h1 id="réflexion-sur-le-format-de-saisie-prénom-nom-pour-les-auteurs">Réflexion sur le format de saisie <em>Prénom Nom</em> pour les auteurs</h1>
+<p>ex: Jean Dupont</p>
+<h3 id="avantage">Avantage</h3>
 <ul>
+<li>Cette mise en forme simplifie la saisie: on copie tel quel ce qui est indiqué 
+  sur le livre. </li>
+<li>On peut penser que la saisie sous cette forme n'impacte pas l'affichage de 
+  l'auteur, car Tellico propose la mise en forme automatique des noms : 
+  "Jean Dupont" peut s'afficher "Dupont, Jean" si on coche l'option. Cette mise 
+  en forme automatique ne touche pas aux données réelles.</li>
+</ul>
+<h3 id="inconvénients">Inconvénients</h3>
+<ul>
+<li>Dans certains cas, l'auto-complétion de l'auteur disfonctionne:<ul>
 <li>Pour les auteurs ou le prénom n'est pas fourni sur certains livres, mais
    est disponible sur d'autres</li>
 <li>Pour les auteurs dont seul l'initiale du prénom est fournie sur le livre</li>
 <li>Pour les couples (deux prénoms et un seul nom)</li>
 </ul>
-<h2 id="mise-en-forme-automatique">Mise en forme automatique</h2>
-<p>Tellico propose la mise en forme automatique des noms : "Jean Dupont" peut
-s'afficher "Dupont, Jean" si on coche l'option. Cette mise en forme 
-automatique ne touche pas aux données réelles.).</p>
-<p>Problèmes:</p>
-<ul>
-<li>Affichage du nom de certains auteurs (voir cette liste)</li>
-<li>Peut provoquer un comportement erroné de saisie, aussi bien en recherche
-   qu'en ajout de donnée (on a tendance a chercher les noms comme il sont mis
-   en forme, mais ce n'est pas ainsi qu'il sont stockés et accessibles en 
-   réalité)</li>
+</li>
+<li>La mise en forme automatique du nom d'auteur peut mal fonctionner (voir 
+  la liste d'exemples ci-dessous)</li>
+<li>La mise en forme automatique du nom peut provoquer un comportement erroné de 
+  saisie, aussi bien en recherche qu'en ajout de donnée. En effet, on a tendance 
+  a chercher les noms comme il sont affichés, mais ce n'est pas ainsi qu'il sont 
+  stockés et accessibles en réalité.</li>
 </ul>
 <h2 id="noms-dauteurs-qui-peuvent-poser-problèmes">Noms d'auteurs qui peuvent poser problèmes</h2>
 <p>Ces noms ont été relevés dans le fichier de base de donnée de la bibliothèque 
@@ -186,7 +192,7 @@ A.J Wood
       <footer class="inner">
         <p class="metadata">Auteur&nbsp;: Sébastien Lamy (lamyseba arobase free.fr)<br />
            Fichier source&nbsp;: <a href="sources/format-noms-d-auteur.md" >docs/sources/format-noms-d-auteur.md</a><br />
-           Dernière mise à jour&nbsp;: 13 mai 2017 -- 
+           Dernière mise à jour&nbsp;: 18 mai 2017 -- 
            <a href="utiliser-la-documentation.html">Comment faire pour modifier ce document&nbsp;?</a>
         </p>
         <p></p>
