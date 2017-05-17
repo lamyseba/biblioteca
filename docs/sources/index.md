@@ -21,8 +21,11 @@ Annexes
 -------------------------------------
 #### [Réflexion sur le format de saisie des noms d'auteur][4]
 
+#### [Utiliser la documentation][5]
+
 
 [1]:fonctionnement-bibliotheque.html
 [2]:questions-reponses.html
 [3]:utilisation-des-scripts.html
 [4]:format-noms-d-auteur.html
+[5]:utiliser-la-documentation.html

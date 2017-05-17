@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="La documentation pour la bibliotèca calandreta paulina" />
+    <link rel="stylesheet" type="text/css" media="screen" href="doc-stylesheets/slate.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <title>BiblioDoc - Utiliser la documentation</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/lamyseba/biblioteca/">View on GitHub</a>
+          <h1 id="project_title"><a href="index.html">Documentation</a></h1>
+          <h2 id="project_tagline">Bibliotèca Calandreta Paulina</h2>
+        </header>
+    </div>  
+
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+      
+        <h1 id="utiliser-la-documentation">Utiliser la documentation</h1>
+<h2 id="a-quoi-sert-la-documentation-">A quoi sert la documentation ?</h2>
+<p>La documention permet de comprendre le fonctionnement courant de la bibliothèque
+calandreta paulina. Elle parle aussi des réflexions et des choix qui ont 
+aboutis à ce fonctionnement. Enfin, elle sert de manuel informatique et
+technique pour la maintenance de la bibliothèque.</p>
+<h2 id="naviguer">Naviguer</h2>
+<p>Le <strong>sommaire de la documentation</strong> est accessible depuis toutes les pages de la
+documentation, en cliquant sur le <strong>titre principal en haut de page</strong> (ce titre
+se nomme "Documentation", comme par hasard).</p>
+<h2 id="le-format-markdown">Le format Markdown</h2>
+<p>La documentation est écrite au format <em>Markdown</em>. C'est une façon simple d'écrire 
+un texte avec des titres, des liens, des passages en gras ou en italique.
+Un fichier <em>Markdown</em> s'écrit et se modifie avec <strong>un éditeur de texte simple</strong> 
+(notepad sous Windows par exemple, ou gedit sous Ubuntu).</p>
+<p>Le mieux pour l'apprendre est de <a href="http://markdown.pioul.fr/">pratiquer un peu</a> en pouvant consulter <a href="memo-markdown.html">un mémo</a>.</p>
+<h2 id="modifier-une-page">Modifier une page</h2>
+<p>En bas de chaque page de documentation, un lien pointe vers le <strong>fichier source</strong>
+de la page. C'est ce fichier qu'il faut modifier pour modifier la page. Les 
+fichiers sources de la documentation sont écrits au format Markdown.
+Cliquez sur le lien puis sur <code>ouvrir</code> (et non pas sur <code>Télécharger</code>). Ou bien
+retrouvez le fichier dans le répertoire <code>docs/sources</code> du projet.</p>
+<p>Une fois le fichier modifié et enregistré, il faut 
+<a href="#générer-la-documentation-à-partir-des-sources">générer la documentation</a>.
+N'oubliez pas de rafraîchir la page de votre navigateur pour voir le résultat
+(par exemple en appuyant sur la touche <code>F5</code> de votre clavier)</p>
+<h2 id="ajouter-une-page">Ajouter une page</h2>
+<p>Le dossier <code>docs/sources</code> est l'endroit où se trouvent les fichiers sources de
+la documentation. Pour ajouter une page à la documentation, il faut ajouter un 
+fichier texte à ce dossier: Écrivez votre texte au format Markdown dans un 
+éditeur de texte simple et enregistrez le fichier dans ce dossier.
+Evitez les <em>espaces</em> et les caractères autre que <em>lettre sans accent</em>, <em>tiret -</em>,
+<em>tiret _</em> dans le nom du fichier, et terminez ce nom par <code>.md</code> pour 
+signifier qu'il s'agit d'un fichier Markdown. Exemple: <code>mon-nom-de-fichier.md</code></p>
+<p>Ensuite, il peut être interessant de modifier le sommaire de la documentation,
+pour ajouter un lien vers votre nouvelle page, avec une brève description. Si 
+vous avez bien lu cette page vous savez déjà comment modifier le sommaire. 
+Le lien vers votre page depuis le sommaire est : <code>mon-nom-de-fichier.html</code>, <strong>sans</strong>
+<em>http://</em>, ni rien d'autre devant ou derrière. En effet le sommaire et votre
+nouvelle page sont dans le même répertoire, donc nul besoin d'aller chercher sur
+internet ou dans un autre répertoire.</p>
+<p>Une fois que tout ça est fait, il ne vous reste plus qu'à générer la 
+documentation, et à la consulter dans votre navigateur (il faudra peut-être 
+rafraichir la page du sommaire, par un appui sur la touche <code>F5</code>)</p>
+<h2 id="générer-la-documentation-à-partir-des-sources">Générer la documentation à partir des sources</h2>
+<p>C'est le script <code>doc.py</code> qui se charge de ce travail. Ceux qui aiment parler à 
+leur ordinateur en lui écrivant poliment des mots peuvent ouvrir une console 
+(<code>CTRL+ALT+T</code> sous Ubuntu), puis lui demander de se déplacer dans le dossier
+<code>scripts</code> du projet. Par exemple:</p>
+<div class="highlight"><pre><span></span>cd Bibli/scripts
+</pre></div>
+
+
+<p>Puis lui demander d'exécuter le script:</p>
+<div class="highlight"><pre><span></span>./doc.py
+</pre></div>
+
+
+<p>Ceux qui préfèrent ne pas adresser la parole à leur machine mais plutôt lui
+faire des gestes ne se rendront pas au même endroit: ils cliqueront jusqu'à ce
+que leur ordinateur veuille bien leur montrer le contenu du dossier <code>docs/sources</code> 
+du projet. Là, ils trouveront entre autre le lanceur <code>Générer html</code>. Un double 
+clic sur ce lanceur signifiera pour votre ordinateur: 
+"Eh! Toi, là! Réveille-toi et génère-moi la documentation! Tu vois bien que
+j'attends!".</p>
+        
+        
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="metadata">Auteur&nbsp;: Sébastien Lamy (lamyseba arobase free.fr)<br />
+           Fichier source&nbsp;: <a href="sources/utiliser-la-documentation.md" >docs/sources/utiliser-la-documentation.md</a><br />
+           Dernière mise à jour&nbsp;: 17 mai 2017 -- 
+           <a href="utiliser-la-documentation.html">Comment faire pour modifier ce document&nbsp;?</a>
+        </p>
+        <p></p>
+        <p class="copyright">Slate theme maintained by <a href="https://github.com/jasoncostello">Jason Costello</a></p>
+      </footer>
+    </div>
+
+  </body>
+</html>

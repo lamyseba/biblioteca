@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Mémo Markdown</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Mono' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="doc-stylesheets/commonmark-normalize.css">
+    <link rel="stylesheet" href="doc-stylesheets/commonmark.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+
+<body>
+    <h1>Mémo Markdown</h1>
+    <div class="container">
+        
+
+
+        <div class="twelve columns center">
+
+            <table class="markdown-reference">
+                <thead>
+                    <tr>
+                        <th>Il faut taper</th>
+                        <th class="second-example">Ou bien</th>
+                        <th>&hellip; pour obtenir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>                        
+                        <td class="preformatted">*texte italique* entre étoiles ou tirets</td>
+                        <td class="preformatted second-example">_texte italique_ entre étoiles ou entre tirets</td>
+                        <td><em>texte italique</em> entre étoiles ou tirets</td>
+                    </tr>
+                    <tr>                        
+                        <td class="preformatted">**texte gras** entre **doubles** étoiles ou entre **double** tirets</td>
+                        <td class="preformatted second-example">__texte gras__ entre __doubles__ étoiles ou entre __double__ tirets</td>
+                        <td><strong>texte gras</strong> entre <strong>doubles</strong> étoiles ou entre <strong>doubles</strong> tirets</td>
+                    </tr>
+                    <tr>
+                        <td class="preformatted">
+                            # Titre de niveau 1 <br />
+                            avec un dièse devant ou des = dessous
+                        </td>
+                        <td class="preformatted second-example">
+                            Titre de niveau 1 <br/>
+                            =========<br />
+                            avec un dièse devant ou des = dessous
+                        </td>
+                        <td>
+                            <h1 class="smaller-h1">Titre de niveau 1</h1>avec un # devant ou des = dessous
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="preformatted">
+                            ## Titre de niveau 2<br/>
+                            avec deux dièses devant ou des tirets en dessous
+                        </td>
+                        <td class="preformatted second-example">
+                            Titre de niveau 2<br/>
+                            ---------<br/>
+                            avec deux dièses devant ou des tirets en dessous
+                        </td>
+                        <td>
+                            <h2 class="smaller-h2">Titre de niveau 2</h2>
+                            avec deux dièses devant ou des tirets en dessous
+                        </td>
+                    </tr>                    
+                    <tr>
+                        <td class="preformatted">
+                            ### Titre de niveau 3 <br/>
+                            avec 3 dièses devant, et puis pour le niveau 4 il
+                            faudra mettre 4 dièses                            
+                        </td>
+                        <td class="preformatted second-example">
+                            &nbsp;
+                        </td>
+                        <td>
+                            <h3 class="smaller-h3">Titre de niveau 3</h3>
+                            avec 3 dièses devant, et puis pour le niveau 4 il
+                            faudra mettre 4 dièses
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>                        
+                        <td class="preformatted">
+                            Un petit [lien](http://a.com) vers le site a.com
+                            et [un autre](http://b.com) vers le site b.com
+                        </td>
+                        <td class="preformatted second-example">
+                            Un petit [lien][1] vers le site a.com et [un autre][]
+                            vers le site b.com<br/>
+                            &#8942;<br/>
+                            [1]:http://a.com<br/>
+                            [un autre]:http://b.com
+                        </td>
+                        <td>Un petit <a href="http://a.com/">lien</a> vers le site
+                            a.com et <a href="http://b.com/">un autre</a> vers le
+                            site b.com</td>
+                    </tr>
+                    <tr>
+                        <td class="preformatted">
+                            ![Texte si image marche pas](images/book-icon.svg)
+                        </td>
+                        <td class="preformatted second-example">
+                            ![Texte si image marche pas][1]<br/>
+                            &#8942;<br/>
+                            [1]:images/book-icon.svg
+                        </td>
+                        <td>
+                            <img src="images/book-icon.svg" width="50" height="50" alt="Texte pour si image marche pas"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="preformatted" colspan="2">
+                            &gt; Une citation, pour répéter ce que dit quelqu'un d'autre en mettant un chevron devant.
+                        </td>
+                        <td>
+                            <blockquote>Une citation, pour répéter ce que dit quelqu'un d'autre en mettant un chevron devant</blockquote>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="preformatted">
+                            Pour séparer deux paragraphe il faut sauter une ligne.<br/>
+                            <br/>
+                            Sinon<br/>
+                            c'est le même paragraphe.</td>
+                        <td>
+                            <p>Pour séparer deux paragraphe il faut sauter une ligne.</p>
+                            <p>Sinon c'est le même paragraphe.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td class="preformatted" colspan="2">
+                            Pour revenir à la ligne<span class="spaces">··</span><br/>
+                             (sans changer de paragraphe), il faut ajouter deux
+                            espaces à la fin de la ligne.<br/>
+                        <td>
+                            Pour revenir à la ligne<br/>
+                            (sans changer de paragraphe), il faut ajouter deux
+                            espaces à la fin de la ligne.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="preformatted">
+                            <p>
+                                * Liste<br/>
+                                * avec des étoiles<br/>
+                                * ou avec des tirets
+                            </p>
+                        </td>
+                        <td class="preformatted second-example">
+                            <p>
+                                - Liste<br/>
+                                - avec des étoiles<br/>
+                                - ou avec des tiretsist<br/>
+                            </p>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Liste</li>
+                                <li>avec des étoiles</li>
+                                <li>ou avec des tirets</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="preformatted">
+                            <p>
+                                1. Liste Numérotée<br/>
+                                2. Avec des points<br/>
+                                3. ou des parenthèses
+                            </p>
+                        </td>
+                        <td class="preformatted second-example">
+                            <p>
+                                1) Liste Numérotée<br/>
+                                2) Avec des points<br/>
+                                3) ou des parenthèses
+                            </p>
+                        </td>
+                        <td>
+                            <ol>
+                                <li>Liste Numérotée</li>
+                                <li>Avec des points</li>
+                                <li>ou des parenthèses</li>
+                            </ol>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="preformatted">
+                            Trait de séparation<br/>
+                            <br/>
+                            ---
+                        </td>
+                        <td class="preformatted second-example">
+                            Trait de séparation<br/>
+                            <br/>
+                            ***
+                        </td>
+                        <td>
+                            Trait de séparation
+                            <hr class="custom-hr" />
+                        </td>
+                    </tr>
+                    <tr>                        
+                        <td class="preformatted" colspan="2">
+                            `code en ligne` entre des accents graves (touches `AltGr`+`7`)
+                            </td>
+                        <td>
+                            <code class="preformatted">code en ligne</code> entre des accents graves (touches 
+                            <code class="preformatted">AltGr</code>+<code class="preformatted">7</code>)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="preformatted">
+                            ```<br/>
+                            # bloc de code<br/>
+                            avec '3 accents graves' ou<br/> 
+                            avec 'indentation 4 espaces'<br/>                            
+                            ```
+                        </td>
+                        <td class="preformatted second-example">
+                            <span class="spaces">····</span># bloc de code<br/> 
+                            <span class="spaces">····</span>avec '3 accents graves' ou<br/>
+                            <span class="spaces">····</span>avec 'indentation 4 espaces'
+                        </td>
+                        <td>
+                            <div class="code-block">
+                                # bloc de code
+                                <br/> avec '3 accents graves' ou
+                                <br/> avec 'indentation 4 espaces'
+                            </div>
+                        </td>
+                    </tr>                    
+                </tbody>
+            </table>
+        </div>
+                
+        <div class="twelve columns" style="margin-top: 2%">
+            <p><b>Besoin d'essayer quelquepart?</b></p>
+            <p>Essayez <a href="http://markdown.pioul.fr/">sur cette page</a> par exemple. Il y en a aussi
+            <a href="https://daringfireball.net/projects/markdown/dingus">une autre un peu plus technique</a> 
+            sur le site officiel de Markdown</p>
+        </div>
+
+        <div class="twelve columns">
+            <p><b>Plus de détails?</b></p>
+            <p>Il va falloir lire de l'anglais sur <a href="https://daringfireball.net/projects/markdown/syntax">le site officiel Markdown</a>, ou alors demander à un moteur de recherche.</p>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
