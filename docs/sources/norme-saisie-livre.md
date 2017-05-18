@@ -42,8 +42,13 @@ Norme pour la saisie des données bibliographiques
   
 !!! important ""
     **Pensez à écrire le numéro d'inventaire sur la page de titre du livre !!**
-    Si le livre a déjà une fiche, il faut aussi écrire ce numéro sur la fiche.
+    Si le livre a déjà une fiche, il faut aussi écrire ce numéro **sur la fiche**.
+    
     Ce numéro est diponible une fois le livre enregistré dans l'inventaire. Il 
     se trouve dans la colonne `N°` de la ligne qui correspond au livre.
     
+    Dans le cas où le livre a **plusieurs exemplaires**, écrire le **numéro 
+    d'exemplaire** juste à coté du numéro d'inventaire **sur la page de titre du 
+    livre et sur sa fiche**. Séparer par un tiret. Par exemple `177-1` pour le premier exemplaire du livre n°177, 
+    `177-2` pour le second, et ainsi de suite.
 [une réflexion]:format-noms-d-auteur.html

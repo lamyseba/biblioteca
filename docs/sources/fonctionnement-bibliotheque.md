@@ -99,11 +99,10 @@ suivant.
       jaune selon la langue, mais il est barré d'un trait blanc sur toute sa
       longueur.
 5. Ajout d'une pochette en fin de livre, qui permet de glisser la fiche.
-6. Inventorier le livre utilisant le programme Tellico. Dans notre école, il y a 
-   une [norme pour la saisie des données][]. N'oubliez pas de la consulter!   
-   <div class="admonition important">Une fois que le livre est enregistré dans 
-   l'inventaire, il faut **recopier le N° d'inventaire sur la page de titre du 
-   livre**.</div>
+6. Inventorier le livre utilisant le programme Tellico. Voir la section
+   "Ajout d'un livre à l'inventaire" [plus haut sur cette page][]. Consultez aussi 
+   la [norme pour la saisie des données][].
+   [plus haut sur cette page]: #ajout-dun-livre-à-linventaire
 7. Impression et mise en place de la fiche. L'impression se fait grâce au 
    raccourci `Impression des fiches` à la racine du projet. Un double-clic
    sur ce raccourci lance le script [impression.py][] avec le paramétrage 
@@ -133,6 +132,5 @@ ce livre.
 [rename_authors.py]:utilisation-des-scripts.html#rename_authorspy
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 [page internet générée à partir du catalogue]:http://calandreta-pau.org/bibli/
-[Ajout d'un livre à l'inventaire]:#ajout-dun-livre-à-linventaire
 [norme pour la saisie des données]:norme-saisie-livre.html
 
