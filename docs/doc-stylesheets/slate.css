@@ -308,6 +308,15 @@ header {
   background: #212121;
 }
 
+.admonition{
+    padding:5px 5px 5px 50px;
+}
+
+.important{
+    background: url('../images/important-blue.svg') no-repeat #f1f1f1 1% 50%;
+    background-size: 36px;    
+}
+
 /*******************************************************************************
 Small Device Styles
 *******************************************************************************/

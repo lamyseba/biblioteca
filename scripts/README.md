@@ -74,7 +74,7 @@ peut cliquer sur une colonne pour trier suivant cette colonne.
 Ce script ne prend pas d'option, il peut être lancé depuis la ligne de commande.
 On peut aussi utiliser [anacron] pour le lancer automatiquement tous les jours.
 
-### Exemple d'utilisation:
+### Exemple d'utilisation
 En supposant que vous soyez placé dans le répertoire racine du projet.
 ```
 ./scripts/web.sh
@@ -90,9 +90,9 @@ Sauvegarde le catalogue `inventaire.tc`, ainsi que le répertoire `docs`
 suivi d'un push sur le site [github](https://github.com/lamyseba/biblioteca/)
 
 Ce script ne prend pas d'option, il peut être lancé depuis la ligne de commande.
-On peut aussi utiliser [anacron] pour le lancer automatiquemetn tous les jours.
+On peut aussi utiliser [anacron] pour le lancer automatiquement tous les jours.
 
-### Exemple d'utilisation:
+### Exemple d'utilisation
 En supposant que vous soyez placé dans le répertoire racine du projet.
 ```
 ./scripts/github_push.sh
@@ -118,22 +118,23 @@ rename_authors.py [-h] [-v] input_file output_file
 
 positional arguments:
   input_file     le fichier de base de donnée tellico à transformer
-  output_file    le nom du fichier de sortie
+  output_file    le nom du fichier de sortie (par defaut:output.tc)
 
 optional arguments:
   -h, --help     show this help message and exit
   -v, --verbose  affiche les transformations de nom sur la sortie standard
 ```
 
-### Exemple d'utilisation:
+### Exemples d'utilisation
 En supposant que vous soyez placé dans le répertoire racine du projet.
 ```bash
 # Renomme les auteurs du fichier inventaire.tc au format 'Prénom' 'Nom' et 
-# enregistre le résultat dans le fichier inventaire.tc.bak
-./scripts/rename_authors.py inventaire.tc inventaire.tc.bak
+# enregistre le résultat dans le fichier inventaire_new.tc
+./rename_authors.py inventaire.tc inventaire_new.tc
 
-# Même chose; mais en affichant les transformations de nom sur la sortie standard:
-./scripts/rename_authors.py -v inventaire.tc inventaire.tc.bak
+# Renomme les auteurs en modifiant directement le fichier inventaire.tc et
+# en affichant les transformation de nom dans la console:
+./rename_authors.py -v inventaire.tc inventaire.tc
 ```
 
 [une réflexion]:https://lamyseba.github.io/biblioteca/format-noms-d-auteur.html
@@ -144,14 +145,15 @@ En supposant que vous soyez placé dans le répertoire racine du projet.
 doc.py
 -------------------------------------
 Génère la documentation du projet (celle que vous consultez maintenant): 
-utilise les fichiers `.md` du répertoire `docs/sources` pour générer les 
-fichiers `.html` dans le répertoire `docs`.
+interprète les fichiers au format Markdown du répertoire `docs/sources` pour 
+générer les fichiers html dans le répertoire `docs`.
 
-* Les fichiers `.md` sont des fichiers au format Markdown, consultable et
-  modifiables avec un simple éditeur de texte.
-* Les fichiers `.html` sont des fichiers lus par les navigateurs web (firefox,
+* Les fichiers au format Markdown sont consultables et modifiables avec un 
+  éditeur de texte simple (notepad, gedit). Leur nom se termine par l'extension
+  `.md`
+* Les fichiers html sont des fichiers lus par les navigateurs web (firefox,
   chrome...). La documentation du projet se trouve au format html dans le
-  répertoire `docs` à la racine du projet.
+  répertoire `docs`.
 
 Ce script peut être lancé en ligne de commande depuis un terminal, mais on 
 peut aussi cliquer sur le lanceur `Générer html` dans le dossier `docs/sources`
@@ -174,7 +176,7 @@ optional arguments:
               documentation)
 ```
 
-### Exemple d'utilisation:
+### Exemples d'utilisation
 En supposant que vous soyez placé dans le répertoire racine du projet.
 ```bash
 # Génère la documentation à partir de tous les fichier .md du répertoire
@@ -214,7 +216,7 @@ installés sur l'ordinateur:
     sudo cp ~/Téléchargement/dossier_wkhtml_dezipé/bin/wkhtmltopdf /usr/bin
   ```  
 * la commande `ftp` doit être disponible (c'est le cas la plupart du temps)
-* Un interpréteur python, et la librairie `python-dbus`
+* Un interpréteur python, ainsi que les librairies `python-dbus` et `python-markdown`
 
 
 

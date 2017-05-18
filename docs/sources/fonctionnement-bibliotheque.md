@@ -32,27 +32,9 @@ génère la page internet à partir du fichier `inventaire.tc`
 
 ### Ajout d'un livre à l'inventaire
 Pour ajouter un livre à l'inventaire, il faut saisir manuellement les données
-qui le concernent dans le programme Tellico.
-
-* [ ] TODO: ajouter une capture d'écran
-
-Les données à renseigner pour un livre sont les suivantes:
-
-* **Titre** : Ce champs dispose de l'auto-complétion pour 
-  **éviter les doublons  dans l'inventaire**. Si le titre que l'on souhaite
-  saisir existe déjà, il faut annuler la saisie d'un nouveau livre, chercher le 
-  livre existant dans l'inventaire et mettre à jour le nombre d'exemplaire.
-* **Sous-titre** (facultatif)
-* **Auteur**
-* **Editeur**
-* **Langue**
-* **Genre** : Parmis Album; BD; Contes; Documentaire; Poésie; Roman; Théâtre
-* **Cote** : La cote de rangement du livre, scotché en bas du dos.
-* **Nb ex** : Le nombre d'exemplaire du livre
-* **Nb. fich. manq.** : Le nombre de fiches qu'il manque pour ce livre. Le 
-  programme d'impression des fiches utilise ce nombre et le remet à zéro.
-* **Nb. cotes manq.** : Le nombre de cotes qu'il manque pour ce livre. Le 
-  programme d'impression des cotes utilise ce nombre et le remet à zéro.
+qui le concernent dans le programme Tellico. Notre école a choisi une 
+[norme pour la saisie des données][], n'oubliez pas de la consulter!!! Cette
+norme de saisie impacte notamment le formattage des cotes imprimées.
 
 Lors de l'enregistrement du livre dans l'inventaire, les données suivantes sont
 automatiquement rajoutées pour le livre:
@@ -60,8 +42,10 @@ automatiquement rajoutées pour le livre:
 * **N°** : Le numéro d'inventaire du livre
 * **Créé le** : La date à laquelle le livre a été ajouté à l'inventaire.
 
-* [ ] TODO: préciser avec un warning qu'il faut écrire le numéro d'inventaire
-  sur le livre après enregistrement.
+!!! important ""
+    **Pensez à écrire le numéro d'inventaire sur la page de titre du livre !!**
+    Ce numéro est diponible une fois le livre enregistré dans l'inventaire. Il 
+    se trouve dans la colonne `N°` de la ligne qui correspond au livre.
 
 La fonction de récupération en ligne de données bibliographique n'est pas 
 utilisée pour le moment. Voir les [Questions/Réponses sur ce sujet](questions-reponses.html#les-données-bibliographiques-sont-elles-récupérées-en-ligne)
@@ -115,13 +99,11 @@ suivant.
       jaune selon la langue, mais il est barré d'un trait blanc sur toute sa
       longueur.
 5. Ajout d'une pochette en fin de livre, qui permet de glisser la fiche.
-6. Inventorier le livre utilisant le programme Tellico. Pour les noms d'auteur, 
-   nous adoptons une saisie sous la forme `Nom, Prénom` séparés par des `;`.  
-   Par exemple `Dupont, Jean; D'Agobert, Roger`     
-   Une fois que le livre est enregistré dans l'inventaire, il faut **recopier le
-   N° d'inventaire sur la page de titre du livre**.  
-     * [ ] TODO: mettre un symbole de warning et un lien vers `Ajout d'un livre à l'inventaire`
-       de ce document qui 
+6. Inventorier le livre utilisant le programme Tellico. Dans notre école, il y a 
+   une [norme pour la saisie des données][]. N'oubliez pas de la consulter!   
+   <div class="admonition important">Une fois que le livre est enregistré dans 
+   l'inventaire, il faut **recopier le N° d'inventaire sur la page de titre du 
+   livre**.</div>
 7. Impression et mise en place de la fiche. L'impression se fait grâce au 
    raccourci `Impression des fiches` à la racine du projet. Un double-clic
    sur ce raccourci lance le script [impression.py][] avec le paramétrage 
@@ -151,5 +133,6 @@ ce livre.
 [rename_authors.py]:utilisation-des-scripts.html#rename_authorspy
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 [page internet générée à partir du catalogue]:http://calandreta-pau.org/bibli/
-
+[Ajout d'un livre à l'inventaire]:#ajout-dun-livre-à-linventaire
+[norme pour la saisie des données]:norme-saisie-livre.html
 

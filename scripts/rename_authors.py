@@ -19,9 +19,19 @@ Inconvénient: Dans certains cas, l'auto-complétion de l'auteur disfonctionne:
 ---
 Plus d'éléments sur le choix du formatage des noms d'auteurs dans le fichier 
 "Documentation/format_noms_d_auteur"
+---
+Exemples d'utilisation
+# Renomme les auteurs du fichier inventaire.tc au format 'Prénom' 'Nom' et 
+# enregistre le résultat dans le fichier inventaire_new.tc
+./rename_authors.py inventaire.tc inventaire_new.tc
+
+# Renomme les auteurs en modifiant directement le fichier inventaire.tc et
+# en affichant les transformation de nom dans la console:
+./rename_authors.py -v inventaire.tc inventaire.tc
+
 """, formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument("input_file",type=str,help='le fichier de base de donnée tellico à transformer')
-parser.add_argument("output_file",type=str,help="le nom du fichier de sortie", default="output.tc")
+parser.add_argument("output_file",type=str,help="le nom du fichier de sortie (par defaut:output.tc)", default="output.tc")
 parser.add_argument("-v","--verbose",help="affiche les transformations de nom sur la sortie standard", action="store_true")
 args = parser.parse_args()
 if not os.path.exists(args.input_file):
@@ -65,4 +75,7 @@ with open(tmp_xml_path, 'wb') as f:
 # Copie le fichier xml temporaire dans une nouvelle base de données tellico
 subprocess.call(["zip","-r","-j",args.output_file,tmp_xml_path])
 print("Base de donnée avec les nouveaux noms d'auteur : "+args.output_file)
+
+# supprime le fichier xml temporaire
+os.remove(tmp_xml_path)
 

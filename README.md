@@ -10,8 +10,10 @@ d'école:
 
 Avant d'utiliser ce projet, assurez vous que vous avez des besoins similaires...
 Vous pouvez consulter le fonctionnement détaillé de notre bibliothèque dans 
-[la documentation][1]. Vous y trouverez aussi [les raisons] qui nous ont fait choisir
-une gestion des prêts par fiche.
+[la documentation][1]. Vous y trouverez notamment [les raisons][] qui nous ont fait 
+choisir une gestion des prêts par fiche.
+
+[les raisons]:http://lamyseba/github.io/bilioteca/questions-reponses.html#pourquoi-une-gestion-des-prêts-par-fiches
 
 
 

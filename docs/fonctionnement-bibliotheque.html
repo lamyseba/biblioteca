@@ -48,40 +48,20 @@ fichier <code>inventaire.tc</code>.</p>
 génère la page internet à partir du fichier <code>inventaire.tc</code></p>
 <h3 id="ajout-dun-livre-à-linventaire">Ajout d'un livre à l'inventaire</h3>
 <p>Pour ajouter un livre à l'inventaire, il faut saisir manuellement les données
-qui le concernent dans le programme Tellico.</p>
-<ul>
-<li>[ ] TODO: ajouter une capture d'écran</li>
-</ul>
-<p>Les données à renseigner pour un livre sont les suivantes:</p>
-<ul>
-<li><strong>Titre</strong> : Ce champs dispose de l'auto-complétion pour 
-  <strong>éviter les doublons  dans l'inventaire</strong>. Si le titre que l'on souhaite
-  saisir existe déjà, il faut annuler la saisie d'un nouveau livre, chercher le 
-  livre existant dans l'inventaire et mettre à jour le nombre d'exemplaire.</li>
-<li><strong>Sous-titre</strong> (facultatif)</li>
-<li><strong>Auteur</strong></li>
-<li><strong>Editeur</strong></li>
-<li><strong>Langue</strong></li>
-<li><strong>Genre</strong> : Parmis Album; BD; Contes; Documentaire; Poésie; Roman; Théâtre</li>
-<li><strong>Cote</strong> : La cote de rangement du livre, scotché en bas du dos.</li>
-<li><strong>Nb ex</strong> : Le nombre d'exemplaire du livre</li>
-<li><strong>Nb. fich. manq.</strong> : Le nombre de fiches qu'il manque pour ce livre. Le 
-  programme d'impression des fiches utilise ce nombre et le remet à zéro.</li>
-<li><strong>Nb. cotes manq.</strong> : Le nombre de cotes qu'il manque pour ce livre. Le 
-  programme d'impression des cotes utilise ce nombre et le remet à zéro.</li>
-</ul>
+qui le concernent dans le programme Tellico. Notre école a choisi une 
+<a href="norme-saisie-livre.html">norme pour la saisie des données</a>, n'oubliez pas de la consulter!!! Cette
+norme de saisie impacte notamment le formattage des cotes imprimées.</p>
 <p>Lors de l'enregistrement du livre dans l'inventaire, les données suivantes sont
 automatiquement rajoutées pour le livre:</p>
 <ul>
 <li><strong>N°</strong> : Le numéro d'inventaire du livre</li>
-<li>
-<p><strong>Créé le</strong> : La date à laquelle le livre a été ajouté à l'inventaire.</p>
-</li>
-<li>
-<p>[ ] TODO: préciser avec un warning qu'il faut écrire le numéro d'inventaire
-  sur le livre après enregistrement.</p>
-</li>
+<li><strong>Créé le</strong> : La date à laquelle le livre a été ajouté à l'inventaire.</li>
 </ul>
+<div class="admonition important">
+<p><strong>Pensez à écrire le numéro d'inventaire sur la page de titre du livre !!</strong>
+Ce numéro est diponible une fois le livre enregistré dans l'inventaire. Il 
+se trouve dans la colonne <code>N°</code> de la ligne qui correspond au livre.</p>
+</div>
 <p>La fonction de récupération en ligne de données bibliographique n'est pas 
 utilisée pour le moment. Voir les <a href="questions-reponses.html#les-données-bibliographiques-sont-elles-récupérées-en-ligne">Questions/Réponses sur ce sujet</a></p>
 <h3 id="sauvegarde-de-linventaire">Sauvegarde de l'inventaire</h3>
@@ -118,15 +98,11 @@ suivant.</p>
 </ul>
 </li>
 <li>Ajout d'une pochette en fin de livre, qui permet de glisser la fiche.</li>
-<li>Inventorier le livre utilisant le programme Tellico. Pour les noms d'auteur, 
-   nous adoptons une saisie sous la forme <code>Nom, Prénom</code> séparés par des <code>;</code>.<br />
-   Par exemple <code>Dupont, Jean; D'Agobert, Roger</code>   <br />
-   Une fois que le livre est enregistré dans l'inventaire, il faut <strong>recopier le
-   N° d'inventaire sur la page de titre du livre</strong>.  <ul>
-<li>[ ] TODO: mettre un symbole de warning et un lien vers <code>Ajout d'un livre à l'inventaire</code>
-   de ce document qui </li>
-</ul>
-</li>
+<li>Inventorier le livre utilisant le programme Tellico. Dans notre école, il y a 
+   une <a href="norme-saisie-livre.html">norme pour la saisie des données</a>. N'oubliez pas de la consulter! <br />
+   <div class="admonition important">Une fois que le livre est enregistré dans 
+   l'inventaire, il faut <strong>recopier le N° d'inventaire sur la page de titre du 
+   livre</strong>.</div></li>
 <li>Impression et mise en place de la fiche. L'impression se fait grâce au 
    raccourci <code>Impression des fiches</code> à la racine du projet. Un double-clic
    sur ce raccourci lance le script <a href="utilisation-des-scripts.html#impressionpy">impression.py</a> avec le paramétrage 
@@ -157,7 +133,7 @@ ce livre.</p>
       <footer class="inner">
         <p class="metadata">Auteur&nbsp;: Sébastien Lamy (lamyseba arobase free.fr)<br />
            Fichier source&nbsp;: <a href="sources/fonctionnement-bibliotheque.md" >docs/sources/fonctionnement-bibliotheque.md</a><br />
-           Dernière mise à jour&nbsp;: 15 mai 2017 -- 
+           Dernière mise à jour&nbsp;: 18 mai 2017 -- 
            <a href="utiliser-la-documentation.html">Comment faire pour modifier ce document&nbsp;?</a>
         </p>
         <p></p>

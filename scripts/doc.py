@@ -82,7 +82,8 @@ md=markdown.Markdown(
     extensions=['markdown.extensions.codehilite',
                 'markdown.extensions.fenced_code',
                 'markdown.extensions.toc',
-                'markdown.extensions.meta'
+                'markdown.extensions.meta',
+                'markdown.extensions.admonition'
                ],
     extension_configs = {
         'markdown.extensions.codehilite': {

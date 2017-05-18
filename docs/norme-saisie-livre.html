@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="La documentation pour la bibliotèca calandreta paulina" />
+    <link rel="stylesheet" type="text/css" media="screen" href="doc-stylesheets/slate.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <title>BiblioDoc - Norme pour la saisie des données bibliographiques</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/lamyseba/biblioteca/">View on GitHub</a>
+          <h1 id="project_title"><a href="index.html">Documentation</a></h1>
+          <h2 id="project_tagline">Bibliotèca Calandreta Paulina</h2>
+        </header>
+    </div>  
+
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+      
+        <h1 id="norme-pour-la-saisie-des-données-bibliographiques">Norme pour la saisie des données bibliographiques</h1>
+<ul>
+<li><strong>Titre</strong> : Ce champs dispose de l'auto-complétion pour <strong>éviter les doublons
+  dans l'inventaire</strong>.
+  <div class="admonition important">
+  <strong>Si le titre existe déjà</strong>, il faut <strong>annuler la saisie</strong> du livre, chercher 
+  le livre existant dans l'inventaire et <strong>mettre à  jour le nombre d'exemplaire</strong>.</div></li>
+<li><strong>Sous-titre</strong> (facultatif)</li>
+<li><strong>Auteur</strong> : Nous utilisons le format <code>Nom, Prénom</code> pour chaque auteur. On
+  peut saisir une liste de plusieurs auteurs en les séparant par des <code>;</code><br />
+  Par exemple <code>Dupont, Jean; D'Agobert, Roger</code>. Ce choix de formattage est
+  issu d'<a href="format-noms-d-auteur.html">une réflexion</a>, mais une autre école pourrait faire un autre choix.</li>
+<li><strong>Editeur</strong> : C'est celui qui à le copyritght © inscrit quelque part sur 
+  le livre</li>
+<li><strong>Langue</strong> : Si il y a deux langues, on les sépare par un <code>/</code>, en commençant
+  par le Français.</li>
+<li><strong>Genre</strong> : <code>Album</code>; <code>BD</code>; <code>Contes</code>; <code>Documentaire</code>; <code>Poésie</code>; <code>Roman</code>; <code>Théâtre</code></li>
+<li><strong>Cote</strong> : La cote de rangement du livre.<ul>
+<li>Si c'est un album, la cote est la première lettre du nom de l'auteur.
+  Elle sera scotchée en haut à droite de la couverture.</li>
+<li>Si c'est un documentaire, la cote est le code numérique du thème suivi 
+  d'un espace puis du nom du thème. Elle sera imprimée sur un papier de 
+  couleur verte et scotchée en bas du dos.</li>
+<li>Pour les autres genre de livre, la cote est le code qui correspond au 
+  genre (<code>C</code> pour les contes, <code>BD</code> pour les BDs, <code>R</code> pour les romans, <code>T</code> 
+  pour le Théâtre, <code>P</code> pour la poésie), suivi d'un espace puis des trois
+  première lettre du nom de l'auteur. Elle sera scotchée en bas du dos.</li>
+</ul>
+</li>
+<li><strong>Nb ex</strong> : Le nombre d'exemplaire du livre</li>
+<li><strong>Nb. fich. manq.</strong> : Le nombre de fiches qu'il manque pour ce livre. Le 
+  programme d'impression des fiches utilise ce nombre et le remet à zéro.
+  Vérifiez si vote livre a déjà une fiche lisible. Si c'est le cas il faudra
+  reporter le numéro d'inventaire sur cette fiche après enregistrement du livre.</li>
+<li><strong>Nb. cotes manq.</strong> : Le nombre de cotes qu'il manque pour ce livre. Le 
+  programme d'impression des cotes utilise ce nombre et le remet à zéro.
+  Vérifier si votre livre a déjà une cote correcte (une lettre en gros sur
+  la couverture pour les albums, un code au bas du dos pour les autre genres)</li>
+</ul>
+<div class="admonition important">
+<p><strong>Pensez à écrire le numéro d'inventaire sur la page de titre du livre !!</strong>
+Si le livre a déjà une fiche, il faut aussi écrire ce numéro sur la fiche.
+Ce numéro est diponible une fois le livre enregistré dans l'inventaire. Il 
+se trouve dans la colonne <code>N°</code> de la ligne qui correspond au livre.</p>
+</div>
+        
+        
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="metadata">Auteur&nbsp;: Sébastien Lamy (lamyseba arobase free.fr)<br />
+           Fichier source&nbsp;: <a href="sources/norme-saisie-livre.md" >docs/sources/norme-saisie-livre.md</a><br />
+           Dernière mise à jour&nbsp;: 18 mai 2017 -- 
+           <a href="utiliser-la-documentation.html">Comment faire pour modifier ce document&nbsp;?</a>
+        </p>
+        <p></p>
+        <p class="copyright">Slate theme maintained by <a href="https://github.com/jasoncostello">Jason Costello</a></p>
+      </footer>
+    </div>
+
+  </body>
+</html>

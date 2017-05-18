@@ -84,7 +84,7 @@ en ligne sur le site de l'école. La page inclut un champs de recherche. On
 peut cliquer sur une colonne pour trier suivant cette colonne.</p>
 <p>Ce script ne prend pas d'option, il peut être lancé depuis la ligne de commande.
 On peut aussi utiliser <a href="http://www.delafond.org/traducmanfr/man/man8/anacron.8.html">anacron</a> pour le lancer automatiquement tous les jours.</p>
-<h3 id="exemple-dutilisation">Exemple d'utilisation:</h3>
+<h3 id="exemple-dutilisation">Exemple d'utilisation</h3>
 <p>En supposant que vous soyez placé dans le répertoire racine du projet.</p>
 <div class="highlight"><pre><span></span>./scripts/web.sh
 </pre></div>
@@ -96,8 +96,8 @@ On peut aussi utiliser <a href="http://www.delafond.org/traducmanfr/man/man8/ana
 (cette documentation). Cette sauvegarde est effectué par un commit
 suivi d'un push sur le site <a href="https://github.com/lamyseba/biblioteca/">github</a></p>
 <p>Ce script ne prend pas d'option, il peut être lancé depuis la ligne de commande.
-On peut aussi utiliser <a href="http://www.delafond.org/traducmanfr/man/man8/anacron.8.html">anacron</a> pour le lancer automatiquemetn tous les jours.</p>
-<h3 id="exemple-dutilisation_1">Exemple d'utilisation:</h3>
+On peut aussi utiliser <a href="http://www.delafond.org/traducmanfr/man/man8/anacron.8.html">anacron</a> pour le lancer automatiquement tous les jours.</p>
+<h3 id="exemple-dutilisation_1">Exemple d'utilisation</h3>
 <p>En supposant que vous soyez placé dans le répertoire racine du projet.</p>
 <div class="highlight"><pre><span></span>./scripts/github_push.sh
 </pre></div>
@@ -115,7 +115,7 @@ terminal.</p>
 
 positional arguments:
   input_file     le fichier de base de donnée tellico à transformer
-  output_file    le nom du fichier de sortie
+  output_file    le nom du fichier de sortie <span class="o">(</span>par defaut:output.tc<span class="o">)</span>
 
 optional arguments:
   -h, --help     show this <span class="nb">help</span> message and <span class="nb">exit</span>
@@ -123,28 +123,30 @@ optional arguments:
 </pre></div>
 
 
-<h3 id="exemple-dutilisation_2">Exemple d'utilisation:</h3>
+<h3 id="exemples-dutilisation_1">Exemples d'utilisation</h3>
 <p>En supposant que vous soyez placé dans le répertoire racine du projet.</p>
 <div class="highlight"><pre><span></span><span class="c1"># Renomme les auteurs du fichier inventaire.tc au format &#39;Prénom&#39; &#39;Nom&#39; et </span>
-<span class="c1"># enregistre le résultat dans le fichier inventaire.tc.bak</span>
-./scripts/rename_authors.py inventaire.tc inventaire.tc.bak
+<span class="c1"># enregistre le résultat dans le fichier inventaire_new.tc</span>
+./rename_authors.py inventaire.tc inventaire_new.tc
 
-<span class="c1"># Même chose; mais en affichant les transformations de nom sur la sortie standard:</span>
-./scripts/rename_authors.py -v inventaire.tc inventaire.tc.bak
+<span class="c1"># Renomme les auteurs en modifiant directement le fichier inventaire.tc et</span>
+<span class="c1"># en affichant les transformation de nom dans la console:</span>
+./rename_authors.py -v inventaire.tc inventaire.tc
 </pre></div>
 
 
 <hr />
 <h2 id="docpy">doc.py</h2>
 <p>Génère la documentation du projet (celle que vous consultez maintenant): 
-utilise les fichiers <code>.md</code> du répertoire <code>docs/sources</code> pour générer les 
-fichiers <code>.html</code> dans le répertoire <code>docs</code>.</p>
+interprète les fichiers au format Markdown du répertoire <code>docs/sources</code> pour 
+générer les fichiers html dans le répertoire <code>docs</code>.</p>
 <ul>
-<li>Les fichiers <code>.md</code> sont des fichiers au format Markdown, consultable et
-  modifiables avec un simple éditeur de texte.</li>
-<li>Les fichiers <code>.html</code> sont des fichiers lus par les navigateurs web (firefox,
+<li>Les fichiers au format Markdown sont consultables et modifiables avec un 
+  éditeur de texte simple (notepad, gedit). Leur nom se termine par l'extension
+  <code>.md</code></li>
+<li>Les fichiers html sont des fichiers lus par les navigateurs web (firefox,
   chrome...). La documentation du projet se trouve au format html dans le
-  répertoire <code>docs</code> à la racine du projet.</li>
+  répertoire <code>docs</code>.</li>
 </ul>
 <p>Ce script peut être lancé en ligne de commande depuis un terminal, mais on 
 peut aussi cliquer sur le lanceur <code>Générer html</code> dans le dossier <code>docs/sources</code>
@@ -163,7 +165,7 @@ optional arguments:
 </pre></div>
 
 
-<h3 id="exemple-dutilisation_3">Exemple d'utilisation:</h3>
+<h3 id="exemples-dutilisation_2">Exemples d'utilisation</h3>
 <p>En supposant que vous soyez placé dans le répertoire racine du projet.</p>
 <div class="highlight"><pre><span></span><span class="c1"># Génère la documentation à partir de tous les fichier .md du répertoire</span>
 <span class="c1"># docs/src</span>
@@ -198,7 +200,7 @@ installés sur l'ordinateur:</p>
 <code>bash  
     sudo cp ~/Téléchargement/dossier_wkhtml_dezipé/bin/wkhtmltopdf /usr/bin</code>  </li>
 <li>la commande <code>ftp</code> doit être disponible (c'est le cas la plupart du temps)</li>
-<li>Un interpréteur python, et la librairie <code>python-dbus</code></li>
+<li>Un interpréteur python, ainsi que les librairies <code>python-dbus</code> et <code>python-markdown</code></li>
 </ul>
 <p><em>(1) Pour la petite histoire, cette version est compilée avec une version 
 patchée de Qt, et souvent la version disponible dans le dépot de votre distro
