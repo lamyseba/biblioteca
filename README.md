@@ -28,7 +28,7 @@ fonctionnent, il faudra peut être installer des dépendances (voir
 
 Utilisation
 -------------------------------------
-Assurez-vous que le programme Tellico[] est bien installé sur votre ordinateur,
+Assurez-vous que le programme [Tellico][] est bien installé sur votre ordinateur,
 puis ouvrez le fichier `inventaire.tc` (c'est un fichier de catalogue pour Tellico).
 Supprimez toutes les livres enregistrés, et remplacez par vos propres livres.
 
