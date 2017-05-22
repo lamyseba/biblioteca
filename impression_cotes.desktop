@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Impression des cotes
 Comment=Génère le PDF pour les cotes qui restent à imprimer
-Exec=/bin/bash -c 'cd "$(dirname "$0")";python3 scripts/impression.py --exclude Documentaire cotes' %k
+Exec=/bin/bash -c 'cd "$(dirname "$0")";python3 scripts/impression.py --exclude Documentari cotes' %k
 Icon=
 Terminal=false
 Type=Application
