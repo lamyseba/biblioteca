@@ -109,7 +109,7 @@
    
   <xsl:call-template name="handleCopies">
    <xsl:with-param name="entry" select="." />
-   <xsl:with-param name="copies_count" select="./tc:nb-ex" />
+   <xsl:with-param name="copies_count" select="dyn:evaluate($print-count-node)" />
   </xsl:call-template>
  </xsl:for-each>
 </xsl:variable>

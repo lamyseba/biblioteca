@@ -29,7 +29,10 @@
 
 <!-- import common templates -->
 <!-- location depends on being installed correctly -->
-<xsl:import href="tellico-common.xsl"/>            
+<xsl:import href="tellico-common.xsl"/>
+
+<!-- L'adresse relative du noeud qui précise le nombre de cote à imprimer-->
+<xsl:variable name="print-count-node" select="'./tc:shelf-nums-miss-count'" />        
 <xsl:include href="calandreta_utils.xsl"/>
 
 
