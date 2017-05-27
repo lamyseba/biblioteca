@@ -61,6 +61,11 @@
     <xsl:when test="./tc:genre='Album' and string-length($cote)=1">
         <div class="cote album"><span><xsl:value-of select="$cote"/></span></div>
     </xsl:when>
+    <xsl:when test="./tc:genre='Documentari'">
+        <div class="cote docu"><span><xsl:value-of select="$cote"/><br/>
+            <xsl:value-of select="document('/tmp/codes.xml')/cotes/cote[@id=$cote]"/></span>
+        </div>
+    </xsl:when>
     <xsl:otherwise>
         <xsl:variable name="cote_lines" select="str:tokenize($cote)"/>
         <div class="cote generale"><span>

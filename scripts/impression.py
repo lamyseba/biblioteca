@@ -1,14 +1,8 @@
 #!/usr/bin/python3
 # coding: utf-8
-import argparse
-import dbus
-import os
-import subprocess
-import sys
+import argparse, dbus, os, subprocess, sys, time, logging, re
 import xml.etree.ElementTree as ET
 from datetime import datetime
-import time
-import logging
 
 description="""
 Un automate pour imprimer les fiches et les cotes des livres qui en ont besoin. 
@@ -66,6 +60,10 @@ input_dir=os.path.join(app_home_dir,'scripts','templates')
 
 # L'emplacement de la copie temporaire de la base de donnée Tellico
 tmp_xml_path = "/tmp/tellico.xml"
+
+# L'emplacement du fichier qui liste les correspondance code-mot clé pour
+# les cotes des documentaires
+docu_codes_path = os.path.join(app_home_dir, 'docs/cotes_documentaires.md')
 
 # Le tri souhaité pour l'impression
 sort={"fiches":"ID","cotes":"cote"}
@@ -254,6 +252,45 @@ class PrintManager:
         shell_command(['unzip','-o',tellico_file_path,'tellico.xml','-d','/tmp'])
         # Récupère le xml des données
         return ET.parse(tmp_xml_path)
+        
+        
+    def _init_docu_codes(self):
+        """ Lit le fichier qui contient la liste des codes de documentaire et
+            leur traduction en mot clé. Génère un fichier xml temporaire
+            qui contient ces informations. La fabrication du html à partir
+            du template xslt et des données tellico utilisera ce fichier pour
+            ajouter le mot clé à côté du code numérique
+        """        
+        # On ne fait ce travail que pour les cotes, car les mots-clés ne sont
+        # pas affiché sur les fiches
+        if self.item_type != "cotes":  return
+        
+        # L'endroit ou est stocké le fichier temporaire. Cet endroit doit
+        # correspondre à celui précisé dans le template cotes.xslt
+        docu_codes_xml_path = "/tmp/codes.xml"
+        logging.debug("translating docu codes from %s to %s", docu_codes_path, docu_codes_xml_path)
+        # On construit des noeuds xml pour chaque cotes. La structure est
+        # du type
+        # <cotes>
+        #   <cote id="100">Psychologie</cote>
+        #   <cote id ="...">...</cote>
+        #   ...
+        # </cotes>
+        codes = ET.Element('cotes')
+        codes_xml=ET.ElementTree(codes)
+        content=""
+        # L'expression régulière pour trouver les titres qui nous intéressent 
+        # dans le fichier source: précédé par ### ou d'un début de ligne, 
+        # commence par 3 chiffres puis ":", est suivi de "<!--" ou d'une fin 
+        # de ligne.
+        p=re.compile(r'#{0,3}\s*(\d{3})\s*:(.*?)((<!--)|$)',re.M)
+        with open (docu_codes_path,'r') as f:
+            content=f.read()
+        for code_match in p.finditer(content):
+            code=ET.SubElement(codes,'cote')
+            code.set('id',code_match.group(1))
+            code.text=code_match.group(2).strip()
+        codes_xml.write(docu_codes_xml_path,encoding='utf-8')
     
     def _validate_excluded_genre_names(self):
         """ Vérifie si les genres à exclure passé en paramètre existent dans 
@@ -365,22 +402,24 @@ class PrintManager:
             
             # ouvre le répertoire ou se trouvent archivées les impressions  
             open_path(self.print_dir)
-            
-            
+                        
             return
-            
+        
+        # Génère le fichier xml qui précise le mot clé correspondant à une
+        # cote numérique
+        self._init_docu_codes()
+       
         # génère les fiches au format html en appliquant le template xsl
         # au fichier xml de la liste des livres.
-        f=open('/tmp/calandreta_'+self.item_type+'.html','w')
-        args=[  'xsltproc',
-                '--novalid',
-                '--param','entry_predicate','"'+self.entry_predicate+'"',
-                '--param','sort-name1',"'%s'"%sort[self.item_type],
-                input_dir+'/'+self.item_type+'.xsl',
-                tmp_xml_path    ]
-        logging.debug(" ".join(args))
-        subprocess.check_call(args,stdout=f)
-        f.close()
+        with open('/tmp/calandreta_'+self.item_type+'.html','w') as f:
+            args=[  'xsltproc',
+                    '--novalid',
+                    '--param','entry_predicate','"'+self.entry_predicate+'"',
+                    '--param','sort-name1',"'%s'"%sort[self.item_type],
+                    input_dir+'/'+self.item_type+'.xsl',
+                    tmp_xml_path    ]
+            logging.debug(" ".join(args))
+            subprocess.check_call(args,stdout=f)
 
         # copie le fichier de mise en forme CSS
         shell_command(['cp',input_dir+'/'+self.item_type+'.css','/tmp/'+self.item_type+'.css'])
