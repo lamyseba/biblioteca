@@ -6,8 +6,8 @@ from datetime import datetime
 
 description="""
 Un automate pour imprimer les fiches et les cotes des livres qui en ont besoin. 
-Ce programme génère un pdf et met à jour le fichier d'inventaire: il remet à 
-zéro le nombre de fiche ou de cote à imprimer pour les livres concernés.
+Ce programme génère un pdf et met à jour le fichier d'inventaire: il modifie 
+le nombre de fiches ou de cotes à imprimer pour les livres concernés.
 
 Ce script peut être lancé en ligne de commande depuis un terminal. On peut
 aussi cliquer sur les lanceurs `Impression des fiches` et `Impression des cotes` 
@@ -43,6 +43,9 @@ impression.py cotes --genre "Documentaire;Album"
 # standard (au lieu de l'écrire dans le fichier de log)
 impression.py fiches --log debug
 
+# Imprime toutes les fiches manquantes pour les livres qui ne sont pas du
+# genre "Documentaire" et n'imprime que les pages pleines
+impression.py fiches --genre Documentaire --eco
 
 
 """
@@ -105,6 +108,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("item_type",type=str,help="peut prendre la valeur 'fiches' ou 'cotes'")
 parser.add_argument("--log",type=str,help="info or debug", default="info")
 parser.add_argument("--genre",type=str,help="la liste des genres à traiter, séparés par des ';'. Si la liste commence par un '!', les genres donnés seront exclus et les autres seront traités")
+parser.add_argument("--eco",action='store_true',help="pour les fiches: n'imprime que les pages pleines")
 args = parser.parse_args()
 
 # Le type d'item qu'on imprime (fiches ou cotes)
@@ -176,9 +180,14 @@ class Item:
         self.item_type=item_type
         
         # print_count: le nombre de fois ou on doit imprimer cet item
-        self.print_count=0        
+        self.print_count=0     
         xml_print_count=self.xml_value(print_count_db_name[item_type])
         if xml_print_count is not None: self.print_count = int(xml_print_count)        
+        
+        # print_count_reset: le nombre d'exemplaire qu'il restera à imprimer
+        # pour cet item (si impression en mode éco, il peut rester plus que
+        # zéro à imprimer)
+        self.print_count_reset=0
         
         # xml_id: l'id du noeud xml qui correspond à cet item        
         self.xml_id = int(self.xml_entry.attrib["id"])        
@@ -202,18 +211,28 @@ class Item:
                 and (
                     not genres \
                     or ( exclude_genres ^ (self.xml_genre in genres) )):
-            self.shall_be_printed=True                        
-            # des variables pour le log
-            xml_title = self.xml_value("title")
-            xml_cote = str.replace(self.xml_cote,"\n",' ')
-                
-            if item_type=="fiches":
-                logging.info("%i fiche(s) pour le livre %i %s - %s",
-                            self.print_count,self.xml_id,xml_cote,xml_title)
+            self.shall_be_printed=True
 
-            if item_type=="cotes": 
-                logging.info("%i cote(s) pour le livre %i %s- %s",
-                            self.print_count,self.xml_id,xml_cote,xml_title)
+
+    def log(self,eco_mode=False):
+        """ log le nombre de fiche ou cote à imprimer, et les références du livre
+        eco_mode -- si True, log le nombre de fiches ignorées pour ce livre, car
+                    elles ne participaient pas à remplir une page pleine.
+        """                         
+        # des variables pour le log
+        xml_title = self.xml_value("title")
+        xml_cote = str.replace(self.xml_cote,"\n",' ')
+        if self.item_type=="fiches":
+            log_msg = "%i fiche(s) pour le livre %i %s - %s"
+            log_count = self.print_count
+            if eco_mode:
+                log_msg = "%i fiches(s) ignorée(s) pour le livre %i %s - %s"
+                log_count = self.print_count_reset
+            logging.info(log_msg,log_count,self.xml_id,xml_cote,xml_title)
+
+        if self.item_type=="cotes": 
+            logging.info("%i cote(s) pour le livre %i %s- %s",
+                        self.print_count,self.xml_id,xml_cote,xml_title)
             
             
     def update_tellico(self,field_name,value):
@@ -235,9 +254,9 @@ class Item:
         """ met à zéro le nombre d'impression nécessaire pour cet item (fiche ou cote),
             et met tellico à jour en consequence
         """
-        logging.debug("clearing print count on %s for entry %i",self.item_type,self.xml_id)
-        self.update_tellico(print_count_db_name[self.item_type],"0")
-        self.print_count=0
+        logging.debug("Reste %i %s à imprimer pour le livre n° %i",self.print_count_reset, self.item_type, self.xml_id)
+        self.update_tellico(print_count_db_name[self.item_type],str(self.print_count_reset))
+        self.print_count=self.print_count_reset
     
         
 
@@ -321,18 +340,63 @@ class PrintManager:
                 raise ValueError("Le genre '"+genre+"' n'est pas valide. Possibilités: ["+allowed_string+"]")         
         
     
+    def _eco_print(self):
+        """ Enlève de la liste des fiches imprimées les fiches qui ne remplissent
+            pas une page pleine.
+        """
+        if self.item_type!="fiches":return
+        # orphans_count: le nombre de fiches qui ne remplissent pas une page
+        # à la fin de l'impression
+        orphans_count = self.print_count % 8        
+        self.print_count -= orphans_count
+        while orphans_count > 0:
+            last_item = self.items.pop()
+            self.eco.insert(0,last_item)
+            if last_item.print_count < orphans_count:
+                last_item.print_count_reset = last_item.print_count
+                orphans_count -= last_item.print_count
+                last_item.print_count = 0
+            else:
+                last_item.print_count_reset = orphans_count
+                last_item.print_count -= orphans_count
+                if last_item.print_count > 0 : self.items.append(last_item)
+                orphans_count=0
+    
+    
     def _init_items(self):
         """ Récupère les items (fiches ou cotes) qu'on doit imprimer """
         # ne garde que les livres dont il faut imprimer l'item (fiche ou cote).
         ## NOTE: la méthode findall("XPath") ne supporte pas notre filtre "entry_predicate",
         ## donc on fait ce filtrage à la main en parcourant tous les livres.
-        xml_entries = self.xml_collection.findall('tc:entry',ns)          
-        items = []
+        xml_entries = self.xml_collection.findall('tc:entry',ns)
+        # items -- La liste des fiches ou des cotes à imprimer
+        self.items = []
+        # eco -- La liste des fiches qui ne seront pas imprimées car elles
+        # ne remplissent pas une page
+        self.eco = []
+        # print_count: Le nombre total d'item à imprimer (on compte les copies multiples)
+        self.print_count = 0
         for xml_entry in xml_entries:
             item = Item(xml_entry,self.item_type)
-            if item.shall_be_printed: items.append(item)
-        return items
-    
+            if item.shall_be_printed: 
+                self.items.append(item)
+                self.print_count += item.print_count
+        
+        # Pour une impression écologique, on peut retirer les items qui ne
+        # remplissent pas complètement une feuille
+        if args.eco: self._eco_print()
+        
+        for item in self.items: item.log()
+        
+        if self.eco :
+            logging.info("--- eco mode")
+            for item in self.eco:item.log(eco_mode=True)
+        
+        logging.info("--------------------")
+        logging.info("Total:%i %s à imprimer",self.print_count,self.item_type)
+
+
+
     def __init__(self,item_type):
         # item_type -- fiches ou cotes        
         self.item_type = item_type
@@ -342,10 +406,8 @@ class PrintManager:
         self.xml_collection=self.tellico_xml.getroot().find('tc:collection',ns)
         # valide les noms des genres à exclure (donnés en paramètre par l'utilisateur)
         self._validate_genre_names()
-        # items -- La liste des fiches ou des cotes à imprimer
-        self.items=self._init_items()
-        # Le nombre total d'item à imprimer (on compte les copies multiples)
-        self.print_count=sum(map(lambda item: item.print_count,self.items))
+        # initialise la liste des fiches ou des cotes à imprimer
+        self._init_items()
         # entry_predicate -- Le prédicat XPath qui permet de filtrer la liste des livres à imprimer:
         ## NOTE: entry_predicate doit être en accord avec la logique qui permet
         ## d'initialiser item.shall_be_printed de la classe Item       
@@ -371,8 +433,6 @@ class PrintManager:
                 # print_dir -- Le sous répertoire de "impressions" où seront stockées les impressions
                 # des fiches (impressions/fiches) ou les cotes (impressions/cotes)
         self.print_dir = os.path.expanduser(output_dir+'/'+item_type)
-        logging.info("--------------------")
-        logging.info("Total:%i %s à imprimer",self.print_count,item_type)
         
     
     def clear_tellico_print_counts(self):
@@ -380,7 +440,11 @@ class PrintManager:
             Remet le nombre de cote ou de fiche à imprimer à zéro
         """          
         # Met à jour tellico pour chacun des items imprimés.
+        logging.debug("")
+        logging.debug("*** Mise à jour ***")
         for item in self.items: item.clear_print_count()
+        logging.debug("***")
+        logging.debug("")
 
     def unlock_tellico_db(self):
         """ supprime le fichier xml temporaire, signalant ainsi que l'éventuelle
@@ -429,17 +493,20 @@ class PrintManager:
         # cote numérique
         self._init_docu_codes()
        
-        # génère les fiches au format html en appliquant le template xsl
+        # génère les fiches ou les cotes au format html en appliquant le template xsl
         # au fichier xml de la liste des livres.
         with open('/tmp/calandreta_'+self.item_type+'.html','w') as f:
-            args=[  'xsltproc',
+            xslt_args=[  'xsltproc',
                     '--novalid',
                     '--param','entry_predicate','"'+self.entry_predicate+'"',
-                    '--param','sort-name1',"'%s'"%sort[self.item_type],
+                    '--param','sort-name1',"'%s'"%sort[self.item_type]]
+            if args.eco:xslt_args.extend([  
+                    '--param','eco','true()'])
+            xslt_args.extend([
                     input_dir+'/'+self.item_type+'.xsl',
-                    tmp_xml_path    ]
-            logging.debug(" ".join(args))
-            subprocess.check_call(args,stdout=f)
+                    tmp_xml_path    ])
+            logging.debug(" ".join(xslt_args))
+            subprocess.check_call(xslt_args,stdout=f)
 
         # copie le fichier de mise en forme CSS
         shell_command(['cp',input_dir+'/'+self.item_type+'.css','/tmp/'+self.item_type+'.css'])
@@ -447,11 +514,11 @@ class PrintManager:
         # utilise le fichier html pour générer un pdf prêt à imprimer 
         if not os.path.exists(self.print_dir): os.makedirs(self.print_dir)
         output_file_path = self.print_dir+'/'+datetime.now().strftime("%Y_%m_%d-%Hh%M")+'.pdf'
-        args=['wkhtmltopdf']
-        args.extend(wk_options[self.item_type])
-        args.append('/tmp/calandreta_'+self.item_type+'.html')
-        args.append(output_file_path)
-        shell_command(args)
+        wk_args=['wkhtmltopdf']
+        wk_args.extend(wk_options[self.item_type])
+        wk_args.append('/tmp/calandreta_'+self.item_type+'.html')
+        wk_args.append(output_file_path)
+        shell_command(wk_args)
                 
         # ouvre le pdf pour que l'utilisateur le voie et puisse l'imprimer
         logging.info("Impression faites dans %s",output_file_path)

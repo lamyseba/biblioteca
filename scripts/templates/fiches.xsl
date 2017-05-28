@@ -41,6 +41,17 @@
 <!-- Le nombre de fiches par ligne -->
 <xsl:variable name="num-columns" select="4"/>
 
+<!-- mode écolo : on imprime pas de page si elle n'est pas rempli en entier -->
+<xsl:param name="eco" select="false()" />
+
+<xsl:variable name="entries-nodeset" select="exsl:node-set($sorted-entries)" />
+
+<xsl:variable name="entries-count" select="count($entries-nodeset/tc:entry)" />
+
+<xsl:variable name="orphans-count" select="$entries-count mod ($num-columns * 2)" />
+
+<xsl:variable name="last-eco-entry-index" select="$entries-count + 1 - $orphans-count" />
+
 <xsl:template match="/">
  <xsl:apply-templates select="tc:tellico"/>
 </xsl:template>
@@ -55,7 +66,16 @@
     <xsl:value-of select="tc:collection/@title"/> - Fiches à imprimer
    </title>
   </head>
-  <body><xsl:apply-templates select="exsl:node-set($sorted-entries)/tc:entry"/></body>
+  <body>
+    <xsl:choose>
+      <xsl:when test="$eco" >
+        <xsl:apply-templates select="$entries-nodeset/tc:entry[position() &lt; $last-eco-entry-index]"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="$entries-nodeset/tc:entry"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </body>
  </html>
 </xsl:template>
 
