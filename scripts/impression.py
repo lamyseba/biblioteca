@@ -32,12 +32,18 @@ Exemples d'utilisation:
 impression.py fiches 
 
 # Imprime les cotes manquantes de tous les livres qui ne sont pas du 
-# genre "Documentaire"
-impression.py cotes --exclude Documentaire 
+# genre "Documentaire" ni du genre "Album"
+impression.py cotes --genre \!"Documentaire;Album" 
+
+# Imprime les cotes manquantes de tous les livres qui sont du genre 
+# "Documentaire" ou du genre "Album"
+impression.py cotes --genre "Documentaire;Album"
 
 # Imprime toutes les fiches manquantes et détaille le déroulé sur la sortie 
 # standard (au lieu de l'écrire dans le fichier de log)
 impression.py fiches --log debug
+
+
 
 """
 
@@ -84,8 +90,11 @@ print_count_db_name={
 ns = {'tc': 'http://periapsis.org/tellico/'}
 ET.register_namespace('','http://periapsis.org/tellico/')
 
-# la liste des genres à exclure
-excluded_genres=[]
+# la liste des genres à traiter
+genres=[]
+
+# précise s'il faut exclure les genre plutôt que les inclure
+exclude_genres = False
 
 
 # récupère et vérifie les arguments de la ligne de commande
@@ -95,15 +104,22 @@ parser = argparse.ArgumentParser(
     formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument("item_type",type=str,help="peut prendre la valeur 'fiches' ou 'cotes'")
 parser.add_argument("--log",type=str,help="info or debug", default="info")
-parser.add_argument("--exclude",type=str,help="la liste des genres à exclure, séparés par des ';'")
+parser.add_argument("--genre",type=str,help="la liste des genres à traiter, séparés par des ';'. Si la liste commence par un '!', les genres donnés seront exclus et les autres seront traités")
 args = parser.parse_args()
 
 # Le type d'item qu'on imprime (fiches ou cotes)
 if args.item_type!="fiches" and args.item_type!="cotes":
     raise ValueError("L'argument doit être 'fiches' ou 'cotes', pas %s" % args.item_type)
 
+
+
 # Récupère les genre à exclure
-if args.exclude is not None: excluded_genres=args.exclude.split(";")
+if args.genre is not None:
+    if args.genre.startswith("!"):
+        genres=args.genre[1:].split(";")
+        exclude_genres = True
+    else:
+        genres=args.genre.split(";")
 
 #Initialise le logger
 # il faut un répertoire "impressions" pour pouvoir logger
@@ -183,7 +199,9 @@ class Item:
         
         if      self.print_count>0 \
                 and self.xml_cote is not None  \
-                and self.xml_genre not in excluded_genres:
+                and (
+                    not genres \
+                    or ( exclude_genres ^ (self.xml_genre in genres) )):
             self.shall_be_printed=True                        
             # des variables pour le log
             xml_title = self.xml_value("title")
@@ -292,13 +310,13 @@ class PrintManager:
             code.text=code_match.group(2).strip()
         codes_xml.write(docu_codes_xml_path,encoding='utf-8')
     
-    def _validate_excluded_genre_names(self):
+    def _validate_genre_names(self):
         """ Vérifie si les genres à exclure passé en paramètre existent dans 
             la base de donnée tellico"""
-        if not excluded_genres: return
+        if not genres: return
         allowed_string=self.xml_collection.find("tc:fields/tc:field[@name='genre']",ns).attrib["allowed"]
         alloweds=allowed_string.split(";")
-        for genre in excluded_genres:
+        for genre in genres:
             if not genre in alloweds:
                 raise ValueError("Le genre '"+genre+"' n'est pas valide. Possibilités: ["+allowed_string+"]")         
         
@@ -323,7 +341,7 @@ class PrintManager:
         # xml_collection -- Le noeud qui correspond à la collection de livre dans le fichier
         self.xml_collection=self.tellico_xml.getroot().find('tc:collection',ns)
         # valide les noms des genres à exclure (donnés en paramètre par l'utilisateur)
-        self._validate_excluded_genre_names()
+        self._validate_genre_names()
         # items -- La liste des fiches ou des cotes à imprimer
         self.items=self._init_items()
         # Le nombre total d'item à imprimer (on compte les copies multiples)
@@ -336,8 +354,10 @@ class PrintManager:
             ## la cote ne doit pas être vide
         conditions.append('boolean(./tc:cote)')
             ## le genre ne doit pas être exclu de l'impression
-        if excluded_genres:
-            condition = " and ".join("./tc:genre != '%s'"%genre for genre in excluded_genres)
+        if genres:
+            operator = "="
+            if exclude_genres : operator = "!="
+            condition = " and ".join("./tc:genre %s '%s'"%(operator,genre) for genre in genres)
             conditions.append(condition)
         self.entry_predicate = '['+" and ".join(conditions)+']'
         # DEPRECATED: Si tellico est lancé on récupère la liste des ids des livres filtrés:
