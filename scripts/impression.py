@@ -45,7 +45,11 @@ impression.py fiches --log debug
 
 # Imprime toutes les fiches manquantes pour les livres qui ne sont pas du
 # genre "Documentaire" et n'imprime que les pages pleines
-impression.py fiches --genre Documentaire --eco
+impression.py fiches --genre \!Documentaire --eco
+
+# Imprime toutes les fiches manquantes pour les livres du genre 'Documentaire'
+# et tri par cote puis par ID si la cote est la même:
+impression.py fiches --genre Documentaire --sort cote;ID
 
 
 """
@@ -116,8 +120,6 @@ args = parser.parse_args()
 if args.item_type!="fiches" and args.item_type!="cotes":
     raise ValueError("L'argument doit être 'fiches' ou 'cotes', pas %s" % args.item_type)
 
-
-
 # Récupère les genre à exclure
 if args.genre is not None:
     if args.genre.startswith("!"):
@@ -139,19 +141,24 @@ logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
                     level=log_level,
                     filename=logfile_path)
 
-
 # Vérifie si tellico est lancé
 bus = dbus.SessionBus()
 tellico_is_launched = False
 if "org.kde.tellico" in bus.list_names(): 
     tellico_is_launched = True
     dbus_collection = bus.get_object("org.kde.tellico", "/Collections")
-    
+
+
+###########################################
+# Fonctions statiques
+###########################################    
 def shell_command(args,debug=True,check=True):
     """ lance une commande shell et affiche le debug """
     if debug: logging.debug(" ".join(args))
     if check: subprocess.check_call(args)
     else: subprocess.call(args)
+
+
 
 def open_path(path):
     """ lance l'emplacement choisi avec l'application par défaut
@@ -163,8 +170,15 @@ def open_path(path):
         subprocess.call(['xdg-open', path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                                  # on capture stdin et out pour rendre le 
                                  # tout non bloquant 
-    
+
+#__________________________________________
+
+
+ 
+########################################### 
 class Item:
+###########################################
+
     def xml_value(self,field_name):
         """ Consulte le xml pour renvoyer le texte d'un champs simple 
             (comme le titre ou la cote) pour le livre correspondant à cet item
@@ -258,10 +272,17 @@ class Item:
         logging.debug("Reste %i %s à imprimer pour le livre n° %i",self.print_count_reset, self.item_type, self.xml_id)
         self.update_tellico(print_count_db_name[self.item_type],str(self.print_count_reset))
         self.print_count=self.print_count_reset
-    
-        
 
+#__________________________________________ end class Item
+
+
+
+
+
+###########################################
 class PrintManager:
+###########################################
+
     def _init_tellico_xml(self):
         # Si tellico n'est pas lancé et qu'un xml temporaire existe déjà, 
         # on attend que le xml temporaire soit supprimé (un autre programme est 
@@ -290,8 +311,9 @@ class PrintManager:
         shell_command(['unzip','-o',tellico_file_path,'tellico.xml','-d','/tmp'])
         # Récupère le xml des données
         return ET.parse(tmp_xml_path)
-        
-        
+    
+    
+       
     def _init_docu_codes(self):
         """ Lit le fichier qui contient la liste des codes de documentaire et
             leur traduction en mot clé. Génère un fichier xml temporaire
@@ -330,6 +352,8 @@ class PrintManager:
             code.text=code_match.group(2).strip()
         codes_xml.write(docu_codes_xml_path,encoding='utf-8')
     
+    
+    
     def _validate_genre_names(self):
         """ Vérifie si les genres à exclure passé en paramètre existent dans 
             la base de donnée tellico"""
@@ -338,8 +362,21 @@ class PrintManager:
         alloweds=allowed_string.split(";")
         for genre in genres:
             if not genre in alloweds:
-                raise ValueError("Le genre '"+genre+"' n'est pas valide. Possibilités: ["+allowed_string+"]")         
+                raise ValueError("Le genre '"+genre+"' n'est pas valide. Possibilités: ["+allowed_string+"]")
+    
+    
+    def _validate_sort_names(self):
+        """ Vérifie si les critères de tri souhaités existent dans la base de
+            données tellico"""
+        if not args.sort: return
+        fields_xml = self.xml_collection.findall("tc:fields/tc:field",ns)
+        fields = list(map((lambda field:field.attrib["name"]), fields_xml))
+        fields_str = "; ".join(fields)
+        for sort_name in self.sort:
+            if sort_name and sort_name not in fields:
+                raise ValueError("'%s' n'existe pas. Noms possible pour le tri: %s"%(sort_name,"; ".join(fields)))
         
+    
     
     def _eco_print(self):
         """ Enlève de la liste des fiches imprimées les fiches qui ne remplissent
@@ -396,24 +433,34 @@ class PrintManager:
         logging.info("--------------------")
         logging.info("Total:%i %s à imprimer",self.print_count,self.item_type)
     
+    
+    
     def _init_sort(self):
+        """Initialise le tri souhaité en fonction des paramètres passés en ligne
+        de commande. Par défaut les fiches sont triées par ID et les cotes par
+        cote. On peut donner jusqu'à 3 critères de tri.
+        """
         self.sort=[sort[self.item_type],'','']
         if args.sort:
             sort_names=args.sort.split(';')
+            if len(sort_names) > 3:
+                raise ValueError ("sort: il n'est pas possible de trier successivement suivant plus de 3 critères")
             i=0
             for sort_name in sort_names:
-                self.sort[i]=sort_name
+                self.sort[i]=sort_name.strip()
                 i+=1
-
+        self._validate_sort_names()
+    
+    
     def __init__(self,item_type):
         # item_type -- fiches ou cotes        
         self.item_type = item_type
-        # initialise le paramétrage du tri pour l'impression        
-        self._init_sort()
         # tellico_xml -- Le fichier xml de la base de donnée tellico
         self.tellico_xml=self._init_tellico_xml()
         # xml_collection -- Le noeud qui correspond à la collection de livre dans le fichier
         self.xml_collection=self.tellico_xml.getroot().find('tc:collection',ns)
+        # initialise le paramétrage du tri pour l'impression        
+        self._init_sort()
         # valide les noms des genres à exclure (donnés en paramètre par l'utilisateur)
         self._validate_genre_names()
         # initialise la liste des fiches ou des cotes à imprimer
@@ -445,6 +492,7 @@ class PrintManager:
         self.print_dir = os.path.expanduser(output_dir+'/'+item_type)
         
     
+    
     def clear_tellico_print_counts(self):
         """ Mets à jour tellico en fonction du pdf qui a été imprimé:
             Remet le nombre de cote ou de fiche à imprimer à zéro
@@ -455,7 +503,9 @@ class PrintManager:
         for item in self.items: item.clear_print_count()
         logging.debug("***")
         logging.debug("")
-
+    
+    
+    
     def unlock_tellico_db(self):
         """ supprime le fichier xml temporaire, signalant ainsi que l'éventuelle
         mise à jour des données tellico est terminée.
@@ -466,6 +516,7 @@ class PrintManager:
         elapsed = self.end-self.start
         logging.debug("unlocked tellico db after %d seconds" % elapsed)
         
+    
         
     def commit_tellico_xml(self):
         """ Mets à jour la base de donnée xml de tellico avec no modification
@@ -479,8 +530,9 @@ class PrintManager:
         # Copie le fichier xml temporaire dans la base de données tellico
         shell_command(["zip","-r","-j",tellico_file_path,tmp_xml_path])        
         logging.info("Le fichier de sauvegarde de tellico a été mis à jour avec les données d'impression")
-
-
+    
+    
+    
     def make_pdf(self):
         """ Génère le pdf à imprimer et l'ouvre, puis met à jour tellico """       
         # Si il n'y a rien à imprimer    
@@ -545,6 +597,10 @@ class PrintManager:
         # Supprime le fichier xml temporaire pour libérer l'accès à la base de donnée tellico
         self.unlock_tellico_db()
 
+#__________________________________________ end class PrintManager
+
+
+
 
 # génère le pdf et met à jour tellico
 try:
@@ -555,7 +611,5 @@ except Exception as e:
     # Tellico
     shell_command(["rm",tmp_xml_path],check=False)
     raise e
-    
-    
 
 
