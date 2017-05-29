@@ -109,6 +109,7 @@ parser.add_argument("item_type",type=str,help="peut prendre la valeur 'fiches' o
 parser.add_argument("--log",type=str,help="info or debug", default="info")
 parser.add_argument("--genre",type=str,help="la liste des genres à traiter, séparés par des ';'. Si la liste commence par un '!', les genres donnés seront exclus et les autres seront traités")
 parser.add_argument("--eco",action='store_true',help="pour les fiches: n'imprime que les pages pleines")
+parser.add_argument("-s","--sort",type=str,help="le tri souhaité pour l'impression, séparés par des ';'. Par défaut cote pour les cotes et ID pour les fiches")
 args = parser.parse_args()
 
 # Le type d'item qu'on imprime (fiches ou cotes)
@@ -394,12 +395,21 @@ class PrintManager:
         
         logging.info("--------------------")
         logging.info("Total:%i %s à imprimer",self.print_count,self.item_type)
-
-
+    
+    def _init_sort(self):
+        self.sort=[sort[self.item_type],'','']
+        if args.sort:
+            sort_names=args.sort.split(';')
+            i=0
+            for sort_name in sort_names:
+                self.sort[i]=sort_name
+                i+=1
 
     def __init__(self,item_type):
         # item_type -- fiches ou cotes        
         self.item_type = item_type
+        # initialise le paramétrage du tri pour l'impression        
+        self._init_sort()
         # tellico_xml -- Le fichier xml de la base de donnée tellico
         self.tellico_xml=self._init_tellico_xml()
         # xml_collection -- Le noeud qui correspond à la collection de livre dans le fichier
@@ -499,7 +509,9 @@ class PrintManager:
             xslt_args=[  'xsltproc',
                     '--novalid',
                     '--param','entry_predicate','"'+self.entry_predicate+'"',
-                    '--param','sort-name1',"'%s'"%sort[self.item_type]]
+                    '--param','sort-name1',"'%s'"%self.sort[0],
+                    '--param','sort-name2',"'%s'"%self.sort[1],
+                    '--param','sort-name3',"'%s'"%self.sort[2]]
             if args.eco:xslt_args.extend([  
                     '--param','eco','true()'])
             xslt_args.extend([
