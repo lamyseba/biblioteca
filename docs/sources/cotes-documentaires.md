@@ -1,3 +1,10 @@
+---
+auteur: Sébastien Lamy (lamyseba arobase free.fr)
+---
+
+Cotes des documentaires
+===========================================================
+
 
 000: Tot saber <!-- Tout savoir -->
 ---------------

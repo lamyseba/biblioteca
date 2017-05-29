@@ -76,7 +76,7 @@ tmp_xml_path = "/tmp/tellico.xml"
 
 # L'emplacement du fichier qui liste les correspondance code-mot clé pour
 # les cotes des documentaires
-docu_codes_path = os.path.join(app_home_dir, 'docs/sources/cotes_documentaires.md')
+docu_codes_path = os.path.join(app_home_dir, 'docs/sources/cotes-documentaires.md')
 
 # Le tri souhaité pour l'impression
 sort={"fiches":"ID","cotes":"cote"}

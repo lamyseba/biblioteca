@@ -11,25 +11,31 @@ Vue générale.
 #### [Norme pour la saisie des données bibliographiques][2]
 Pour l'ajout ou la modification des livres dans l'inventaire informatique.
 
-#### [Questions/Réponses][3]
+#### [Cotes des documentaires][3]
+Les couples _[ code numérique / mot-clé ]_ pour les documentaires, parfois assortis
+d'une description.
+
+#### [Questions/Réponses][4]
 Sur les choix faits pour la gestion de notre petite bibliothèque d'école en 
 immersion occitan.
 
-#### [Utilisation des scripts][4]
-Description et aide
+#### [Utilisation des scripts][5]
+Description et aide.
 
 
 
 Annexes
 -------------------------------------
-#### [Réflexion sur le format de saisie des noms d'auteur][5]
 
-#### [Utiliser la documentation][6]
+#### [Réflexion sur le format de saisie des noms d'auteur][6]
+
+#### [Utiliser la documentation][7]
 
 
 [1]:fonctionnement-bibliotheque.html
 [2]:norme-saisie-livre.html
-[3]:questions-reponses.html
-[4]:utilisation-des-scripts.html
-[5]:format-noms-d-auteur.html
-[6]:utiliser-la-documentation.html
+[3]:cotes-documentaires.html
+[4]:questions-reponses.html
+[5]:utilisation-des-scripts.html
+[6]:format-noms-d-auteur.html
+[7]:utiliser-la-documentation.html

@@ -48,7 +48,7 @@ de chaque exécution du script est écrite à la fin du fichier
 ouvert, sinon ce script met à jour directement le fichier <code>inventaire.tc</code> où 
 sont sauvegardées les données.</p>
 <h3 id="syntaxe">Syntaxe</h3>
-<div class="highlight"><pre><span></span>impression.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--log LOG<span class="o">]</span> <span class="o">[</span>--exclude EXCLUDE<span class="o">]</span> item_type
+<div class="highlight"><pre><span></span>impression.py <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--log LOG<span class="o">]</span> <span class="o">[</span>--genre GENRE<span class="o">]</span> <span class="o">[</span>--eco<span class="o">]</span> <span class="o">[</span>-s SORT<span class="o">]</span> item_type
 
 Le premier argument indique s<span class="sb">`</span>il faut imprimer les fiches ou les cotes : Ce 
 script ne fait pas les deux à la fois.
@@ -57,9 +57,14 @@ positional arguments:
   item_type          peut prendre la valeur <span class="s2">&quot;fiches&quot;</span> ou <span class="s2">&quot;cotes&quot;</span>
 
 optional arguments:
-  -h, --help         show this <span class="nb">help</span> message and <span class="nb">exit</span>
-  --log LOG          info or debug
-  --exclude EXCLUDE  la liste des genres à exclure, séparés par des <span class="s1">&#39;;&#39;</span>
+  -h, --help            show this <span class="nb">help</span> message and <span class="nb">exit</span>
+  --log LOG             info or debug
+  --genre GENRE         la liste des genres à traiter, séparés par des <span class="s1">&#39;;&#39;</span>. 
+                        Si la liste commence par un <span class="s1">&#39;!&#39;</span>, les genres donnés 
+                        seront exclus et les autres seront traités
+  --eco                 pour les fiches: n<span class="sb">`</span>imprime que les pages pleines
+  -s SORT, --sort SORT  le tri souhaité pour l<span class="sb">`</span>impression, séparés par des <span class="s1">&#39;;&#39;</span>. 
+                        Par défaut <span class="s1">&#39;cote&#39;</span> pour les cotes et <span class="s1">&#39;ID&#39;</span> pour les fiches
 </pre></div>
 
 
@@ -68,12 +73,25 @@ optional arguments:
 <div class="highlight"><pre><span></span><span class="c1"># Imprime toutes les fiches manquantes</span>
 ./scripts/impression.py fiches 
 
-<span class="c1"># Imprime les cotes manquantes de tous les livres qui ne sont pas du genre &quot;Documentaire&quot;</span>
-./scripts/impression.py cotes --exclude Documentaire 
+<span class="c1"># Imprime les cotes manquantes de tous les livres qui ne sont pas du </span>
+<span class="c1"># genre &quot;Documentaire&quot; ni du genre &quot;Album&quot;</span>
+./scripts/impression.py cotes --genre <span class="se">\!</span><span class="s2">&quot;Documentaire;Album&quot;</span> 
+
+<span class="c1"># Imprime les cotes manquantes de tous les livres qui sont du genre </span>
+<span class="c1"># &quot;Documentaire&quot; ou du genre &quot;Album&quot;</span>
+./scripts/impression.py cotes --genre <span class="s2">&quot;Documentaire;Album&quot;</span>
 
 <span class="c1"># Imprime toutes les fiches manquantes et détaille le déroulé sur la sortie </span>
 <span class="c1"># standard (au lieu de l&#39;écrire dans le fichier de log)</span>
 ./scripts/impression.py fiches --log debug
+
+<span class="c1"># Imprime toutes les fiches manquantes pour les livres qui ne sont pas du</span>
+<span class="c1"># genre &quot;Documentaire&quot; et n&#39;imprime que les pages pleines</span>
+./scripts/impression.py fiches --genre <span class="se">\!</span>Documentaire --eco
+
+<span class="c1"># Imprime toutes les fiches manquantes pour les livres du genre &#39;Documentaire&#39;</span>
+<span class="c1"># et tri par cote puis par ID si la cote est la même:</span>
+./scripts/impression.py fiches --genre Documentaire --sort cote<span class="p">;</span>ID
 </pre></div>
 
 
@@ -215,7 +233,7 @@ linux favorite n'est pas compilée avec cette version patchée</em></p>
       <footer class="inner">
         <p class="metadata">Auteur&nbsp;: Sébastien Lamy (lamyseba arobase free.fr)<br />
            Fichier source&nbsp;: <a href="../scripts/README.md" >scripts/README.md</a><br />
-           Dernière mise à jour&nbsp;: 18 mai 2017 -- 
+           Dernière mise à jour&nbsp;: 29 mai 2017 -- 
            <a href="utiliser-la-documentation.html">Comment faire pour modifier ce document&nbsp;?</a>
         </p>
         <p></p>

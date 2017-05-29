@@ -34,7 +34,7 @@ sont sauvegardées les données.
 
 ### Syntaxe
 ```bash
-impression.py [-h] [--log LOG] [--exclude EXCLUDE] item_type
+impression.py [-h] [--log LOG] [--genre GENRE] [--eco] [-s SORT] item_type
 
 Le premier argument indique s`il faut imprimer les fiches ou les cotes : Ce 
 script ne fait pas les deux à la fois.
@@ -43,9 +43,14 @@ positional arguments:
   item_type          peut prendre la valeur "fiches" ou "cotes"
 
 optional arguments:
-  -h, --help         show this help message and exit
-  --log LOG          info or debug
-  --exclude EXCLUDE  la liste des genres à exclure, séparés par des ';'
+  -h, --help            show this help message and exit
+  --log LOG             info or debug
+  --genre GENRE         la liste des genres à traiter, séparés par des ';'. 
+                        Si la liste commence par un '!', les genres donnés 
+                        seront exclus et les autres seront traités
+  --eco                 pour les fiches: n`imprime que les pages pleines
+  -s SORT, --sort SORT  le tri souhaité pour l`impression, séparés par des ';'. 
+                        Par défaut 'cote' pour les cotes et 'ID' pour les fiches
 ```
 
 ### Exemples d'utilisation
@@ -54,12 +59,25 @@ En supposant que vous soyez placé dans le répertoire racine du projet.
 # Imprime toutes les fiches manquantes
 ./scripts/impression.py fiches 
 
-# Imprime les cotes manquantes de tous les livres qui ne sont pas du genre "Documentaire"
-./scripts/impression.py cotes --exclude Documentaire 
+# Imprime les cotes manquantes de tous les livres qui ne sont pas du 
+# genre "Documentaire" ni du genre "Album"
+./scripts/impression.py cotes --genre \!"Documentaire;Album" 
+
+# Imprime les cotes manquantes de tous les livres qui sont du genre 
+# "Documentaire" ou du genre "Album"
+./scripts/impression.py cotes --genre "Documentaire;Album"
 
 # Imprime toutes les fiches manquantes et détaille le déroulé sur la sortie 
 # standard (au lieu de l'écrire dans le fichier de log)
 ./scripts/impression.py fiches --log debug
+
+# Imprime toutes les fiches manquantes pour les livres qui ne sont pas du
+# genre "Documentaire" et n'imprime que les pages pleines
+./scripts/impression.py fiches --genre \!Documentaire --eco
+
+# Imprime toutes les fiches manquantes pour les livres du genre 'Documentaire'
+# et tri par cote puis par ID si la cote est la même:
+./scripts/impression.py fiches --genre Documentaire --sort cote;ID
 ```
 
 

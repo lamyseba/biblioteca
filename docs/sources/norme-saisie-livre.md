@@ -15,7 +15,7 @@ Norme pour la saisie des données bibliographiques
   peut saisir une liste de plusieurs auteurs en les séparant par des `;`  
   Par exemple `Dupont, Jean; D'Agobert, Roger`. Ce choix de formattage est
   issu d'[une réflexion], mais une autre école pourrait faire un autre choix.
-* **Editeur** : C'est celui qui à le copyritght © inscrit quelque part sur 
+* **Editeur** : Correspond au copyritght © inscrit quelque part sur 
   le livre
 * **Langue** : Si il y a deux langues, on les sépare par un `/`, en commençant
   par le Français.
