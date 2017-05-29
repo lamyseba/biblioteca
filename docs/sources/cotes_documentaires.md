@@ -5,13 +5,13 @@ Ranger ici les documentaires sur des sujets variés (encyclopédies, etc.)
 
 
 
-100: Me comprénguer <!-- Me comprendre -->
+100: Compréne-s/Conéishe-s <!-- Se comprendre -->
 ----------------------
 
-### 110: Còrs uman e santat <!-- Corps humain et santé -->
+### 110: Còs uman e santat <!-- Corps humain et santé -->
 Ranger ici tous les livres de physiologie, anatomie, médecine, santé, diététique … 
 
-### 120: Se pensar <!-- Réfléchir sur soi -->
+### 120: Pensar <!-- Réfléchir -->
 Ranger ici tous les livres de philosophie (questions existentielle …) et les 
 livres de psychologie (émotions,  processus mentaux, communication, relations 
 familiales...) :
@@ -19,7 +19,7 @@ Titre initial: Penser, ressentir (pensar, sentir)
 
 
 
-200: Viure en societat <!-- Vivre en société -->
+200: Vívere en societat <!-- Vivre en société -->
 ----------------------
 Ranger ici tous les livres sur des questions de société (dimension plutôt 
 collective ou institutionnelle), les livres relevant plus ou moins des 
@@ -35,7 +35,7 @@ Titre initial: Vivre ensemble (viure amassa)
 
 
 
-300: Diversitat culturala plaplaplapla blablabla<!-- Diversité culturelle -->
+300: Diversitat culturau <!-- Diversité culturelle -->
 ----------------------
 Ranger ici les livres d'anthropologie / ethnologie : connaissance des pratiques 
 humaines sur la planète (similitudes, différences...) : façons de se vêtir, 
@@ -57,7 +57,7 @@ méthodes de langue, sur la lecture, sur des particularités de langage
 ----------------------
 Etude d'une époque, d'une période passée. Généralités
 
-### 510 Preïstòria <!-- Préhistoire -->
+### 510: Preïstòria <!-- Préhistoire -->
 
 ### 520: Istòria Euròpa <!-- Histoire - Europe -->
 
@@ -78,7 +78,7 @@ Etude d'un lieu et livres sur les voyages, guides de tourisme. Généralités. A
 
 
 
-700: Ciencias <!-- Sciences -->
+700: Sciéncias <!-- Sciences -->
 ----------------------
 Titre initial: Observer (espiar) ?
 
@@ -100,16 +100,13 @@ Livres sur les arbres, les fleurs, les champignons...
 ### 760: Animaus <!-- Animaux -->
 Livres sur les animaux en général.
 
-### 761: Animaus dens lo son miei <!-- Animaux dans leur milieu -->
-Livres sur tous les animaux d'un milieu particulier (désert, ferme..;)
-Cote à supprimer ?
 
-### 762: Animaus desaparéishuts <!-- Animaux disparus -->
+### 761: Animaus desaparéishuts <!-- Animaux disparus -->
 Dinosaures ...
 
-### 763: Mamifèrs <!-- Mammifères -->
+### 762: Mamifèrs <!-- Mammifères -->
 
-### 764: Non mamifèrs <!-- Non-mammifères -->
+### 763: Autes que mamifèrs <!-- Non-mammifères -->
 Insectes, oiseaux, reptiles...
 
 
