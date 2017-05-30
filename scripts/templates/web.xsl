@@ -202,6 +202,9 @@
     $(document).ready(function() {
       $('#myTable').DataTable( {
         "dom":'pflrtip',
+        "columnDefs": [
+            { "type": "string", "targets": [1,2,3,4,5,6,8] }
+        ],
         "language": {
           processing:     "Traitement en cours...",
           search:         "Cercar&nbsp;:",
@@ -231,6 +234,8 @@
         "orderClasses": false,        
         "fixedHeader":true
       } );
+      
+
       // Remove accented character from search input as well
       $('#myTable_filter input[type=search]').keyup( function () {
         var table = $('#myTable').DataTable();
