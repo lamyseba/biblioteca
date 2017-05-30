@@ -20,7 +20,7 @@ DATE=$(date +"%d %b %Y")
 unzip -p ~/Bibli/inventaire.tc tellico.xml | \
 \
 # Compile le xml pour faire une page web enregistrée dans /tmp/index.html
-xsltproc --novalid --param "column-names" "'id title author editor language genre cote nb-ex'" \
+xsltproc --novalid --param "column-names" "'id title author editor language genre cote nb-ex notes'" \
         --param "cdate" "'$DATE'" \
         ~/Bibli/scripts/templates/web.xsl \
         - > /tmp/index.html
