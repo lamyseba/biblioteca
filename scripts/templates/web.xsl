@@ -208,7 +208,7 @@
           lengthMenu:    "Afichar _MENU_ elements",
           info:           "Afichatge de l'element _START_ a _END_ sus _TOTAL_ elements",
           infoEmpty:      "Afichatge de 0 element 0 sus 0 element",
-          infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+          infoFiltered:   "(filtrats de _MAX_ elements en tot)",
           infoPostFix:    "",
           loadingRecords: "Chargement en cours...",
           zeroRecords:    "Non i a pas arren que afichar",
