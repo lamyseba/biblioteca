@@ -179,25 +179,45 @@
    
    
    <script type="text/javascript" class="init"><xsl:text disable-output-escaping="yes" ><![CDATA[
+    jQuery.fn.DataTable.ext.type.search.string = function ( data ) {
+        return ! data ?
+        '' :
+        typeof data === 'string' ?
+            data
+                .replace( /\n/g, ' ' )
+                .replace( /[áàäâ]/g, 'a' )
+                .replace( /[ÁÀÄÂ]/g, 'A' )
+                .replace( /[éèëê]/g, 'e' )
+                .replace( /[ÉÈËÊ]/g, 'E' )
+                .replace( /[íìïî]/g, 'i' )
+                .replace( /[ÍÌÏÎ]/g, 'I' )
+                .replace( /[óòöô]/g, 'o' )
+                .replace( /[ÓÒÖÔ]/g, 'O' )
+                .replace( /[úùüû]/g, 'u' )
+                .replace( /[ÚÙÜÛ]/g, 'U' )                
+                .replace( /[ç]/g, 'c' )
+                .replace( /[Ç]/g, 'C' ):
+            data;
+    };
     $(document).ready(function() {
       $('#myTable').DataTable( {
         "dom":'pflrtip',
         "language": {
           processing:     "Traitement en cours...",
-          search:         "Rechercher&nbsp;:",
-          lengthMenu:    "Afficher _MENU_ &eacute;l&eacute;ments",
-          info:           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-          infoEmpty:      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+          search:         "Cercar&nbsp;:",
+          lengthMenu:    "Afichar _MENU_ elements",
+          info:           "Afichatge de l'element _START_ a _END_ sus _TOTAL_ elements",
+          infoEmpty:      "Afichatge de 0 element 0 sus 0 element",
           infoFiltered:   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
           infoPostFix:    "",
           loadingRecords: "Chargement en cours...",
-          zeroRecords:    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+          zeroRecords:    "Non i a pas arren que afichar",
           emptyTable:     "Aucune donnée disponible dans le tableau",
           paginate: {
-            first:      "Premier",
-            previous:   "Pr&eacute;c&eacute;dent",
-            next:       "Suivant",
-            last:       "Dernier"
+            first:      "&nbsp;|<&nbsp;" /*"Prum&eagrave;r"*/,
+            previous:   "&nbsp;<&nbsp;" /*"Precedent"*/,
+            next:       "&nbsp;>&nbsp;" /*"Seguent"*/,
+            last:       "&nbsp;>|&nbsp;" /*"Darr&eagrave;r"*/
           },
           aria: {
             sortAscending:  ": activer pour trier la colonne par ordre croissant",
@@ -210,6 +230,15 @@
         "order":[],
         "orderClasses": false,        
         "fixedHeader":true
+      } );
+      // Remove accented character from search input as well
+      $('#myTable_filter input[type=search]').keyup( function () {
+        var table = $('#myTable').DataTable();
+        table
+          .search(
+            jQuery.fn.DataTable.ext.type.search.string( this.value )
+          )
+          .draw()
       } );
      } );]]></xsl:text></script>
    <title>
@@ -224,7 +253,7 @@
 
 <xsl:template match="tc:collection">
  <p id="header-left"><xsl:value-of select="$cdate"/></p>
- <a id="header-right" href="http://lamyseba.github.io/biblioteca">Documentation</a>
+ <a id="header-right" href="http://lamyseba.github.io/biblioteca">Documentacion</a>
  <h1 class="colltitle">
   <xsl:value-of select="@title"/>
  </h1>
