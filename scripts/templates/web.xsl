@@ -194,9 +194,11 @@
                 .replace( /[óòöô]/g, 'o' )
                 .replace( /[ÓÒÖÔ]/g, 'O' )
                 .replace( /[úùüû]/g, 'u' )
-                .replace( /[ÚÙÜÛ]/g, 'U' )                
-                .replace( /[ç]/g, 'c' )
-                .replace( /[Ç]/g, 'C' ):
+                .replace( /[ÚÙÜÛ]/g, 'U' )
+                .replace( /ñ/g, 'n' )
+                .replace( /Ñ/g, 'N' )
+                .replace( /ç/g, 'c' )
+                .replace( /Ç/g, 'C' ):
             data;
     };
     $(document).ready(function() {
