@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# coding=utf-8
 import sys, os, glob, markdown, re, codecs, argparse, datetime, locale
 from string import Template
 

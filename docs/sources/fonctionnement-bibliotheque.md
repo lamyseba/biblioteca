@@ -43,7 +43,7 @@ automatiquement rajoutées pour le livre:
 * **Créé le** : La date à laquelle le livre a été ajouté à l'inventaire.
 
 !!! important ""
-    **Pensez à écrire le numéro d'inventaire sur la page de titre du livre !!**
+    **Pensez à écrire le numéro d'inventaire sur la page de titre du livre et sur le coin cartonné où sera insérée la fiche!!**
     Ce numéro est diponible une fois le livre enregistré dans l'inventaire. Il 
     se trouve dans la colonne `N°` de la ligne qui correspond au livre.
 
@@ -106,7 +106,7 @@ suivant.
 7. Impression et mise en place de la fiche. L'impression se fait grâce au 
    raccourci `Impression des fiches` à la racine du projet. Un double-clic
    sur ce raccourci lance le script [impression.py][] avec le paramétrage 
-   nécessaire. 
+   nécessaire. Consultez [Le mode d'emploi pour l'impression des fiches].
 8. Impression et mise en place de la cote. L'impression se fait grâce au
    raccourci `Impression des cotes` à la racine du projet. Un double-clic
    sur ce raccourci lance le script [impression.py][] avec le
@@ -133,4 +133,5 @@ ce livre.
 [anacron]:http://www.delafond.org/traducmanfr/man/man8/anacron.8.html
 [page internet générée à partir du catalogue]:http://calandreta-pau.org/bibli/
 [norme pour la saisie des données]:norme-saisie-livre.html
+[Le mode d'emploi pour l'impression]:impression-fiches.html
 
