@@ -45,7 +45,8 @@ côté.
 
 Sur l'ordinateur du bureau, il faut ouvrir le fichier PDF et paramétrer 
 l'impression: 
-* S'assurer que l'option "Taille Réelle est choisie"
+* S'assurer que l'option "Taille Réelle" est choisie
+* S'assurer que l'option "Paysage" est choisie
 * Dans les propriété
     * choisir le magasin "ByPass", qui correspond ou magasin
       sur le petit côté de l'imprimante.
